@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "kiyanawapp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authkiyanawappc7e5d4c3",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

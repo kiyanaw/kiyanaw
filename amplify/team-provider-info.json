@@ -10,6 +10,11 @@
             "StackName": "amplify-kiyanaw-app-dev-223941",
             "StackId": "arn:aws:cloudformation:us-east-1:494185203413:stack/amplify-kiyanaw-app-dev-223941/7e0ba430-8d00-11ea-8d73-120022ae60fd",
             "AmplifyAppId": "d36hff5euri57m"
+        },
+        "categories": {
+            "auth": {
+                "kiyanawappc7e5d4c3": {}
+            }
         }
     }
 }

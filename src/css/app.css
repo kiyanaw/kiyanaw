@@ -1,18 +1,1 @@
 /* Your app styles here */
-
-#question {
-  font-size: 1.5em;
-}
-
-#question textarea {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.hint {
-  margin-top: -20px !important;
-  margin-bottom: 15px;
-  line-height: 15px;
-  font-size: .8em;
-  color: #999;
-}

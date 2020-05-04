@@ -10,8 +10,8 @@
       <f7-view url="/panel-left/"></f7-view>
     </f7-panel>
 
-    <!-- Main View -->
-    <f7-view id="main-view" url="/" main></f7-view>
+    <f7-view id="main-view" url="/" main class="safe-areas"></f7-view>
+  
   </f7-app>
 </template>
 
@@ -25,7 +25,7 @@ export default {
       // Framework7 parameters here
       f7params: {
         id: 'io.framework7.testapp', // App bundle ID
-        name: 'Framework7', // App name
+        name: 'tânisi ka-itwân ôma...', // App name
         theme: 'auto', // Automatic theme detection
         // App routes
         routes: routes,

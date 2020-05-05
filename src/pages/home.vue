@@ -10,7 +10,12 @@
       </f7-nav-left>
       <div class="title">kiyânaw</div>
     </f7-navbar>
-
+    <f7-block>
+      <h1> How do I say: </h1>
+      <f7-searchbar
+        custom-search="true">
+      </f7-searchbar>
+    </f7-block>
     <!-- <amplify-authenticator> </amplify-authenticator> -->
 
     <!-- <f7-block inner>

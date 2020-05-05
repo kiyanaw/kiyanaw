@@ -37,13 +37,14 @@ import store from "./assets/vuex/storage.js";
 
 import "@aws-amplify/ui-vue";
 import Amplify from "aws-amplify";
+import Vuetify from 'vuetify'
 // import awsconfig from "./aws-exports";
 
 import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
 // Vue.use(AmplifyPlugin, AmplifyModules);
-
+Vue.use(Vuetify)
 // Different F7-Vue plugin initialization with f7 v3.0
 Framework7.use(Framework7Vue);
 

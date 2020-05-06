@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "kiyanawappc7e5d4c3_identitypool_c7e5d4c3",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "kiyanac7e5d4c3",
-    "userPoolName": "kiyanawappc7e5d4c3_userpool_c7e5d4c3",
+    "identityPoolName": "kiyanaw_app459ca40c_identitypool_459ca40c",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "kiyana459ca40c",
+    "userPoolName": "kiyanaw_app459ca40c_userpool_459ca40c",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,8 +18,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email",
-        "name"
+        "email"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -29,10 +28,22 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "kiyanac7e5d4c3_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "kiyana459ca40c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "kiyanawappc7e5d4c3",
+    "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
+    "resourceName": "kiyanawapp459ca40c459ca40c",
+    "thirdPartyAuth": false,
+    "usernameAttributes": [
+        "email"
+    ],
+    "userPoolGroups": true,
+    "adminQueries": false,
+    "triggers": "{}",
+    "hostedUI": false,
+    "userPoolGroupList": [
+        "Admin"
+    ],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -45,12 +56,6 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
-    "usernameAttributes": [
-        "email"
-    ],
-    "triggers": "{}",
-    "userPoolGroupList": [],
     "parentStack": {
         "Ref": "AWS::StackId"
     },

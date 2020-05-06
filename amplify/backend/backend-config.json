@@ -1,6 +1,22 @@
 {
 	"auth": {
-		"kiyanawappc7e5d4c3": {
+		"userPoolGroups": {
+			"service": "Cognito-UserPool-Groups",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "kiyanawapp459ca40c459ca40c",
+					"attributes": [
+						"UserPoolId",
+						"AppClientIDWeb",
+						"AppClientID",
+						"IdentityPoolId"
+					]
+				}
+			]
+		},
+		"kiyanawapp459ca40c459ca40c": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
@@ -12,11 +28,15 @@
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"authConfig": {
-					"additionalAuthenticationProviders": [],
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "AWS_IAM"
+						}
+					],
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authkiyanawappc7e5d4c3"
+							"userPoolId": "authkiyanawapp459ca40c459ca40c"
 						}
 					}
 				}

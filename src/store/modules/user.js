@@ -1,5 +1,10 @@
 const state = {
-  user: null,
+  user: {
+    email: '',
+    id: '',
+    username: '',
+    
+  },
 };
 
 const vgetters = {

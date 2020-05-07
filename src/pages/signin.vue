@@ -73,8 +73,10 @@ export default {
       if (info === 'signedIn') {
         console.log('WOOT');
         this.signedIn = true
-        Auth.currentUserInfo().then((data) => {
-          console.log(data);
+        Auth.currentAuthenticatedUser().then((user) => {
+          Auth.userAttributes(user).then((data) => {
+            console.log(data);
+          });
         });
       } else {
         console.log('BOOO');

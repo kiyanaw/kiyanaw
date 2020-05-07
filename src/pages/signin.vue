@@ -48,7 +48,7 @@
 </template>
 
 <script>
-// import { amplifyComponents, AmplifyEventBus } from "aws-amplify-vue";
+import { AmplifyEventBus } from "aws-amplify-vue";
 export default {
   name: 'Signin',
   methods: {
@@ -56,7 +56,18 @@ export default {
       let formData
       console.log(formData);
     },
-  }
+  },
+  mounted() {
+    AmplifyEventBus.$on('authState', info => {
+      if (info === 'signedIn') {
+        console.log('WOOT');
+        this.signedIn = true
+      } else {
+        console.log('BOOO');
+        this.signedIn = false
+      }
+    });
+  },
 }
 </script>
 

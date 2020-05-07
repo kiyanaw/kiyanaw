@@ -37,12 +37,15 @@ import store from './store/index.js'
 // import { AmplifyPlugin } from "aws-amplify-vue";
 
 import '@aws-amplify/ui-vue'
-import Amplify from 'aws-amplify'
-// import Vuetify from 'vuetify'
-// import awsconfig from "./aws-exports";
+// import Amplify from 'aws-amplify'
+import Amplify, * as AmplifyModules from 'aws-amplify';
+import { AmplifyPlugin } from 'aws-amplify-vue';
+import aws_exports from './aws-exports';
+Amplify.configure(aws_exports)
 
-import awsconfig from './aws-exports'
-Amplify.configure(awsconfig)
+Vue.use(AmplifyPlugin, AmplifyModules);
+// import awsconfig from "./aws-exports";
+// Amplify.configure(awsconfig)
 
 // Vue.use(AmplifyPlugin, AmplifyModules);
 // Different F7-Vue plugin initialization with f7 v3.0

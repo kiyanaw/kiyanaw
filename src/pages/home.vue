@@ -172,7 +172,7 @@
 </template>
 <script>
 // import { amplifyComponents } from "aws-amplify-vue";
-
+import Timeout from 'smart-timeout'
 import Store from '../store'
 
 export default {
@@ -187,55 +187,19 @@ export default {
       language: 'Cree',
       searching: false,
       searchText: '',
-      searchTimeout: null,
-      answersList: [
-        {
-          id: 1,
-          link: '#',
-          phrase: 'nitisiyihkason',
-          query: 'My Name Is',
-          language: 'X',
-          dialect: 'Y',
-          updated: new Date().toString(),
-        },
-        {
-          id: 2,
-          link: '#',
-          phrase: 'teluisi',
-          query: 'My Name Is',
-          language: 'Mikmaq',
-          dialect: 'Listguj',
-          updated: new Date().toString(),
-        },
-      ],
     }
   },
   methods: {
     onSearch(searchBar, query, previousQuery) {
-      console.log('got query', query)
-      // TODO: throttle
-      this.searchText = query
+      Timeout.set(this.setSearch, 1000, query)
     },
-    // executeSearch(queryString) {
-    //   console.log(queryString)
-    //   // Send to store action..... which should then send to service
-    //   // Service should return query response which will populate answers
-    // },
+    setSearch(query) {
+      this.searchText = query;
+    }
   },
   mounted() {
     window.foo = this
   },
-  // watch: {
-  //   searchText(newVal, oldVal) {
-  //     if (newVal !== oldVal && newVal !== '') {
-  //       // TODO: use smart-timeout
-  //       window.clearTimeout(this.searchTimeout)
-  //       this.searchTimeout = window.setTimeout(() => {
-  //         this.executeSearch(newVal)
-  //       }, 1000)
-  //     }
-  //   },
-  // },
 }
 </script>
 

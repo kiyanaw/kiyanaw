@@ -10,7 +10,8 @@
         <f7-link ref="searchLink" class="searchbar-enable" icon-md="material:search"></f7-link>
       </f7-nav-right>
     </f7-navbar>
-    <amplify-authenticator />
+    <amplify-authenticator/>
+    <amplify-sign-out />
     <!-- <form class="list" id="login">
       <ul>
         <li>
@@ -49,19 +50,32 @@
 
 <script>
 import { AmplifyEventBus } from "aws-amplify-vue";
+import { Auth } from 'aws-amplify';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Signin',
+  computed: {
+    ...mapGetters([
+      'user',
+    ]),
+  },
   methods: {
-    authUser() {
-      let formData
-      console.log(formData);
-    },
+    ...mapActions([
+      'setUser',
+    ])
+    // authUser() {
+    //   let formData
+    //   console.log(formData);
+    // },
   },
   mounted() {
     AmplifyEventBus.$on('authState', info => {
       if (info === 'signedIn') {
         console.log('WOOT');
         this.signedIn = true
+        Auth.currentUserInfo().then((data) => {
+          console.log(data);
+        });
       } else {
         console.log('BOOO');
         this.signedIn = false

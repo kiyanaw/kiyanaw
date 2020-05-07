@@ -3,13 +3,15 @@ const state = {
 };
 
 const vgetters = {
-
+  user(state) {
+    return state.user;
+  }
 };
 
 const actions = {
-  userLogged({ commit }, user) {
-    commit('USER_LOGGED', user)
-  },
+  setUser(store, user) {
+    store.commit('USER_LOGGED', user);
+  }
 };
 
 const mutations = {

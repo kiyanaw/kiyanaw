@@ -3,24 +3,14 @@ import Vuex from 'vuex'
 
 import SearchService from '../services/search'
 
+import user from './modules/user';
+import search from './modules/search';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    user: null,
-  },
-
-  actions: {
-    async search(query) {},
-
-    userLogged({ commit }, user) {
-      commit('USER_LOGGED', user)
-    },
-  },
-
-  mutations: {
-    USER_LOGGED(state, user) {
-      state.user = user
-    },
-  },
+  modules: {
+    user,
+    search,
+  }
 })

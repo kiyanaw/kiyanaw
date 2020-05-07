@@ -172,12 +172,16 @@
 </template>
 <script>
 // import { amplifyComponents } from "aws-amplify-vue";
-import Timeout from 'smart-timeout'
-import Store from '../store'
+import Timeout from 'smart-timeout';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
   computed: {
+    ...mapGetters([
+      'user',
+      'currentQuery', 
+    ]),
     user: () => {
       return false
     },
@@ -190,12 +194,21 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setCurrentQuery',
+    ]),
     onSearch(searchBar, query, previousQuery) {
       Timeout.set(this.setSearch, 1000, query)
     },
     setSearch(query) {
       this.searchText = query;
+      this.setCurrentQuery(query);
     }
+  },
+  watch: {
+    currentQuery(val) {
+      console.log(val);
+    },
   },
   mounted() {
     window.foo = this

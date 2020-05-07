@@ -1,65 +1,66 @@
 // Import Vue
-import Vue from "vue";
+import Vue from 'vue'
 
 // Import Framework7
-import Framework7 from "framework7/framework7.esm.bundle";
+import Framework7 from 'framework7/framework7.esm.bundle'
 
 // Import F7 Vue Plugin
-import Framework7Vue from "framework7-vue/framework7-vue.esm.bundle.js";
+import Framework7Vue from 'framework7-vue/framework7-vue.esm.bundle.js'
 
 // Import F7 Style
-import Framework7CSS from "framework7/css/framework7.bundle.min.css";
+import Framework7CSS from 'framework7/css/framework7.bundle.min.css'
 
 // Import F7 iOS Icons
-import Framework7Icons from "framework7-icons/css/framework7-icons.css";
+import Framework7Icons from 'framework7-icons/css/framework7-icons.css'
 
 // Import Material Icons
-import MaterialIcons from "material-design-icons/iconfont/material-icons.css";
+import MaterialIcons from 'material-design-icons/iconfont/material-icons.css'
 
 // Import Fontawesome Theme Styles
-import FontAwesome from "@fortawesome/fontawesome-free/css/all.min.css";
+import FontAwesome from '@fortawesome/fontawesome-free/css/all.min.css'
 
 // Import fastClick
-import FastClick from "fastclick";
+import FastClick from 'fastclick'
 
 // Import App Custom Styles
 // import AppStyles from './assets/sass/main.scss'
 
 // Import App Component
-import app from "./main.vue";
+import app from './main.vue'
 
 // Import Vuex Storage
-import store from "./assets/vuex/storage.js";
+// import store from './assets/vuex/storage.js'
 
 // import Amplify, * as AmplifyModules from "aws-amplify";
 // import "@aws-amplify/ui-vue";
 // import { AmplifyPlugin } from "aws-amplify-vue";
 
-import "@aws-amplify/ui-vue";
-import Amplify from "aws-amplify";
+import '@aws-amplify/ui-vue'
+import Amplify from 'aws-amplify'
+// import Vuetify from 'vuetify'
 // import awsconfig from "./aws-exports";
 
-import awsconfig from "./aws-exports";
-Amplify.configure(awsconfig);
+import awsconfig from './aws-exports'
+Amplify.configure(awsconfig)
 
 // Vue.use(AmplifyPlugin, AmplifyModules);
-
+// Vue.use(Vuetify)
 // Different F7-Vue plugin initialization with f7 v3.0
-Framework7.use(Framework7Vue);
+Framework7.use(Framework7Vue)
 
 // Init Vue App
 export default new Vue({
   // Root Element
-  el: "#app",
-  store,
-  render: c => c("app"),
+  el: '#app',
+  // store,
+  render: (c) => c('app'),
   components: {
-    app
+    app,
   },
   mounted() {
-    window.addEventListener("load", () => {
+    window.addEventListener('load', () => {
       // run after everything is in-place
-      FastClick.attach(document.body);
-    });
-  }
-});
+      FastClick.attach(document.body)
+    })
+  },
+})

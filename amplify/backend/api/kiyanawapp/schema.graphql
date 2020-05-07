@@ -1,5 +1,99 @@
-type Todo @model {
+enum PhraseType {
+  word
+  phrase
+}
+
+enum EnquiryType {
+  enquiry
+}
+
+enum ResponseType {
+  response
+}
+
+type Enquiry
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: public, provider: iam, operations: [read] }
+    ]
+  ) {
   id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON # just a storage bin for lack of crystal ball...
+  languageIndex: String!
+  type: PhraseType!
+  responses: [Response] @connection(keyName: "byEnquiry", fields: ["id"])
+  # this field is required to be able to sort on dates
+  table: EnquiryType!
+}
+
+type Response
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: public, provider: iam, operations: [read] }
+    ]
+  )
+  # @key(name: "byType", fields: ["type"], queryField: "byType")
+  @key(name: "byCreatedAt", fields: ["table", "createdAt"], queryField: "byCreatedAt")
+  @key(name: "byUpdatedAt", fields: ["table", "updatedAt"], queryField: "byUpdatedAt")
+  @key(name: "byEnquiry", fields: ["enquiryId"], queryField: "byEnquiry")
+  @key(name: "byWarrior", fields: ["warriorId"], queryField: "byWarrior") {
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  type: PhraseType!
+  enquiryId: ID!
+  enquiry: Enquiry @connection(fields: ["enquiryId"])
+  warriorId: String!
+  warrior: Warrior @connection(fields: ["warriorId"])
+  media: [Media] @connection(keyName: "byResponse", fields: ["id"])
+  # this field is required to be able to sort on dates
+  table: ResponseType!
+}
+
+type Media
+  @model
+  @key(name: "byResponse", fields: ["responseId"], queryField: "byResponse")
+  @key(name: "byWarrior", fields: ["warriorId"], queryField: "byWarrior")
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: public, provider: iam, operations: [read] }
+    ]
+  ) {
+  responseId: ID!
+  response: Response @connection(fields: ["responseId"])
+  warriorId: String!
+  warrior: Warrior @connection(fields: ["warriorId"])
+  url: String!
+}
+
+type Warrior
+  @model
+  @key(fields: ["id"])
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: public, provider: iam, operations: [read] }
+    ]
+  ) {
+  id: String! # this will be email
   name: String!
-  description: String
+  language: String!
+  dialect: String
+  region: String
+  responses: [Response] @connection(keyName: "byWarrior", fields: ["id"])
+  media: [Media] @connection(keyName: "byWarrior", fields: ["id"])
 }

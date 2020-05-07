@@ -30,7 +30,7 @@ import app from './main.vue'
 
 // Import Vuex Storage
 import Vuex from 'vuex'
-import store from './store'
+import store from './store/index.js'
 
 // import Amplify, * as AmplifyModules from "aws-amplify";
 // import "@aws-amplify/ui-vue";

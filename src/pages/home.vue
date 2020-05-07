@@ -1,5 +1,7 @@
 <template>
   <f7-page>
+    <!-- <amplify-authenticator> -->
+    <!-- The rest of your app code -->
     <!-- Top Nav -->
     <f7-navbar>
       <f7-nav-left>
@@ -36,7 +38,7 @@
           <f7-button raised icon-md="material:list">Browse</f7-button>
         </f7-col>
       </f7-row>
-      <f7-block v-if="!user"> <f7-link href="/sign-in">Sign in</f7-link> to submit content. </f7-block>
+      <f7-block v-if="!user"> <f7-link href="/sign-in/">Sign in</f7-link> to submit content. </f7-block>
     </f7-block>
 
     <div v-if="searching && !searchText">
@@ -168,10 +170,11 @@
         <f7-fab-button label="Action 2">2</f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>
+     <!-- <amplify-sign-out></amplify-sign-out> -->
+    <!-- </amplify-authenticator> -->
   </f7-page>
 </template>
 <script>
-// import { amplifyComponents } from "aws-amplify-vue";
 import Timeout from 'smart-timeout';
 import { mapGetters, mapActions } from 'vuex';
 

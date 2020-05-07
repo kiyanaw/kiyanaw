@@ -18,7 +18,15 @@
         <f7-icon slot="media" material="info"></f7-icon
       ></f7-list-item>
     </f7-list>
-    <f7-button raised fill color="orange" icon-md="material:https" icon-size="15" class="padd">Sign in</f7-button>
+    <f7-button 
+      href="/sign-in/"
+      raised 
+      fill color="orange"
+      icon-md="material:https" 
+      icon-size="15" 
+      class="padd">
+      Sign in
+    </f7-button>
   </f7-page>
 </template>
 <script>
@@ -30,6 +38,8 @@ export default {
       return false
     },
   },
+  methods: {
+  }
 }
 </script>
 

@@ -24,7 +24,7 @@
       ></f7-searchbar>
     </f7-navbar>
 
-    <amplify-authenticator> </amplify-authenticator>
+    <!-- <amplify-authenticator> </amplify-authenticator> -->
 
     <f7-block inner>
       <p>This is template for Framework75, Vue and Phonegap.</p>

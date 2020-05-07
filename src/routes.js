@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import Home from './assets/vue/pages/home.vue'
+import Home from './pages/home.vue'
 import AboutPage from './assets/vue/pages/about.vue'
 import FormPage from './assets/vue/pages/form.vue'
 import DynamicRoutePage from './assets/vue/pages/dynamic-route.vue'

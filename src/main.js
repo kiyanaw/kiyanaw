@@ -29,7 +29,7 @@ import FastClick from 'fastclick'
 import app from './main.vue'
 
 // Import Vuex Storage
-import store from './assets/vuex/storage.js'
+// import store from './assets/vuex/storage.js'
 
 // import Amplify, * as AmplifyModules from "aws-amplify";
 // import "@aws-amplify/ui-vue";
@@ -52,7 +52,7 @@ Framework7.use(Framework7Vue)
 export default new Vue({
   // Root Element
   el: '#app',
-  store,
+  // store,
   render: (c) => c('app'),
   components: {
     app,

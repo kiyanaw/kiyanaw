@@ -29,7 +29,8 @@ import FastClick from 'fastclick'
 import app from './main.vue'
 
 // Import Vuex Storage
-// import store from './assets/vuex/storage.js'
+import Vuex from 'vuex'
+import store from './store'
 
 // import Amplify, * as AmplifyModules from "aws-amplify";
 // import "@aws-amplify/ui-vue";
@@ -44,7 +45,6 @@ import awsconfig from './aws-exports'
 Amplify.configure(awsconfig)
 
 // Vue.use(AmplifyPlugin, AmplifyModules);
-// Vue.use(Vuetify)
 // Different F7-Vue plugin initialization with f7 v3.0
 Framework7.use(Framework7Vue)
 
@@ -52,7 +52,8 @@ Framework7.use(Framework7Vue)
 export default new Vue({
   // Root Element
   el: '#app',
-  // store,
+  store,
+  Vuex,
   render: (c) => c('app'),
   components: {
     app,

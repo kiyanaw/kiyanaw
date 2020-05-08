@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import Home from './pages/home.vue'
+import Browse from './pages/browse.vue'
 import Detail from './pages/detail.vue'
 import NewEnquiry from './pages/new-enquiry.vue'
 import PanelLeftPage from './pages/panel-left.vue'
@@ -15,6 +16,10 @@ export default [
   {
     path: '/new-enquiry/',
     component: NewEnquiry,
+  },
+  {
+    path: '/browse/',
+    component: Browse,
   },
   {
     path: '/detail/',

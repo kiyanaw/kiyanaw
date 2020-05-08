@@ -2,21 +2,56 @@
   <f7-page>
     <f7-block-title>Navigation</f7-block-title>
     <f7-list>
-      <f7-list-item link="/" title="Search" panel-close>
-        <f7-icon slot="media" material="search"></f7-icon>
+      <f7-list-item
+        link="/"
+        title="Search"
+        panel-close
+      >
+        <f7-icon
+          slot="media"
+          material="search"
+        />
       </f7-list-item>
-      <f7-list-item link="/playlist/" title="Playlist" panel-close>
-        <f7-icon slot="media" material="queue_music"></f7-icon>
+      <f7-list-item
+        link="/playlist/"
+        title="Playlist"
+        panel-close
+      >
+        <f7-icon
+          slot="media"
+          material="queue_music"
+        />
       </f7-list-item>
-      <f7-list-item link="/history/" title="History" panel-close>
-        <f7-icon slot="media" material="history"></f7-icon>
+      <f7-list-item
+        link="/history/"
+        title="History"
+        panel-close
+      >
+        <f7-icon
+          slot="media"
+          material="history"
+        />
       </f7-list-item>
-      <f7-list-item link="/preferences/" title="Preferences" panel-close>
-        <f7-icon slot="media" material="settings"></f7-icon>
+      <f7-list-item
+        link="/preferences/"
+        title="Preferences"
+        panel-close
+      >
+        <f7-icon
+          slot="media"
+          material="settings"
+        />
       </f7-list-item>
-      <f7-list-item link="/about/" title="About" panel-close>
-        <f7-icon slot="media" material="info"></f7-icon
-      ></f7-list-item>
+      <f7-list-item
+        link="/about/"
+        title="About"
+        panel-close
+      >
+        <f7-icon
+          slot="media"
+          material="info"
+        />
+      </f7-list-item>
     </f7-list>
     <f7-button
       v-if="!user"

@@ -48,7 +48,6 @@ export default new Vue({
   el: '#app',
   store,
   Vuex,
-  render: (c) => c('app'),
   components: {
     app,
   },
@@ -61,4 +60,5 @@ export default new Vue({
       store.dispatch('getUser')
     })
   },
+  render: (c) => c('app'),
 })

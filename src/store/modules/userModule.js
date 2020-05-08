@@ -23,13 +23,14 @@ const actions = {
       store.dispatch('setUser', user)
     }
   },
-  updateAttribute(store, name, value) {
+  updateAttribute(store, payload) {
     // Update user object here, then send to service layer
     // TODO: restrict to only accept custom attributes
-    const { user } = store.getters
-    assert.ok(user.hasOwnProperty(name), `user does not have attribute ${name}`)
-    user[name] = value
-    userService.setCustomUserAttribute(name, value)
+    const localUser = store.getters.user
+    assert.ok(localUser.hasOwnProperty(payload.name), `user does not have attribute ${payload.name}`)
+    localUser[payload.name] = payload.value
+    userService.setCustomUserAttribute(payload.name, payload.value)
+    // TODO: Handle error if response is not success and revert user object in store
     store.dispatch('getUser')
   },
 }

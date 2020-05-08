@@ -9,22 +9,16 @@
         User Settings
       </h1>
 
-      <div
-        class="list">
+      <div class="list">
         <ul>
-          <!-- Smart select item -->
           <li>
-            <!-- Additional "smart-select" class -->
             <a
               href="#"
               class="item-link smart-select"
               data-close-on-select="true">
-              <!-- select -->
               <select
                 v-model="userLang"
                 name="Language">
-                <!-- TODO: Wire up event to mutate user preference,
-                 wire up "selected" prop to stored pref-->
                 <option
                   v-for="lang in languages"
                   :key="lang"
@@ -33,13 +27,10 @@
                   {{ lang }}
                 </option>
               </select>
-
               <div class="item-content">
                 <div class="item-inner">
-                  <!-- Select label -->
                   <div class="item-title">Language</div>
-                  <!-- Selected value, not required -->
-                  <!-- <div class="item-after">Apple</div> -->
+                  <div class="item-after">{{ userLang }}</div>
                 </div>
               </div>
             </a>
@@ -64,12 +55,10 @@ export default {
     ]),
     userLang: {
       get() {
-        console.log('GET', this.user.language)
         return this.user.language
       },
       set(val) {
-        console.log('SET', val)
-        this.updateAttribute({ 'custom:language': val })
+        this.updateAttribute({ name: 'language', value: val })
       },
     },
   },
@@ -77,9 +66,6 @@ export default {
     ...mapActions([
       'updateAttribute',
     ]),
-    localSetLanguage(lang) {
-      this.updateAttribute({ 'custom:language': lang })
-    },
   },
 }
 </script>

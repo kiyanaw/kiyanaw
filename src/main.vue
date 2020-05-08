@@ -2,7 +2,7 @@
   <!-- App -->
   <f7-app
     :params="f7params">
-    <f7-statusbar />
+    <!-- <f7-statusbar /> -->
     <f7-panel
       left
       cover>
@@ -19,7 +19,7 @@
 <script>
 // Import Routes...
 import {
-  f7App, f7Panel, f7View, f7Statusbar,
+  f7App, f7Panel, f7View, /* f7Statusbar, */
 } from 'framework7-vue'
 import routes from './routes'
 
@@ -34,7 +34,7 @@ export default {
     f7App,
     f7Panel,
     f7View,
-    f7Statusbar,
+    // f7Statusbar,
   },
   data() {
     return {

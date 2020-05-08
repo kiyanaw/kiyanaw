@@ -25,9 +25,11 @@ export default {
     return user
   },
   async setCustomUserAttribute(name, value) {
-    // Accept two params attr name, value pair
     const attribute = {}
     attribute[`custom:${name}`] = value
-    return Auth.updateUserAttributes(user, attribute)
+    const curUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
+    const response = await Auth.updateUserAttributes(curUser, attribute)
+    // TODO: return error if response is not success
+    return response
   },
 }

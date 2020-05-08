@@ -1,45 +1,46 @@
-import enquiryService from '../../services/enquiry'
+import Vue from 'vue';
+import enquiryService from '../../services/enquiry';
 
-const state = {
+const vstate = {
   enquiry: null,
-  recentEnquiries: []
-}
+  recentEnquiries: [],
+};
 
 const getters = {
   enquiry(state) {
-    return state.enquiry
+    return state.enquiry;
   },
   recentEnquiries(state) {
-    return state.recentEnquiries
-  }
-}
+    return state.recentEnquiries;
+  },
+};
 
 const actions = {
   async createEnquiry(store, phrase) {
-    const enquiry = await enquiryService.create(phrase)
+    const enquiry = await enquiryService.create(phrase);
     // if we just created an enquiry, we'll redirect to it
-    store.commit('SET_ENQUIRY', enquiry)
-    return enquiry
+    store.commit('SET_ENQUIRY', enquiry);
+    return enquiry;
   },
 
-  listRecentEnquiries() {
-    const enquiries = await enquiryService.listRecent()
-    store.
+  async listRecentEnquiries() {
+    const enquiries = await enquiryService.listRecent();
+    console.log(enquiries);
   },
-}
+};
 
 const mutations = {
   SET_ENQUIRY(state, enquiry) {
-    state.enquiry = enquiry
+    Vue.set(state, 'enquiry', enquiry);
   },
   SET_RECENT_ENQUIRIES(state, list) {
-    state.recentEnquiries = list
-  }
-}
+    Vue.set(state, 'recentEnquiries', list);
+  },
+};
 
 export default {
-  state,
+  state: vstate,
   getters,
   actions,
   mutations,
-}
+};

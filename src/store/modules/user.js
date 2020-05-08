@@ -1,5 +1,5 @@
 import Vue from 'vue';
-// import userService from '../../services/user';
+import userService from '../../services/user';
 
 const state = {
   user: null,

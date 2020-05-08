@@ -20,12 +20,11 @@ export default {
   computed: {
     ...mapGetters(['recentEnquiries']),
   },
-  methods: {
-    ...mapActions(['listRecentEnquiries']),
-  },
-
   mounted() {
     this.listRecentEnquiries();
+  },
+  methods: {
+    ...mapActions(['listRecentEnquiries']),
   },
 };
 </script>

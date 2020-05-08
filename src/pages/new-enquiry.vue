@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'NewEnquiry',
@@ -44,7 +44,6 @@ export default {
       this.$f7router.navigate('/detail/');
     },
   },
-  mounted() {},
 };
 </script>
 

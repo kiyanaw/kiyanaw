@@ -1,10 +1,10 @@
 import UUID from 'uuid';
 
-import { API, graphqlOperation, Storage } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
-import * as subscriptions from '../graphql/subscriptions';
+// import * as subscriptions from '../graphql/subscriptions';
 
 export default {
   async create(phrase) {

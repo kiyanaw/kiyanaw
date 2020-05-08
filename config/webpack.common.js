@@ -87,8 +87,8 @@ module.exports = function(options) {
           use: {
             loader: "babel-loader",
             options: {
-              presets: ["env"],
-              plugins: ["transform-runtime", "transform-object-rest-spread"]
+              presets: ["@babel/preset-env"],
+              plugins: ['@babel/plugin-transform-runtime', "@babel/plugin-proposal-object-rest-spread"]
             }
           }
         }

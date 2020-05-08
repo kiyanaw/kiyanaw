@@ -45,12 +45,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Preferences',
   data: () => ({
     languages: ['Cree', "Mi'kmaq"],
   }),
-  methods: {},
+  methods: {
+    ...mapActions([
+      'setUserLanguage',
+    ]),
+    localSetLanguage() {
+      this.setUserLanguage();
+    },
+  },
 };
 </script>
 

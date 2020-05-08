@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import userService from '../../services/user';
+import userService from '../../services/userService';
 
 const state = {
   user: null,
@@ -19,7 +19,7 @@ const actions = {
     const user = await userService.getUser();
     if (user) {
       console.log('Authenticated user', user);
-      actions.setUser(store, user);
+      store.dispatch('setUser', user);
     }
   },
 };

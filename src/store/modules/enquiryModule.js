@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import enquiryService from '../../services/enquiry';
+import enquiryService from '../../services/enquiryService';
 
 const vstate = {
   enquiry: null,

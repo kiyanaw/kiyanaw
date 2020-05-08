@@ -232,7 +232,10 @@ export default {
     searchText: '',
   }),
   computed: {
-    ...mapGetters(['user', 'currentQuery']),
+    ...mapGetters([
+      'user',
+      'currentQuery',
+    ]),
   },
   watch: {
     currentQuery(val) {
@@ -240,7 +243,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setCurrentQuery']),
+    ...mapActions([
+      'setCurrentQuery',
+    ]),
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
       Timeout.set(this.setSearch, 250, query);

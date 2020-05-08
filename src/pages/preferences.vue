@@ -47,13 +47,11 @@
 <script>
 export default {
   name: 'Preferences',
-  data: () => {
-    return {
-      languages: ['Cree', "Mi'kmaq"],
-    }
-  },
+  data: () => ({
+    languages: ['Cree', "Mi'kmaq"],
+  }),
   methods: {},
-}
+};
 </script>
 
 <style></style>

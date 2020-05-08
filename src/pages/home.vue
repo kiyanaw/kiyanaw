@@ -37,7 +37,8 @@
 
     <f7-block v-if="!searching && !searchText">
       <p>
-        Search for words or phrases you want to know in the {{ language }} language, or browse the list of submissions.
+        Search for words or phrases you want to know in the {{ language }} language,
+        or browse the list of submissions.
       </p>
       <br>
       <f7-row>
@@ -220,40 +221,36 @@
   </f7-page>
 </template>
 <script>
-import Timeout from 'smart-timeout'
-import { mapGetters, mapActions } from 'vuex'
+import Timeout from 'smart-timeout';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Home',
-  data: () => {
-    return {
-      language: 'Cree',
-      searching: false,
-      searchText: '',
-    }
-  },
+  data: () => ({
+    language: 'Cree',
+    searching: false,
+    searchText: '',
+  }),
   computed: {
     ...mapGetters(['user', 'currentQuery']),
   },
   watch: {
     currentQuery(val) {
-      console.log(val)
+      console.log(val);
     },
-  },
-  mounted() {
-    window.foo = this
   },
   methods: {
     ...mapActions(['setCurrentQuery']),
+    // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
-      Timeout.set(this.setSearch, 250, query)
+      Timeout.set(this.setSearch, 250, query);
     },
     setSearch(query) {
-      this.searchText = query
-      this.setCurrentQuery(query)
+      this.searchText = query;
+      this.setCurrentQuery(query);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

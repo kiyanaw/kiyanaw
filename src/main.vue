@@ -20,12 +20,15 @@
 </template>
 <script>
 // Import Routes...
-import { f7App, f7Panel, f7View, f7Statusbar } from 'framework7-vue'
-import routes from './routes.js'
+import {
+  f7App, f7Panel, f7View, f7Statusbar,
+} from 'framework7-vue';
+import routes from './routes';
 
-let theme = 'md'
+let theme = 'md';
 if (document.location.search.indexOf('theme=') >= 0) {
-  theme = document.location.search.split('theme=')[1].split('&')[0]
+  // eslint-disable-next-line prefer-destructuring
+  theme = document.location.search.split('theme=')[1].split('&')[0];
 }
 
 export default {
@@ -42,7 +45,7 @@ export default {
         routes,
         id: 'io.framework7.testapp',
       },
-    }
+    };
   },
-}
+};
 </script>

@@ -5,8 +5,8 @@ const state = {
 };
 
 const vgetters = {
-  currentQuery(state) {
-    return state.query;
+  currentQuery(context) {
+    return context.query;
   },
 };
 
@@ -18,8 +18,8 @@ const actions = {
 };
 
 const mutations = {
-  SET_QUERY(state, query) {
-    state.query = query;
+  SET_QUERY(context, query) {
+    Vue.set(context, 'query', query);
   },
 };
 
@@ -28,5 +28,5 @@ export default {
   state,
   getters: vgetters,
   actions,
-  mutations
-}
+  mutations,
+};

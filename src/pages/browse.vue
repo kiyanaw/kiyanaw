@@ -1,6 +1,10 @@
 <template>
   <f7-page>
-    <f7-navbar title="Detail" back-link="Back" back-link-url="/"></f7-navbar>
+    <f7-navbar
+      title="Detail"
+      back-link="Back"
+      back-link-url="/"
+    />
     <f7-block-title>
       Some details
     </f7-block-title>
@@ -9,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Detail',
@@ -21,9 +25,9 @@ export default {
   },
 
   mounted() {
-    this.listRecentEnquiries()
+    this.listRecentEnquiries();
   },
-}
+};
 </script>
 
 <style></style>

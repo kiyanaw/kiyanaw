@@ -1,11 +1,21 @@
 <template>
   <!-- App -->
   <f7-app :params="f7params">
-    <f7-statusbar></f7-statusbar>
-    <f7-panel left cover>
-      <f7-view url="/panel-left/" links-view=".view-main" />
+    <f7-statusbar />
+    <f7-panel
+      left
+      cover
+    >
+      <f7-view
+        url="/panel-left/"
+        links-view=".view-main"
+      />
     </f7-panel>
-    <f7-view url="/" :main="true" class="ios-edges"></f7-view>
+    <f7-view
+      url="/"
+      :main="true"
+      class="ios-edges"
+    />
   </f7-app>
 </template>
 <script>

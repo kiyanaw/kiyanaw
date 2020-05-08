@@ -1,7 +1,12 @@
 <template>
   <f7-page>
-    <f7-navbar title="Sign in" back-link="Back"></f7-navbar>
-    <f7-block v-if="user"> You are signed in as {{ user.email }} </f7-block>
+    <f7-navbar
+      title="Sign in"
+      back-link="Back"
+    />
+    <f7-block v-if="user">
+      You are signed in as {{ user.email }}
+    </f7-block>
     <amplify-authenticator v-if="!user" />
     <amplify-sign-out v-if="user" />
   </f7-page>
@@ -17,9 +22,6 @@ export default {
   computed: {
     ...mapGetters(['user']),
   },
-  methods: {
-    ...mapActions(['getUser', 'setUser']),
-  },
   mounted() {
     AmplifyEventBus.$on('authState', (info) => {
       if (info === 'signedIn') {
@@ -28,6 +30,9 @@ export default {
         this.setUser(false)
       }
     })
+  },
+  methods: {
+    ...mapActions(['getUser', 'setUser']),
   },
 }
 </script>

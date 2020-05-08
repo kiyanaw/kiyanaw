@@ -19,17 +19,13 @@ export default {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false });
       if (user) {
         const userData = await Auth.userAttributes(user);
-        console.log('META', userData.find((el) => el.Name === 'custom:language').Value);
+        this.setUserAttribute({ 'custom:language': 'Cree' });
         user = new User(user, userData);
       }
     }
     return user;
   },
-  async setUserAttributes() {
-    const msg = await Auth.updateUserAttributes(user,
-      {
-        'custom:language': 'cree',
-      });
-    console.log(msg);
+  async setUserAttribute(attribute) {
+    return Auth.updateUserAttributes(user, attribute);
   },
 };

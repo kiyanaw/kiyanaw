@@ -22,6 +22,10 @@ const actions = {
       store.dispatch('setUser', user);
     }
   },
+  updateAttribute(store, attr) {
+    userService.setUserAttribute(attr);
+    store.dispatch('getUser');
+  },
 };
 
 const mutations = {

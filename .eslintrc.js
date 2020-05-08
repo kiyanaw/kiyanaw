@@ -20,5 +20,9 @@ module.exports = {
       "order": ["template", "script", "style"]
     }],
     "vue/no-deprecated-slot-attribute": 0,
+    "vue/html-closing-bracket-newline": ["warn", {
+      "singleline": "never",
+      "multiline": "never"
+    }]
   }
 };

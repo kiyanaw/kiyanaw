@@ -1,56 +1,48 @@
 <template>
   <f7-page>
-    <f7-block-title>Navigation</f7-block-title>
+    <f7-block-title>
+      Navigation
+    </f7-block-title>
     <f7-list>
       <f7-list-item
         link="/"
         title="Search"
-        panel-close
-      >
+        panel-close>
         <f7-icon
           slot="media"
-          material="search"
-        />
+          material="search" />
       </f7-list-item>
       <f7-list-item
         link="/playlist/"
         title="Playlist"
-        panel-close
-      >
+        panel-close>
         <f7-icon
           slot="media"
-          material="queue_music"
-        />
+          material="queue_music" />
       </f7-list-item>
       <f7-list-item
         link="/history/"
         title="History"
-        panel-close
-      >
+        panel-close>
         <f7-icon
           slot="media"
-          material="history"
-        />
+          material="history" />
       </f7-list-item>
       <f7-list-item
         link="/preferences/"
         title="Preferences"
-        panel-close
-      >
+        panel-close>
         <f7-icon
           slot="media"
-          material="settings"
-        />
+          material="settings" />
       </f7-list-item>
       <f7-list-item
         link="/about/"
         title="About"
-        panel-close
-      >
+        panel-close>
         <f7-icon
           slot="media"
-          material="info"
-        />
+          material="info" />
       </f7-list-item>
     </f7-list>
     <f7-button
@@ -61,8 +53,7 @@
       color="orange"
       icon-md="material:https"
       icon-size="15"
-      class="padd"
-    >
+      class="padd">
       Sign in
     </f7-button>
     <f7-button
@@ -73,8 +64,7 @@
       color="orange"
       icon-md="material:https"
       icon-size="15"
-      class="padd"
-    >
+      class="padd">
       Sign out
     </f7-button>
   </f7-page>

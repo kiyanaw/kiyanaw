@@ -3,12 +3,13 @@
     <f7-navbar
       title="Detail"
       back-link="Back"
-      back-link-url="/"
-    />
+      back-link-url="/" />
     <f7-block-title>
       Some details
     </f7-block-title>
-    <p>{{ enquiry }}</p>
+    <p>
+      {{ enquiry }}
+    </p>
   </f7-page>
 </template>
 

@@ -2,16 +2,15 @@
   <f7-page>
     <f7-navbar
       title="Sign in"
-      back-link="Back"
-    />
+      back-link="Back" />
     <f7-block
       v-if="user"
-      class="sign-out-block"
-    >
+      class="sign-out-block">
       You are signed in as {{ user.email }}
       <amplify-sign-out />
     </f7-block>
-    <amplify-authenticator v-if="!user" />
+    <amplify-authenticator
+      v-if="!user" />
   </f7-page>
 </template>
 

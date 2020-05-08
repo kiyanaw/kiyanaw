@@ -8,8 +8,7 @@
         <f7-link
           class="panel-open"
           open-panel="left"
-          icon="fas fa-bars"
-        />
+          icon="fas fa-bars" />
       </f7-nav-left>
 
       <f7-nav-title sliding>
@@ -19,8 +18,7 @@
         <f7-link
           ref="searchLink"
           class="searchbar-enable"
-          icon-md="material:search"
-        />
+          icon-md="material:search" />
       </f7-nav-right>
       <f7-searchbar
         ref="searchbar"
@@ -31,11 +29,11 @@
         :disable-button="!this.$theme.aurora"
         @focus="searching = true"
         @searchbar:disable="searching = false"
-        @searchbar:search="onSearch"
-      />
+        @searchbar:search="onSearch" />
     </f7-navbar>
 
-    <f7-block v-if="!searching && !searchText">
+    <f7-block
+      v-if="!searching && !searchText">
       <p>
         Search for words or phrases you want to know in the {{ language }} language,
         or browse the list of submissions.
@@ -46,142 +44,132 @@
           <f7-button
             raised
             icon-md="material:search"
-            class="searchbar-enable"
-          >
+            class="searchbar-enable">
             Search
           </f7-button>
         </f7-col>
         <f7-col>
           <f7-button
             raised
-            icon-md="material:list"
-          >
+            icon-md="material:list">
             Browse
           </f7-button>
         </f7-col>
       </f7-row>
-      <f7-block v-if="!user">
-        <f7-link href="/sign-in/">
+      <f7-block
+        v-if="!user">
+        <f7-link
+          href="/sign-in/">
           Sign in
         </f7-link> to submit content.
       </f7-block>
     </f7-block>
 
-    <div v-if="searching && !searchText">
+    <div
+      v-if="searching && !searchText">
       <!-- <f7-block-title>Recent</f7-block-title> -->
-      <f7-list class="nomargin">
+      <f7-list
+        class="nomargin">
         <f7-list-item
           title="visits"
-          @click="$refs.searchbar.search('visits')"
-        />
+          @click="$refs.searchbar.search('visits')" />
         <f7-list-item
           title="fontanelle"
-          @click="$refs.searchbar.search('fontanelle')"
-        />
+          @click="$refs.searchbar.search('fontanelle')" />
         <f7-list-item
           title="itâhkamikisiw"
-          @click="$refs.searchbar.search('itâhkamikisiw')"
-        />
+          @click="$refs.searchbar.search('itâhkamikisiw')" />
       </f7-list>
     </div>
 
-    <div v-if="searchText.length">
-      <f7-block-title>Search results for {{ searchText }}</f7-block-title>
+    <div
+      v-if="searchText.length">
+      <f7-block-title>
+        Search results for {{ searchText }}
+      </f7-block-title>
       <f7-list>
         <f7-list-item
           link="#"
           title="tânispî ohci ê-nôhtê-kiyokêyan"
           header="How long do you want to visit?"
           footer="updated 3 minutes ago by bengodden"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="ahâw mâka"
           header="Okay then..."
           footer="updated 4 minutes ago by aaronfay"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="nitawi-wîcê-mêtawêmik kîtisânak"
           header="Go and play with your siblings"
           footer="updated 7 minutes by wjackson"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="kika-kî-nipân"
           header="You should be sleeping"
           footer="updated 15 minutes by jhill"
-          after=""
-        />
+          after="" />
 
         <f7-list-item
           link="#"
           title="kiwâmpamâw cî kitôtêminaw Ben?"
           header="Have you seen our friend Ben?"
           footer="updated 21 minutes by rfletcher"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="mwêstas ê-wî-pîkiskwâtikok"
           header="I will talk to you all later"
           footer="updated 27 minutes by bgodden"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="tânitê êtikwê"
           header="I wonder where..."
           footer="updated 33 minutes by aogg"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="kitatamiskâtinâwâw kahkiyaw"
           header="I greet you all"
           footer="updated 40 minutes by tgreen"
-          after="🎵"
-        />
+          after="🎵" />
         <f7-list-item
           link="#"
           title="kiwâmpamâw cî kitôtêminaw Ben?"
           header="Have you seen our friend Ben?"
           footer="updated 21 minutes by rfletcher"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="mwêstas ê-wî-pîkiskwâtikok"
           header="I will talk to you all later"
           footer="updated 27 minutes by bgodden"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="tânitê êtikwê"
           header="I wonder where..."
           footer="updated 33 minutes by aogg"
-          after="🎵"
-        />
+          after="🎵" />
 
         <f7-list-item
           link="#"
           title="kitatamiskâtinâwâw kahkiyaw"
           header="I greet you all"
           footer="updated 40 minutes by tgreen"
-          after="🎵"
-        />
+          after="🎵" />
       </f7-list>
     </div>
 
@@ -189,30 +177,24 @@
       v-if="user"
       slot="fixed"
       position="right-bottom"
-      color="blue"
-    >
+      color="blue">
       <f7-icon
         ios="f7:plus"
         aurora="f7:plus"
-        md="material:add"
-      />
+        md="material:add" />
       <f7-icon
         ios="f7:xmark"
         aurora="f7:xmark"
-        md="material:close"
-      />
+        md="material:close" />
       <f7-fab-buttons
         position="top"
-        color="green"
-      >
+        color="green">
         <f7-fab-button
           fab-close
-          href="/new-enquiry/"
-        >
+          href="/new-enquiry/">
           <f7-icon
             md="material:create"
-            size="15"
-          />
+            size="15" />
         </f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>

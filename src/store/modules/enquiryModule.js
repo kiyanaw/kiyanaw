@@ -24,8 +24,8 @@ const actions = {
   },
 
   async listRecentEnquiries() {
-    const enquiries = await enquiryService.listRecent()
-    console.log(enquiries)
+    const list = await enquiryService.listRecent()
+    store.commit('SET_RECENT_ENQUIRIES', list)
   },
 }
 

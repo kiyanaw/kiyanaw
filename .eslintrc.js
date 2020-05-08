@@ -12,6 +12,8 @@ module.exports = {
     'plugin:vue/vue3-recommended'
   ],
   rules: {
+    'no-prototype-builtins': 0,
+    'semi': ['error', 'never'],
     'max-len': [1, 120],
     'no-console': 0,
     // override/add rules settings here, such as:

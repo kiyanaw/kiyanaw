@@ -1,27 +1,27 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
 const state = {
   query: '',
-};
+}
 
 const vgetters = {
   currentQuery(context) {
-    return context.query;
+    return context.query
   },
-};
+}
 
 const actions = {
   setCurrentQuery(store, query) {
-    console.log(query);
-    store.commit('SET_QUERY', query);
+    console.log(query)
+    store.commit('SET_QUERY', query)
   },
-};
+}
 
 const mutations = {
   SET_QUERY(context, query) {
-    Vue.set(context, 'query', query);
+    Vue.set(context, 'query', query)
   },
-};
+}
 
 
 export default {
@@ -29,4 +29,4 @@ export default {
   getters: vgetters,
   actions,
   mutations,
-};
+}

@@ -1,13 +1,13 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 // import SearchService from '../services/search'
 
-import enquiry from './modules/enquiryModule';
-import user from './modules/userModule';
-import search from './modules/searchModule';
+import enquiry from './modules/enquiryModule'
+import user from './modules/userModule'
+import search from './modules/searchModule'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
@@ -15,4 +15,4 @@ export default new Vuex.Store({
     user,
     search,
   },
-});
+})

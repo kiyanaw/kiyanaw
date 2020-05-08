@@ -70,7 +70,7 @@
   </f7-page>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
   components: {},
@@ -78,7 +78,7 @@ export default {
     ...mapGetters(['user']),
   },
   methods: {},
-};
+}
 </script>
 
 <style>

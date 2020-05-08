@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Detail',
@@ -22,12 +22,12 @@ export default {
     ...mapGetters(['recentEnquiries']),
   },
   mounted() {
-    this.listRecentEnquiries();
+    this.listRecentEnquiries()
   },
   methods: {
     ...mapActions(['listRecentEnquiries']),
   },
-};
+}
 </script>
 
 <style></style>

@@ -21,26 +21,23 @@
               data-close-on-select="true">
               <!-- select -->
               <select
-                name="Language"
-                @open="localSetLanguage">
+                v-model="userLang"
+                name="Language">
                 <!-- TODO: Wire up event to mutate user preference,
                  wire up "selected" prop to stored pref-->
                 <option
                   v-for="lang in languages"
                   :key="lang"
                   :value="lang"
-                  :selected="userLang === lang"
-                  @click="localSetLanguage">
+                  :selected="userLang === lang">
                   {{ lang }}
                 </option>
               </select>
-              <div
-                class="item-content">
-                <div
-                  class="item-inner">
+
+              <div class="item-content">
+                <div class="item-inner">
                   <!-- Select label -->
-                  <div
-                    class="item-title">Language</div>
+                  <div class="item-title">Language</div>
                   <!-- Selected value, not required -->
                   <!-- <div class="item-after">Apple</div> -->
                 </div>
@@ -54,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Preferences',
@@ -67,12 +64,12 @@ export default {
     ]),
     userLang: {
       get() {
-        console.log(this.user.language);
-        return this.user.language;
+        console.log('GET', this.user.language)
+        return this.user.language
       },
       set(val) {
-        console.log('SET', val);
-        this.updateAttribute({ 'custom:language': val });
+        console.log('SET', val)
+        this.updateAttribute({ 'custom:language': val })
       },
     },
   },
@@ -81,10 +78,10 @@ export default {
       'updateAttribute',
     ]),
     localSetLanguage(lang) {
-      this.updateAttribute({ 'custom:language': lang });
+      this.updateAttribute({ 'custom:language': lang })
     },
   },
-};
+}
 </script>
 
 <style></style>

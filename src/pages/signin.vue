@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { AmplifyEventBus } from 'aws-amplify-vue';
+import { AmplifyEventBus } from 'aws-amplify-vue'
 // import { Auth } from 'aws-amplify';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Signin',
@@ -27,16 +27,16 @@ export default {
   mounted() {
     AmplifyEventBus.$on('authState', (info) => {
       if (info === 'signedIn') {
-        this.getUser();
+        this.getUser()
       } else {
-        this.setUser(false);
+        this.setUser(false)
       }
-    });
+    })
   },
   methods: {
     ...mapActions(['getUser', 'setUser']),
   },
-};
+}
 </script>
 
 <style>

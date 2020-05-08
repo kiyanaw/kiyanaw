@@ -203,8 +203,8 @@
   </f7-page>
 </template>
 <script>
-import Timeout from 'smart-timeout';
-import { mapGetters, mapActions } from 'vuex';
+import Timeout from 'smart-timeout'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -221,7 +221,7 @@ export default {
   },
   watch: {
     currentQuery(val) {
-      console.log(val);
+      console.log(val)
     },
   },
   methods: {
@@ -230,14 +230,14 @@ export default {
     ]),
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
-      Timeout.set(this.setSearch, 250, query);
+      Timeout.set(this.setSearch, 250, query)
     },
     setSearch(query) {
-      this.searchText = query;
-      this.setCurrentQuery(query);
+      this.searchText = query
+      this.setCurrentQuery(query)
     },
   },
-};
+}
 </script>
 
 <style lang="scss">

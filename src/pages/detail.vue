@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Detail',
@@ -23,7 +23,7 @@ export default {
   },
 
   mounted() {},
-};
+}
 </script>
 
 <style></style>

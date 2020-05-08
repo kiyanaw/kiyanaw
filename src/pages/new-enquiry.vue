@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
   name: 'NewEnquiry',
@@ -34,15 +34,15 @@ export default {
   methods: {
     ...mapActions(['createEnquiry']),
     async onSubmit() {
-      console.log('the phrase', this.phrase);
-      this.$f7.dialog.preloader('Creating phrase...');
-      const enquiry = await this.createEnquiry(this.phrase);
-      this.$f7.dialog.close();
-      console.log('got new enquiry', enquiry);
-      this.$f7router.navigate('/detail/');
+      console.log('the phrase', this.phrase)
+      this.$f7.dialog.preloader('Creating phrase...')
+      const enquiry = await this.createEnquiry(this.phrase)
+      this.$f7.dialog.close()
+      console.log('got new enquiry', enquiry)
+      this.$f7router.navigate('/detail/')
     },
   },
-};
+}
 </script>
 
 <style></style>

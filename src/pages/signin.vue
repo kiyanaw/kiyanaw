@@ -4,11 +4,14 @@
       title="Sign in"
       back-link="Back"
     />
-    <f7-block v-if="user">
+    <f7-block
+      v-if="user"
+      class="sign-out-block"
+    >
       You are signed in as {{ user.email }}
+      <amplify-sign-out />
     </f7-block>
     <amplify-authenticator v-if="!user" />
-    <amplify-sign-out v-if="user" />
   </f7-page>
 </template>
 
@@ -37,4 +40,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.sign-out-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

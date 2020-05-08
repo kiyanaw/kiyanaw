@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require("path");
 
 const webpack = require("webpack");
@@ -8,6 +9,7 @@ const entryFile = path.join(__dirname + "/../src/main.js");
 
 module.exports = function(options) {
   return {
+    devtool: "source-map",
     mode: options.mode,
     entry: entryFile,
 

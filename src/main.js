@@ -34,14 +34,17 @@ import Vuex from 'vuex';
 
 import '@aws-amplify/ui-vue';
 import Amplify, * as AmplifyModules from 'aws-amplify';
+import { Logger } from 'aws-amplify';
 import { AmplifyPlugin } from 'aws-amplify-vue';
-import store from './store';
-import app from './main.vue';
 // eslint-disable-next-line camelcase
 import aws_exports from './aws-exports';
 
+import store from './store';
+import app from './main.vue';
+
 Amplify.configure(aws_exports);
-Vue.use(AmplifyPlugin, AmplifyModules);
+Vue.use(AmplifyPlugin, AmplifyModules, Logger);
+Vue.prototype.$Amplify = Amplify;
 
 // Different F7-Vue plugin initialization with f7 v3.0
 Framework7.use(Framework7Vue);

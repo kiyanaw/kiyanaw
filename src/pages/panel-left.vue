@@ -18,28 +18,41 @@
         <f7-icon slot="media" material="info"></f7-icon
       ></f7-list-item>
     </f7-list>
-    <f7-button 
+    <f7-button
+      v-if="!user"
       href="/sign-in/"
-      raised 
-      fill color="orange"
-      icon-md="material:https" 
-      icon-size="15" 
-      class="padd">
+      panel-close
+      fill
+      color="orange"
+      icon-md="material:https"
+      icon-size="15"
+      class="padd"
+    >
       Sign in
+    </f7-button>
+    <f7-button
+      v-if="user"
+      href="/sign-in/"
+      panel-close
+      outline
+      color="orange"
+      icon-md="material:https"
+      icon-size="15"
+      class="padd"
+    >
+      Sign out
     </f7-button>
   </f7-page>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   components: {},
   computed: {
-    user() {
-      // TODO: tie in store
-      return false
-    },
+    ...mapGetters(['user']),
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>
 

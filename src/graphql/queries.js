@@ -151,10 +151,10 @@ export const listResponses = `query ListResponses(
 }
 `;
 export const byCreatedAt = `query ByCreatedAt(
-  $table: ResponseType
+  $table: EnquiryType
   $createdAt: ModelStringKeyConditionInput
   $sortDirection: ModelSortDirection
-  $filter: ModelResponseFilterInput
+  $filter: ModelEnquiryFilterInput
   $limit: Int
   $nextToken: String
 ) {
@@ -172,32 +172,12 @@ export const byCreatedAt = `query ByCreatedAt(
       updatedAt
       text
       extra
+      languageIndex
       type
-      enquiryId
-      warriorId
       table
-      enquiry {
-        id
-        createdAt
-        updatedAt
-        text
-        extra
-        languageIndex
-        type
-        table
-        owner
-      }
       owner
-      media {
+      responses {
         nextToken
-      }
-      warrior {
-        id
-        name
-        language
-        dialect
-        region
-        owner
       }
     }
     nextToken
@@ -205,10 +185,10 @@ export const byCreatedAt = `query ByCreatedAt(
 }
 `;
 export const byUpdatedAt = `query ByUpdatedAt(
-  $table: ResponseType
+  $table: EnquiryType
   $updatedAt: ModelStringKeyConditionInput
   $sortDirection: ModelSortDirection
-  $filter: ModelResponseFilterInput
+  $filter: ModelEnquiryFilterInput
   $limit: Int
   $nextToken: String
 ) {
@@ -226,32 +206,12 @@ export const byUpdatedAt = `query ByUpdatedAt(
       updatedAt
       text
       extra
+      languageIndex
       type
-      enquiryId
-      warriorId
       table
-      enquiry {
-        id
-        createdAt
-        updatedAt
-        text
-        extra
-        languageIndex
-        type
-        table
-        owner
-      }
       owner
-      media {
+      responses {
         nextToken
-      }
-      warrior {
-        id
-        name
-        language
-        dialect
-        region
-        owner
       }
     }
     nextToken

@@ -165,29 +165,22 @@
     <f7-fab v-if="user" position="right-bottom" slot="fixed" color="blue">
       <f7-icon ios="f7:plus" aurora="f7:plus" md="material:add"></f7-icon>
       <f7-icon ios="f7:xmark" aurora="f7:xmark" md="material:close"></f7-icon>
-      <f7-fab-buttons position="top">
-        <f7-fab-button label="Action 1">1</f7-fab-button>
-        <f7-fab-button label="Action 2">2</f7-fab-button>
+      <f7-fab-buttons position="top" color="green">
+        <f7-fab-button fab-close href="/new-enquiry/"><f7-icon md="material:create" size="15"></f7-icon></f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>
-     <!-- <amplify-sign-out></amplify-sign-out> -->
+    <!-- <amplify-sign-out></amplify-sign-out> -->
     <!-- </amplify-authenticator> -->
   </f7-page>
 </template>
 <script>
-import Timeout from 'smart-timeout';
-import { mapGetters, mapActions } from 'vuex';
+import Timeout from 'smart-timeout'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
   computed: {
-    ...mapGetters([
-      'user',
-      'currentQuery', 
-    ]),
-    user: () => {
-      return false
-    },
+    ...mapGetters(['user', 'currentQuery']),
   },
   data: () => {
     return {
@@ -197,20 +190,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'setCurrentQuery',
-    ]),
+    ...mapActions(['setCurrentQuery']),
     onSearch(searchBar, query, previousQuery) {
-      Timeout.set(this.setSearch, 1000, query)
+      Timeout.set(this.setSearch, 250, query)
     },
     setSearch(query) {
-      this.searchText = query;
-      this.setCurrentQuery(query);
-    }
+      this.searchText = query
+      this.setCurrentQuery(query)
+    },
   },
   watch: {
     currentQuery(val) {
-      console.log(val);
+      console.log(val)
     },
   },
   mounted() {

@@ -13,6 +13,8 @@ enum ResponseType {
 
 type Enquiry
   @model
+  @key(name: "byCreatedAt", fields: ["table", "createdAt"], queryField: "byCreatedAt")
+  @key(name: "byUpdatedAt", fields: ["table", "updatedAt"], queryField: "byUpdatedAt")
   @auth(
     rules: [
       { allow: owner }
@@ -52,6 +54,7 @@ type Response
   text: String!
   extra: AWSJSON
   type: PhraseType!
+  #languageIndex: String! # TODO
   enquiryId: ID!
   enquiry: Enquiry @connection(fields: ["enquiryId"])
   warriorId: String!

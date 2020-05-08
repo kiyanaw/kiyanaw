@@ -42,5 +42,12 @@
 				}
 			}
 		}
+	},
+	"function": {
+		"streamToEs": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
 	}
 }

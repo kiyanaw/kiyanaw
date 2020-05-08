@@ -3,15 +3,15 @@ import Vuex from 'vuex';
 
 // import SearchService from '../services/search'
 
-// import enquiry from './modules/enquiry';
-import user from './modules/user';
-import search from './modules/search';
+import enquiry from './modules/enquiryModule';
+import user from './modules/userModule';
+import search from './modules/searchModule';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    // enquiry,
+    enquiry,
     user,
     search,
   },

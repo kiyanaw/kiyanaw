@@ -23,6 +23,7 @@ export const createEnquiry = `mutation CreateEnquiry(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -55,6 +56,7 @@ export const updateEnquiry = `mutation UpdateEnquiry(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -87,6 +89,7 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -108,6 +111,7 @@ export const createResponse = `mutation CreateResponse(
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -163,6 +167,7 @@ export const updateResponse = `mutation UpdateResponse(
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -218,6 +223,7 @@ export const deleteResponse = `mutation DeleteResponse(
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -277,6 +283,7 @@ export const createMedia = `mutation CreateMedia(
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -337,6 +344,7 @@ export const updateMedia = `mutation UpdateMedia(
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -397,6 +405,7 @@ export const deleteMedia = `mutation DeleteMedia(
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -460,6 +469,7 @@ export const createWarrior = `mutation CreateWarrior(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -498,6 +508,7 @@ export const updateWarrior = `mutation UpdateWarrior(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -536,6 +547,7 @@ export const deleteWarrior = `mutation DeleteWarrior(
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table

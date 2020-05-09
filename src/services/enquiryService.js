@@ -24,20 +24,16 @@ export default {
   },
 
   async listRecent() {
-    // const input = {
-    //   updatedAt: { lt: `${new Date().toISOString()}` },
-    // }
     const response = await API.graphql(
-      graphqlOperation(queries.byUpdatedAt, {
+      graphqlOperation(queries.byEnquiryUpdatedAt, {
         table: 'enquiry',
         updatedAt: {
-          eq: '2020-05-08T07:41:24.204Z',
+          gt: '0',
         },
-        // sortDirection: 'DESC',
       })
     )
 
     console.log('enquiries', response)
-    return response.data.byUpdatedAt.items
+    return response.data.byEnquiryUpdatedAt.items
   },
 }

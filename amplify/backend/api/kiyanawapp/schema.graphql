@@ -13,8 +13,8 @@ enum ResponseType {
 
 type Enquiry
   @model
-  @key(name: "byCreatedAt", fields: ["table", "createdAt"], queryField: "byCreatedAt")
-  @key(name: "byUpdatedAt", fields: ["table", "updatedAt"], queryField: "byUpdatedAt")
+  @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
+  @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
   @auth(
     rules: [
       { allow: owner }
@@ -29,7 +29,7 @@ type Enquiry
   extra: AWSJSON # just a storage bin for lack of crystal ball...
   languageIndex: String!
   type: PhraseType!
-  responses: [Response] @connection(keyName: "byEnquiry", fields: ["id"])
+  responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
   table: EnquiryType!
 }
@@ -44,30 +44,30 @@ type Response
     ]
   )
   # @key(name: "byType", fields: ["type"], queryField: "byType")
-  @key(name: "byCreatedAt", fields: ["table", "createdAt"], queryField: "byCreatedAt")
-  @key(name: "byUpdatedAt", fields: ["table", "updatedAt"], queryField: "byUpdatedAt")
-  @key(name: "byEnquiry", fields: ["enquiryId"], queryField: "byEnquiry")
-  @key(name: "byWarrior", fields: ["warriorId"], queryField: "byWarrior") {
+  @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byResponseCreatedAt")
+  @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byResponseUpdatedAt")
+  @key(name: "ByEnquiry", fields: ["enquiryId"], queryField: "responseByEnquiry")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "responseByWarrior") {
   id: ID!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   text: String!
   extra: AWSJSON
   type: PhraseType!
-  #languageIndex: String! # TODO
+  languageIndex: String!
   enquiryId: ID!
   enquiry: Enquiry @connection(fields: ["enquiryId"])
   warriorId: String!
   warrior: Warrior @connection(fields: ["warriorId"])
-  media: [Media] @connection(keyName: "byResponse", fields: ["id"])
+  media: [Media] @connection(keyName: "ByResponse", fields: ["id"])
   # this field is required to be able to sort on dates
   table: ResponseType!
 }
 
 type Media
   @model
-  @key(name: "byResponse", fields: ["responseId"], queryField: "byResponse")
-  @key(name: "byWarrior", fields: ["warriorId"], queryField: "byWarrior")
+  @key(name: "ByResponse", fields: ["responseId"], queryField: "mediaByResponse")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "mediaByWarrior")
   @auth(
     rules: [
       { allow: owner }
@@ -97,6 +97,6 @@ type Warrior
   language: String!
   dialect: String
   region: String
-  responses: [Response] @connection(keyName: "byWarrior", fields: ["id"])
-  media: [Media] @connection(keyName: "byWarrior", fields: ["id"])
+  responses: [Response] @connection(keyName: "ByWarrior", fields: ["id"])
+  media: [Media] @connection(keyName: "ByWarrior", fields: ["id"])
 }

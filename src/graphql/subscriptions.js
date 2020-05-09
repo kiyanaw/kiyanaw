@@ -20,6 +20,7 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -49,6 +50,7 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -78,6 +80,7 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -96,6 +99,7 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -148,6 +152,7 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -200,6 +205,7 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     text
     extra
     type
+    languageIndex
     enquiryId
     warriorId
     table
@@ -256,6 +262,7 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -313,6 +320,7 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -370,6 +378,7 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       text
       extra
       type
+      languageIndex
       enquiryId
       warriorId
       table
@@ -430,6 +439,7 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -465,6 +475,7 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table
@@ -500,6 +511,7 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         text
         extra
         type
+        languageIndex
         enquiryId
         warriorId
         table

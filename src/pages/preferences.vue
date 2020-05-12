@@ -14,20 +14,20 @@
               class="item-link smart-select"
               data-close-on-select="true">
               <select
-                v-model="userLang"
+                v-model="localUserLang"
                 name="Language">
                 <option
                   v-for="lang in languages"
                   :key="lang"
                   :value="lang"
-                  :selected="userLang === lang">
+                  :selected="localUserLang === lang">
                   {{ lang }}
                 </option>
               </select>
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-title">Language</div>
-                  <div class="item-after">{{ userLang }}</div>
+                  <div class="item-after">{{ localUserLang }}</div>
                 </div>
               </div>
             </a>
@@ -43,20 +43,20 @@
                 class="item-link smart-select"
                 data-close-on-select="true">
                 <select
-                  v-model="userDialect"
+                  v-model="localUserDialect"
                   name="dialect">
                   <option
                     v-for="dialect in dialects"
                     :key="dialect"
                     :value="dialect"
-                    :selected="userDialect === dialect">
+                    :selected="localUserDialect === dialect">
                     {{ dialect }}
                   </option>
                 </select>
                 <div class="item-content">
                   <div class="item-inner">
                     <div class="item-title"> Dialect </div>
-                    <div class="item-after">{{ userDialect }}</div>
+                    <div class="item-after">{{ localUserDialect }}</div>
                   </div>
                 </div>
               </a>
@@ -72,20 +72,20 @@
                 class="item-link smart-select"
                 data-close-on-select="true">
                 <select
-                  v-model="userRegion"
+                  v-model="localUserRegion"
                   name="region">
                   <option
                     v-for="region in regions"
                     :key="region"
                     :value="region"
-                    :selected="userRegion === region">
+                    :selected="localUserRegion === region">
                     {{ region }}
                   </option>
                 </select>
                 <div class="item-content">
                   <div class="item-inner">
                     <div class="item-title"> Region </div>
-                    <div class="item-after">{{ userRegion }}</div>
+                    <div class="item-after">{{ localUserRegion }}</div>
                   </div>
                 </div>
               </a>
@@ -103,33 +103,36 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Preferences',
   data: () => ({
-    languages: ['Cree', "Mi'kmaq"],
-    dialects: ['test1', 'test2', 'test3', 'test4'],
-    regions: ['r1', 'r2', 'r3', 'r4'],
   }),
   computed: {
     ...mapGetters([
-      'user',
+      // 'user',
+      'languages',
+      'dialects',
+      'regions',
+      'userLanguage',
+      'userDialect',
+      'userRegion',
     ]),
-    userLang: {
+    localUserLang: {
       get() {
-        return this.user.language
+        return this.userLanguage
       },
       set(val) {
         this.updateAttribute({ name: 'language', value: val })
       },
     },
-    userDialect: {
+    localUserDialect: {
       get() {
-        return this.user.dialect
+        return this.userDialect
       },
       set(val) {
         this.updateAttribute({ name: 'dialect', value: val })
       },
     },
-    userRegion: {
+    localUserRegion: {
       get() {
-        return this.user.region
+        return this.userRegion
       },
       set(val) {
         this.updateAttribute({ name: 'region', value: val })

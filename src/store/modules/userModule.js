@@ -4,16 +4,40 @@ import userService from '../../services/userService'
 
 const state = {
   user: null,
+  languages: ['Cree', "Mi'kmaq"],
+  dialects: ['test1', 'test2', 'test3', 'test4'],
+  regions: ['r1', 'r2', 'r3', 'r4'],
 }
 
 const getters = {
   user(context) {
     return context.user
   },
+  languages(context) {
+    return context.languages
+  },
+  dialects(context) {
+    return context.dialects
+  },
+  regions(context) {
+    return context.regions
+  },
+  userLanguage(context) {
+    return context.user.language
+  },
+  userDialect(context) {
+    return context.user.dialect
+  },
+  userRegion(context) {
+    return context.user.region
+  },
 }
 
 const actions = {
   setUser(store, user) {
+    if (!user) {
+      userService.flushUser()
+    }
     store.commit('USER_LOGGED', user)
   },
   async getUser(store) {

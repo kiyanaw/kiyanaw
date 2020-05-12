@@ -30,7 +30,10 @@ const ago = new TimeAgo('en-US')
 export default {
   name: 'Detail',
   computed: {
-    ...mapGetters(['recentEnquiries']),
+    ...mapGetters([
+      'recentEnquiries',
+      'user',
+    ]),
   },
   async mounted() {
     this.$f7.dialog.preloader('Loading recent ...')

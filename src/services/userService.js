@@ -37,4 +37,7 @@ export default {
     // TODO: return error if response is not success
     return response
   },
+  flushUser() {
+    user = null
+  },
 }

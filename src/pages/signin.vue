@@ -29,7 +29,7 @@ export default {
       if (info === 'signedIn') {
         this.getUser()
       } else {
-        this.setUser(false)
+        this.setUser(null)
       }
     })
   },

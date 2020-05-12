@@ -59,7 +59,7 @@
       <f7-block v-if="!user">
         <f7-link href="/sign-in/">
           Sign in
-        </f7-link>to submit content.
+        </f7-link> to submit content.
       </f7-block>
     </f7-block>
 
@@ -191,8 +191,6 @@
         </f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>
-    <!-- <amplify-sign-out></amplify-sign-out> -->
-    <!-- </amplify-authenticator> -->
   </f7-page>
 </template>
 <script>

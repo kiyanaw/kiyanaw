@@ -5,9 +5,6 @@
       back-link="Back" />
 
     <f7-block>
-      <h1>
-        User Settings
-      </h1>
       <!-- Language Setting -->
       <div class="list">
         <ul>

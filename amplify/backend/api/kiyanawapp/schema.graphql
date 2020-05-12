@@ -15,11 +15,14 @@ type Enquiry
   @model
   @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
   @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
+  @aws_iam
+  @aws_cognito_user_pools
   @auth(
     rules: [
-      { allow: owner }
-      { allow: groups, groups: ["Admin"] }
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
       { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   ) {
   id: ID!
@@ -36,11 +39,14 @@ type Enquiry
 
 type Response
   @model
+  @aws_iam
+  @aws_cognito_user_pools
   @auth(
     rules: [
-      { allow: owner }
-      { allow: groups, groups: ["Admin"] }
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
       { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   )
   # @key(name: "byType", fields: ["type"], queryField: "byType")
@@ -68,11 +74,14 @@ type Media
   @model
   @key(name: "ByResponse", fields: ["responseId"], queryField: "mediaByResponse")
   @key(name: "ByWarrior", fields: ["warriorId"], queryField: "mediaByWarrior")
+  @aws_iam
+  @aws_cognito_user_pools
   @auth(
     rules: [
-      { allow: owner }
-      { allow: groups, groups: ["Admin"] }
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
       { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   ) {
   responseId: ID!
@@ -85,11 +94,14 @@ type Media
 type Warrior
   @model
   @key(fields: ["id"])
+  @aws_iam
+  @aws_cognito_user_pools
   @auth(
     rules: [
-      { allow: owner }
-      { allow: groups, groups: ["Admin"] }
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
       { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   ) {
   id: String! # this will be email

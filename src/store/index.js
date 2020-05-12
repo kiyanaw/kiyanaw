@@ -6,6 +6,7 @@ import Vuex from 'vuex'
 import enquiry from './modules/enquiryModule'
 import user from './modules/userModule'
 import search from './modules/searchModule'
+import response from './modules/responseModule'
 
 Vue.use(Vuex)
 
@@ -14,5 +15,6 @@ export default new Vuex.Store({
     enquiry,
     user,
     search,
+    response,
   },
 })

@@ -28,6 +28,10 @@ const actions = {
     console.log('got list', list)
     store.commit('SET_RECENT_ENQUIRIES', list)
   },
+
+  setEnquiry(store, enquiry) {
+    store.commit('SET_ENQUIRY', enquiry)
+  },
 }
 
 const mutations = {

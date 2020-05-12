@@ -39,11 +39,57 @@
     },
     "Resources": {
     
+        "everyoneGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "everyone",
+              "Precedence" : 1,
+              "RoleArn" : {
+                "Fn::GetAtt": [
+                    "everyoneGroupRole",
+                    "Arn"
+                ]
+              },
+              "UserPoolId" : {
+                "Ref": "authkiyanawapp459ca40c459ca40cUserPoolId"
+              } 
+            }
+        },
+        "everyoneGroupRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName":{
+                    "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Ref": "authkiyanawapp459ca40c459ca40cUserPoolId"
+                          },
+                          "-everyoneGroupRole"
+                        ]
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Sid": "",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Federated": "cognito-identity.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRoleWithWebIdentity"
+                        }
+                    ]
+                }
+            }
+        },
+    
         "AdminGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
               "GroupName" : "Admin",
-              "Precedence" : 1,
+              "Precedence" : 2,
               "RoleArn" : {
                 "Fn::GetAtt": [
                     "AdminGroupRole",
@@ -281,6 +327,17 @@
         }
     },
     "Outputs": {
+      
+        "everyoneGroupRole": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "everyoneGroupRole",
+                    "Arn"
+                ]
+            }
+         
+        },
+        
       
         "AdminGroupRole": {
             "Value": {

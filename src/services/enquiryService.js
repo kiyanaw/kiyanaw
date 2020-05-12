@@ -18,7 +18,7 @@ export default {
       table: 'enquiry',
     }
 
-    const response = await client.request(mutations.createEnquiry, input)
+    const response = await client.request(mutations.createEnquiry, { input })
     console.log('got enquiry', response)
     // TODO: unwrap this
     return response.data.createEnquiry
@@ -33,7 +33,6 @@ export default {
       sortDirection: 'DESC',
     })
 
-    console.log('enquiries', response)
     return response.data.byEnquiryUpdatedAt.items
   },
 }

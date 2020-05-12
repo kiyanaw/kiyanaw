@@ -3,7 +3,7 @@ import { API } from 'aws-amplify'
 import userService from './userService'
 
 export default {
-  async request(query, input) {
+  async request(query, variables) {
     // NOTE: we intentionally go around the store here
     const user = await userService.getUser()
 
@@ -13,7 +13,6 @@ export default {
       authMode = 'AWS_IAM'
     }
 
-    console.log('client user', user, authMode)
-    return API.graphql({ query, variables: input, authMode })
+    return API.graphql({ query, variables, authMode })
   },
 }

@@ -219,7 +219,7 @@ export default {
   async mounted() {
     await this.getUser()
     console.log('USER!?!', this.user, this.userLanguage)
-    if (!this.userLanguage) {
+    if (!this.userLanguage && !this.user) {
       this.$f7.views.main.router.navigate('/new-user/')
     }
   },

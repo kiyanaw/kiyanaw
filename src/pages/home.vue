@@ -205,15 +205,29 @@ export default {
     searchText: '',
   }),
   computed: {
-    ...mapGetters(['user', 'currentQuery']),
+    ...mapGetters([
+      'user',
+      'currentQuery',
+      'userLanguage',
+    ]),
   },
   watch: {
     currentQuery(val) {
       console.log(val)
     },
   },
+  async mounted() {
+    await this.getUser()
+    console.log('USER!?!', this.user, this.userLanguage)
+    if (!this.userLanguage) {
+      this.$f7.views.main.router.navigate('/new-user/')
+    }
+  },
   methods: {
-    ...mapActions(['setCurrentQuery']),
+    ...mapActions([
+      'setCurrentQuery',
+      'getUser',
+    ]),
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
       Timeout.set(this.setSearch, 250, query)

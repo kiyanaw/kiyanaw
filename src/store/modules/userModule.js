@@ -27,6 +27,7 @@ const getters = {
     if (context.user) {
       return context.user.language
     }
+    console.log('OUTSIDE', window.localStorage.getItem('language'))
     return window.localStorage.getItem('language')
   },
   userDialect(context) {

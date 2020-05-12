@@ -68,6 +68,9 @@ export default {
       set(val) {
         if (!this.userLanguage) {
           window.localStorage.setItem('language', val)
+          window.setTimeout(() => {
+            this.$f7.views.main.router.navigate('/')
+          }, 500)
         }
       },
     },

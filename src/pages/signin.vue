@@ -25,9 +25,9 @@ export default {
     ...mapGetters(['user']),
   },
   mounted() {
+    window.localStorage.removeItem('language')
     AmplifyEventBus.$on('authState', (info) => {
       if (info === 'signedIn') {
-        window.localStorage.removeItem('language')
         this.getUser()
       } else {
         this.setUser(null)

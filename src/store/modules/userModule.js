@@ -7,6 +7,7 @@ const state = {
   languages: ['Cree', "Mi'kmaq"],
   dialects: ['test1', 'test2', 'test3', 'test4'],
   regions: ['r1', 'r2', 'r3', 'r4'],
+  language: null,
 }
 
 const getters = {
@@ -23,7 +24,10 @@ const getters = {
     return context.regions
   },
   userLanguage(context) {
-    return context.user.language
+    if (context.user) {
+      return context.user.language
+    }
+    return window.localStorage.getItem('language')
   },
   userDialect(context) {
     return context.user.dialect

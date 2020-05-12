@@ -33,65 +33,65 @@
             </a>
           </li>
         </ul>
+      </div>
 
-        <!-- Dialect -->
-        <div class="list">
-          <ul>
-            <li>
-              <a
-                href="#"
-                class="item-link smart-select"
-                data-close-on-select="true">
-                <select
-                  v-model="localUserDialect"
-                  name="dialect">
-                  <option
-                    v-for="dialect in dialects"
-                    :key="dialect"
-                    :value="dialect"
-                    :selected="localUserDialect === dialect">
-                    {{ dialect }}
-                  </option>
-                </select>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title"> Dialect </div>
-                    <div class="item-after">{{ localUserDialect }}</div>
-                  </div>
+      <!-- Dialect -->
+      <div class="list">
+        <ul>
+          <li>
+            <a
+              href="#"
+              class="item-link smart-select"
+              data-close-on-select="true">
+              <select
+                v-model="localUserDialect"
+                name="dialect">
+                <option
+                  v-for="dialect in dialects"
+                  :key="dialect"
+                  :value="dialect"
+                  :selected="localUserDialect === dialect">
+                  {{ dialect }}
+                </option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title"> Dialect </div>
+                  <div class="item-after">{{ localUserDialect }}</div>
                 </div>
-              </a>
-            </li>
-          </ul>
-        </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-        <div class="list">
-          <ul>
-            <li>
-              <a
-                href="#"
-                class="item-link smart-select"
-                data-close-on-select="true">
-                <select
-                  v-model="localUserRegion"
-                  name="region">
-                  <option
-                    v-for="region in regions"
-                    :key="region"
-                    :value="region"
-                    :selected="localUserRegion === region">
-                    {{ region }}
-                  </option>
-                </select>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title"> Region </div>
-                    <div class="item-after">{{ localUserRegion }}</div>
-                  </div>
+      <div class="list">
+        <ul>
+          <li>
+            <a
+              href="#"
+              class="item-link smart-select"
+              data-close-on-select="true">
+              <select
+                v-model="localUserRegion"
+                name="region">
+                <option
+                  v-for="region in regions"
+                  :key="region"
+                  :value="region"
+                  :selected="localUserRegion === region">
+                  {{ region }}
+                </option>
+              </select>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title"> Region </div>
+                  <div class="item-after">{{ localUserRegion }}</div>
                 </div>
-              </a>
-            </li>
-          </ul>
-        </div>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
     </f7-block>
   </f7-page>

@@ -58,7 +58,7 @@
       Sign in
     </f7-button>
     <f7-button
-      v-if="user"
+      v-else
       href="/sign-in/"
       panel-close
       outline

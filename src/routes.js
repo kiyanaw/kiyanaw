@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import Vue from 'vue'
+import store from './store'
 
 import Home from './pages/home.vue'
 import Browse from './pages/browse.vue'
@@ -9,11 +10,16 @@ import AddResponse from './pages/add-response.vue'
 import PanelLeftPage from './pages/panel-left.vue'
 import Preferences from './pages/preferences.vue'
 import Signin from './pages/signin.vue'
+import Onboarding from './pages/onboarding.vue'
 
 export default [
   {
     path: '/',
     component: Home,
+  },
+  {
+    path: '/new-user/',
+    component: Onboarding,
   },
   {
     path: '/new-enquiry/',

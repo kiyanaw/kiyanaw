@@ -16,10 +16,15 @@ class User {
 export default {
   async getUser() {
     if (!user) {
-      user = await Auth.currentAuthenticatedUser({ bypassCache: false })
-      if (user) {
-        const userData = await Auth.userAttributes(user)
-        user = new User(user, userData)
+      window.Auth = Auth
+      try {
+        user = await Auth.currentAuthenticatedUser({ bypassCache: false })
+        if (user) {
+          const userData = await Auth.userAttributes(user)
+          user = new User(user, userData)
+        }
+      } catch (error) {
+        console.warn('User not authenticated', error.message)
       }
     }
     return user

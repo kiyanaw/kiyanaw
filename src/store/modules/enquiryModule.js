@@ -23,9 +23,14 @@ const actions = {
     return enquiry
   },
 
-  async listRecentEnquiries() {
-    const enquiries = await enquiryService.listRecent()
-    console.log(enquiries)
+  async listRecentEnquiries(store) {
+    const list = await enquiryService.listRecent()
+    console.log('got list', list)
+    store.commit('SET_RECENT_ENQUIRIES', list)
+  },
+
+  setEnquiry(store, enquiry) {
+    store.commit('SET_ENQUIRY', enquiry)
   },
 }
 

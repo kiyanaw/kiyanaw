@@ -2,6 +2,39 @@
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Description": "Lambda resource stack creation using Amplify CLI",
 	"Parameters": {
+		"GROUP": {
+			"Type": "String",
+			"Default": ""
+		},
+		"modules": {
+			"Type": "String",
+			"Default": "",
+			"Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+		},
+		"resourceName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"trigger": {
+			"Type": "String",
+			"Default": "true"
+		},
+		"functionName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"roleName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"parentResource": {
+			"Type": "String",
+			"Default": ""
+		},
+		"parentStack": {
+			"Type": "String",
+			"Default": ""
+		},
 		"env": {
 			"Type": "String"
 		}
@@ -28,12 +61,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"streamToEs",
+						"kiyanawapp459ca40c459ca40cPostConfirmation",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"streamToEs",
+									"kiyanawapp459ca40c459ca40cPostConfirmation",
 									"-",
 									{
 										"Ref": "env"
@@ -48,8 +81,14 @@
 						"ENV": {
 							"Ref": "env"
 						},
+						"MODULES": {
+							"Ref": "modules"
+						},
 						"REGION": {
 							"Ref": "AWS::Region"
+						},
+						"GROUP": {
+							"Ref": "GROUP"
 						}
 					}
 				},
@@ -63,7 +102,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-kiyanaw-app-dev-223941-deployment",
-					"S3Key": "amplify-builds/streamToEs-45723037554c77764446-build.zip"
+					"S3Key": "amplify-builds/kiyanawapp459ca40c459ca40cPostConfirmation-47324272737a4a546f74-build.zip"
 				}
 			}
 		},
@@ -73,12 +112,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"kiyanawappLambdaRole8076c90f",
+						"kiyanawapp459ca40c459ca40cPostConfirmation",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"kiyanawappLambdaRole8076c90f",
+									"kiyanawapp459ca40c459ca40cPostConfirmation",
 									"-",
 									{
 										"Ref": "env"
@@ -164,14 +203,14 @@
 				]
 			}
 		},
-		"Region": {
-			"Value": {
-				"Ref": "AWS::Region"
-			}
-		},
 		"LambdaExecutionRole": {
 			"Value": {
 				"Ref": "LambdaExecutionRole"
+			}
+		},
+		"Region": {
+			"Value": {
+				"Ref": "AWS::Region"
 			}
 		}
 	}

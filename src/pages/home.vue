@@ -32,11 +32,10 @@
         @searchbar:search="onSearch" />
     </f7-navbar>
 
-    <f7-block
-      v-if="!searching && !searchText">
+    <f7-block v-if="!searching && !searchText">
       <p>
-        Search for words or phrases you want to know in the {{ language }} language,
-        or browse the list of submissions.
+        Search for words or phrases you want to know in the
+        {{ language }} language, or browse the list of submissions.
       </p>
       <br>
       <f7-row>
@@ -51,25 +50,22 @@
         <f7-col>
           <f7-button
             raised
-            icon-md="material:list">
+            icon-md="material:list"
+            href="/browse/">
             Browse
           </f7-button>
         </f7-col>
       </f7-row>
-      <f7-block
-        v-if="!user">
-        <f7-link
-          href="/sign-in/">
+      <f7-block v-if="!user">
+        <f7-link href="/sign-in/">
           Sign in
         </f7-link> to submit content.
       </f7-block>
     </f7-block>
 
-    <div
-      v-if="searching && !searchText">
+    <div v-if="searching && !searchText">
       <!-- <f7-block-title>Recent</f7-block-title> -->
-      <f7-list
-        class="nomargin">
+      <f7-list class="nomargin">
         <f7-list-item
           title="visits"
           @click="$refs.searchbar.search('visits')" />
@@ -82,11 +78,8 @@
       </f7-list>
     </div>
 
-    <div
-      v-if="searchText.length">
-      <f7-block-title>
-        Search results for {{ searchText }}
-      </f7-block-title>
+    <div v-if="searchText.length">
+      <f7-block-title>Search results for {{ searchText }}</f7-block-title>
       <f7-list>
         <f7-list-item
           link="#"
@@ -114,7 +107,7 @@
           title="kika-kî-nipân"
           header="You should be sleeping"
           footer="updated 15 minutes by jhill"
-          after="" />
+          after />
 
         <f7-list-item
           link="#"
@@ -198,8 +191,6 @@
         </f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>
-    <!-- <amplify-sign-out></amplify-sign-out> -->
-    <!-- </amplify-authenticator> -->
   </f7-page>
 </template>
 <script>
@@ -214,10 +205,7 @@ export default {
     searchText: '',
   }),
   computed: {
-    ...mapGetters([
-      'user',
-      'currentQuery',
-    ]),
+    ...mapGetters(['user', 'currentQuery']),
   },
   watch: {
     currentQuery(val) {
@@ -225,9 +213,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'setCurrentQuery',
-    ]),
+    ...mapActions(['setCurrentQuery']),
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
       Timeout.set(this.setSearch, 250, query)

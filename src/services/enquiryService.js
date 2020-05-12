@@ -1,6 +1,5 @@
-import UUID from 'uuid'
-
-import { API, graphqlOperation } from 'aws-amplify'
+import { v1 as uuidv1 } from 'uuid'
+import client from './client'
 
 import * as queries from '../graphql/queries'
 import * as mutations from '../graphql/mutations'
@@ -8,7 +7,7 @@ import * as mutations from '../graphql/mutations'
 
 export default {
   async create(phrase) {
-    const id = UUID.v1()
+    const id = uuidv1()
     const input = {
       id,
       createdAt: new Date(),
@@ -18,18 +17,22 @@ export default {
       type: 'phrase',
       table: 'enquiry',
     }
-    const response = await API.graphql(graphqlOperation(mutations.createEnquiry, { input }))
+
+    const response = await client.request(mutations.createEnquiry, { input })
+    console.log('got enquiry', response)
     // TODO: unwrap this
     return response.data.createEnquiry
   },
 
   async listRecent() {
-    const input = {
+    const response = await client.request(queries.byEnquiryUpdatedAt, {
       table: 'enquiry',
-      updatedAt: { lte: new Date() },
+      updatedAt: {
+        gt: '0',
+      },
       sortDirection: 'DESC',
-    }
-    const response = await API.graphql(graphqlOperation(queries.byUpdatedAt, { input }))
-    console.log('enquiries', response)
+    })
+
+    return response.data.byEnquiryUpdatedAt.items
   },
 }

@@ -29,6 +29,7 @@
           material="history" />
       </f7-list-item>
       <f7-list-item
+        v-if="user"
         link="/preferences/"
         title="Preferences"
         panel-close>

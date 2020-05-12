@@ -29,7 +29,7 @@ module.exports = function(options) {
       pathinfo: true,
       devtoolLineToLine: true,
       filename: "[hash].[name].js",
-      sourceMapFilename: "[hash].[name].js.map",
+      sourceMapFilename: "[hash].[name].js.map[query]",
       path: path.join(__dirname, "../www")
     },
 

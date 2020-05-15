@@ -44,7 +44,6 @@ const getters = {
     return context.region
   },
   username(context) {
-    console.log(context.user.preferred_username)
     return context.user.preferred_username
   },
 }
@@ -54,7 +53,6 @@ const actions = {
     if (!user) {
       userService.flushUser()
     }
-    console.log('SET USER', user)
     store.commit('USER_LOGGED', user)
   },
   async setUsername(store, username) {
@@ -63,7 +61,6 @@ const actions = {
   async getUser(store) {
     userService.getUser().then((user) => {
       if (user) {
-        console.log('USER TO SAVE', user)
         store.dispatch('setUser', user)
       }
     })

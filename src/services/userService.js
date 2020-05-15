@@ -20,7 +20,6 @@ export default {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
         const userData = await Auth.userAttributes(user)
-        console.log('GET USER', user, userData)
         user = new User(user, userData)
       }
     } catch (error) {

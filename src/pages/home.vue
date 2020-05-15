@@ -198,6 +198,7 @@
 <script>
 import Timeout from 'smart-timeout'
 import { mapGetters, mapActions } from 'vuex'
+// eslint-disable-next-line import/no-unresolved
 import onboarding from 'src/components/onboarding.vue'
 
 export default {

@@ -8,6 +8,8 @@ const state = {
   dialects: ['test1', 'test2', 'test3', 'test4'],
   regions: ['r1', 'r2', 'r3', 'r4'],
   language: null,
+  region: null,
+  dialect: null,
 }
 
 const getters = {
@@ -27,14 +29,23 @@ const getters = {
     if (context.user) {
       return context.user.language
     }
-    console.log('OUTSIDE', window.localStorage.getItem('language'))
-    return window.localStorage.getItem('language')
+    return context.language
   },
   userDialect(context) {
-    return context.user.dialect
+    if (context.user) {
+      return context.user.dialect
+    }
+    return context.dialect
   },
   userRegion(context) {
-    return context.user.region
+    if (context.user) {
+      return context.user.region
+    }
+    return context.region
+  },
+  username(context) {
+    console.log(context.user.preferred_username)
+    return context.user.preferred_username
   },
 }
 
@@ -43,14 +54,28 @@ const actions = {
     if (!user) {
       userService.flushUser()
     }
+    console.log('SET USER', user)
     store.commit('USER_LOGGED', user)
   },
+  async setUsername(store, username) {
+    return userService.setUsername(username)
+  },
   async getUser(store) {
-    const user = await userService.getUser()
-    if (user) {
-      console.log('Authenticated user', user)
-      store.dispatch('setUser', user)
-    }
+    userService.getUser().then((user) => {
+      if (user) {
+        console.log('USER TO SAVE', user)
+        store.dispatch('setUser', user)
+      }
+    })
+  },
+  setCurrentLanguage(store, val) {
+    store.commit('SET_CURRENT_LANGUAGE', val)
+  },
+  setCurrentRegion(store, val) {
+    store.commit('SET_CURRENT_REGION', val)
+  },
+  setCurrentDialect(store, val) {
+    store.commit('SET_CURRENT_DIALECT', val)
   },
   updateAttribute(store, payload) {
     // Update user object here, then send to service layer
@@ -62,11 +87,28 @@ const actions = {
     // TODO: Handle error if response is not success and revert user object in store
     store.dispatch('getUser')
   },
+  updateUsername(store, payload) {
+    userService.setRegularAttribute('preferred_username', payload).then(() => {
+      window.setTimeout(() => { store.dispatch('getUser') }, 2000)
+    })
+  },
 }
 
 const mutations = {
   USER_LOGGED(context, user) {
     Vue.set(context, 'user', user)
+  },
+  SET_CURRENT_LANGUAGE(context, val) {
+    window.localStorage.setItem('language', val)
+    Vue.set(context, 'language', val)
+  },
+  SET_CURRENT_REGION(context, val) {
+    window.localStorage.setItem('region', val)
+    Vue.set(context, 'region', val)
+  },
+  SET_CURRENT_DIALECT(context, val) {
+    window.localStorage.setItem('dialect', val)
+    Vue.set(context, 'dialect', val)
   },
 }
 

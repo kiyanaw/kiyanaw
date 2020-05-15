@@ -32,7 +32,9 @@
         @searchbar:search="onSearch" />
     </f7-navbar>
 
-    <f7-block v-if="!searching && !searchText">
+    <onboarding v-if="!searching && !searchText && !languageSet" />
+
+    <f7-block v-if="!searching && !searchText && languageSet">
       <p>
         Search for words or phrases you want to know in the
         {{ language }} language, or browse the list of submissions.
@@ -63,7 +65,7 @@
       </f7-block>
     </f7-block>
 
-    <div v-if="searching && !searchText">
+    <div v-if="searching && !searchText && languageSet">
       <!-- <f7-block-title>Recent</f7-block-title> -->
       <f7-list class="nomargin">
         <f7-list-item
@@ -196,9 +198,13 @@
 <script>
 import Timeout from 'smart-timeout'
 import { mapGetters, mapActions } from 'vuex'
+import onboarding from 'src/components/onboarding.vue'
 
 export default {
   name: 'Home',
+  components: {
+    onboarding,
+  },
   data: () => ({
     language: 'Cree',
     searching: false,
@@ -210,23 +216,26 @@ export default {
       'currentQuery',
       'userLanguage',
     ]),
+    languageSet() {
+      if (this.user) {
+        return true
+      }
+      if (this.userLanguage) {
+        return true
+      }
+      return false
+    },
   },
   watch: {
     currentQuery(val) {
       console.log(val)
     },
   },
-  async mounted() {
-    await this.getUser()
-    console.log('USER!?!', this.user, this.userLanguage)
-    if (!this.userLanguage && !this.user) {
-      this.$f7.views.main.router.navigate('/new-user/')
-    }
-  },
   methods: {
     ...mapActions([
       'setCurrentQuery',
       'getUser',
+      'setUsername',
     ]),
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {

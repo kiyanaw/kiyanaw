@@ -10,16 +10,11 @@ import AddResponse from './pages/add-response.vue'
 import PanelLeftPage from './pages/panel-left.vue'
 import Preferences from './pages/preferences.vue'
 import Signin from './pages/signin.vue'
-import Onboarding from './pages/onboarding.vue'
 
 export default [
   {
     path: '/',
     component: Home,
-  },
-  {
-    path: '/new-user/',
-    component: Onboarding,
   },
   {
     path: '/new-enquiry/',

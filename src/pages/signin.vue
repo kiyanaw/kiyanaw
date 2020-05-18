@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { AmplifyEventBus } from 'aws-amplify-vue'
+import { Hub } from '@aws-amplify/core'
 // import { Auth } from 'aws-amplify';
 import { mapActions, mapGetters } from 'vuex'
 
@@ -50,8 +50,9 @@ export default {
     ]),
   },
   mounted() {
-    AmplifyEventBus.$on('authState', (info) => {
-      if (info === 'signedIn') {
+    Hub.listen('auth', (info) => {
+      console.log(info)
+      if (info.payload.event === 'signIn') {
         window.localStorage.removeItem('language')
         this.getUser()
       } else {

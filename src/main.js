@@ -32,20 +32,16 @@ import FastClick from 'fastclick'
 // Import Vuex Storage
 import Vuex from 'vuex'
 
-
-import Amplify, * as AmplifyModules from 'aws-amplify'
-// import { Logger } from 'aws-amplify'
-import { AmplifyPlugin } from 'aws-amplify-vue'
-// eslint-disable-next-line camelcase
-
-
+import '@aws-amplify/ui-vue'
+import Amplify from '@aws-amplify/core'
 import awsconfig from './aws-exports'
+
 
 import store from './store'
 import app from './main.vue'
 
 Amplify.configure(awsconfig)
-Vue.use(AmplifyPlugin, AmplifyModules)
+Vue.use(Amplify)
 // Vue.prototype.$Amplify = Amplify
 
 // Different F7-Vue plugin initialization with f7 v3.0

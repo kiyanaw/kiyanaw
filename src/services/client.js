@@ -1,4 +1,4 @@
-import { API } from '@aws-amplify/common'
+import { API } from 'aws-amplify'
 
 import userService from './userService'
 

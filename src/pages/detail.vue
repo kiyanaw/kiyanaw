@@ -22,13 +22,17 @@
       Add response
     </f7-link>
 
-    <!-- <f7-block-title>Some details</f7-block-title> -->
-    <p>{{ enquiry }}</p>
+    <!-- TODO: Friendly message if no responses provided -->
+    <f7-block
+      v-for="response in responses"
+      :key="response.id">
+      <p> {{ response }} </p>
+    </f7-block>
   </f7-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
@@ -39,15 +43,23 @@ const ago = new TimeAgo('en-US')
 export default {
   name: 'Detail',
   computed: {
-    ...mapGetters(['enquiry', 'user']),
+    data: () => ({
+      responses: [],
+    }),
+    ...mapGetters([
+      'enquiry',
+      'user',
+    ]),
   },
 
-  mounted() {
-    console.log(this.$f7router.history)
-    // If we are here we are viewing the details of the
+  async mounted() {
+    this.responses = await this.getEnquiry(this.enquiry.id).responses
   },
 
   methods: {
+    ...mapActions([
+      'getEnquiry',
+    ]),
     ago(dateString) {
       return ago.format(new Date(dateString))
     },

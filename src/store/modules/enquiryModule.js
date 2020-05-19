@@ -32,6 +32,11 @@ const actions = {
   setEnquiry(store, enquiry) {
     store.commit('SET_ENQUIRY', enquiry)
   },
+
+  async getEnquiry(store, enqId) {
+    const result = await enquiryService.getEnquiry(enqId)
+    return result
+  },
 }
 
 const mutations = {

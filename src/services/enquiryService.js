@@ -24,6 +24,11 @@ export default {
     return response.data.createEnquiry
   },
 
+  async getEnquiry(id) {
+    const resp = await client.request(queries.getEnquiry, { table: 'enquiry', id })
+    return resp.data
+  },
+
   async listRecent() {
     const response = await client.request(queries.byEnquiryUpdatedAt, {
       table: 'enquiry',

@@ -141,10 +141,13 @@ export const createResponse = `mutation CreateResponse(
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -197,10 +200,13 @@ export const updateResponse = `mutation UpdateResponse(
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -253,10 +259,13 @@ export const deleteResponse = `mutation DeleteResponse(
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -304,20 +313,26 @@ export const createMedia = `mutation CreateMedia(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -365,20 +380,26 @@ export const updateMedia = `mutation UpdateMedia(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -426,20 +447,26 @@ export const deleteMedia = `mutation DeleteMedia(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -457,10 +484,13 @@ export const createWarrior = `mutation CreateWarrior(
 ) {
   createWarrior(input: $input, condition: $condition) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id
@@ -496,10 +526,13 @@ export const updateWarrior = `mutation UpdateWarrior(
 ) {
   updateWarrior(input: $input, condition: $condition) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id
@@ -535,10 +568,13 @@ export const deleteWarrior = `mutation DeleteWarrior(
 ) {
   deleteWarrior(input: $input, condition: $condition) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id

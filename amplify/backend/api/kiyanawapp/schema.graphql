@@ -105,10 +105,13 @@ type Warrior
     ]
   ) {
   id: String! # this will be email
-  name: String!
+  username: String!
   language: String!
   dialect: String
   region: String
+  favorites: AWSJSON
+  playlist: AWSJSON
+  isWarrior: Boolean!
   responses: [Response] @connection(keyName: "ByWarrior", fields: ["id"])
   media: [Media] @connection(keyName: "ByWarrior", fields: ["id"])
 }

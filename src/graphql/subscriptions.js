@@ -129,10 +129,13 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -182,10 +185,13 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -235,10 +241,13 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -283,20 +292,26 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -341,20 +356,26 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -399,20 +420,26 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -427,10 +454,13 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
 export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
   onCreateWarrior(owner: $owner) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id
@@ -463,10 +493,13 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
 export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
   onUpdateWarrior(owner: $owner) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id
@@ -499,10 +532,13 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
 export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
   onDeleteWarrior(owner: $owner) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id

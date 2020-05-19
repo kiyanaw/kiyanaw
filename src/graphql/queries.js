@@ -161,10 +161,13 @@ export const getResponse = `query GetResponse($id: ID!) {
     }
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -210,10 +213,13 @@ export const listResponses = `query ListResponses(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -265,10 +271,13 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -320,10 +329,13 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -373,10 +385,13 @@ export const responseByEnquiry = `query ResponseByEnquiry(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -426,10 +441,13 @@ export const responseByWarrior = `query ResponseByWarrior(
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -470,20 +488,26 @@ export const getMedia = `query GetMedia($id: ID!) {
       }
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
     owner
     warrior {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -521,10 +545,13 @@ export const listMedias = `query ListMedias(
       owner
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -566,10 +593,13 @@ export const mediaByResponse = `query MediaByResponse(
       owner
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -611,10 +641,13 @@ export const mediaByWarrior = `query MediaByWarrior(
       owner
       warrior {
         id
-        name
+        username
         language
         dialect
         region
+        favorites
+        playlist
+        isWarrior
         owner
       }
     }
@@ -638,10 +671,13 @@ export const listWarriors = `query ListWarriors(
   ) {
     items {
       id
-      name
+      username
       language
       dialect
       region
+      favorites
+      playlist
+      isWarrior
       responses {
         nextToken
       }
@@ -657,10 +693,13 @@ export const listWarriors = `query ListWarriors(
 export const getWarrior = `query GetWarrior($id: String!) {
   getWarrior(id: $id) {
     id
-    name
+    username
     language
     dialect
     region
+    favorites
+    playlist
+    isWarrior
     responses {
       items {
         id

@@ -21,6 +21,14 @@
           material="queue_music" />
       </f7-list-item>
       <f7-list-item
+        link="/favorites/"
+        title="Favorites"
+        panel-close>
+        <f7-icon
+          slot="media"
+          material="favorite" />
+      </f7-list-item>
+      <f7-list-item
         link="/history/"
         title="History"
         panel-close>

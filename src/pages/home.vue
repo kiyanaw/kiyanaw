@@ -37,7 +37,7 @@
     <f7-block v-if="!searching && !searchText && languageSet">
       <p>
         Search for words or phrases you want to know in the
-        {{ language }} language, or browse the list of submissions.
+        {{ userLanguage }} language, or browse the list of submissions.
       </p>
       <br>
       <f7-row>
@@ -231,6 +231,9 @@ export default {
     currentQuery(val) {
       console.log(val)
     },
+  },
+  mounted() {
+    console.log('HOME MOUNTED', this.userLanguage)
   },
   methods: {
     ...mapActions([

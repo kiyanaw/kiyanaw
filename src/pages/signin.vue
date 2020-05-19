@@ -53,8 +53,14 @@ export default {
     Hub.listen('auth', (info) => {
       console.log(info)
       if (info.payload.event === 'signIn') {
+        // TO DO PUSH SET LANGUAGE TO USER PREF IF NOT ALREADY SET FOR USER
         window.localStorage.removeItem('language')
+
+        // Populates user in the store
         this.getUser()
+
+        // Redirects to home after good login
+        this.$f7router.navigate('/')
       } else {
         this.setUser(null)
       }

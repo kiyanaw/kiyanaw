@@ -8,7 +8,7 @@
     <f7-card
       v-if="enquiry"
       :title="enquiry.text"
-      :content="`Submitted by some@body.com ${ago(enquiry.createdAt)}`">
+      :content="`Submitted by ${enquiry.warriorName} ${ago(enquiry.createdAt)}`">
       <f7-card-footer>
         <f7-link icon-md="material:star_outline">
           Save
@@ -62,7 +62,9 @@ export default {
 
   async mounted() {
     console.log('getting responses')
-    this.responses = await this.getEnquiry(this.enquiryId).responses
+    this.$f7.dialog.preloader('Loading enquiry...')
+    this.enquiry = await this.getEnquiry(this.enquiryId)
+    this.$f7.dialog.close()
     console.log('responses', this.responses)
   },
 

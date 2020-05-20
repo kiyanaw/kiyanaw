@@ -4,7 +4,7 @@
       title="Response"
       back-link="Back" />
 
-    <f7-block>{{ enquiry.phrase }}</f7-block>
+    <f7-block>{{ enquiry.text }}</f7-block>
     <f7-list
       form>
       <!-- input vue models cannot be bound https://v2.framework7.io/vue/inputs.html -->

@@ -5,7 +5,7 @@ import userService from './userService'
 export default {
   async request(query, variables) {
     // NOTE: we intentionally go around the store here
-    const user = await userService.getUser()
+    const user = await userService.get()
 
     let authMode = 'AMAZON_COGNITO_USER_POOLS'
     if (!user) {

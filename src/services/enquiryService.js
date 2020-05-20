@@ -1,10 +1,11 @@
 import { v1 as uuidv1 } from 'uuid'
 import client from './client'
+import userService from './userService'
 
 import * as queries from '../graphql/queries'
 import * as mutations from '../graphql/mutations'
 
-/**
+/** ENTRY
 createdAt: "2020-05-19T06:47:08.841Z"
 extra: null
 id: (...)
@@ -17,6 +18,18 @@ type: "phrase"
 updatedAt: "2020-05-19T06:47:08.841Z"
  */
 
+class Response {
+  constructor(data) {
+    this.id = data.id
+    this.text = data.text
+    this.type = data.type
+    this.createdAt = new Date(data.createdAt)
+    this.updatedAt = new Date(data.updatedAt)
+    this.warriorName = data.warriorName
+    // this.media
+  }
+}
+
 class Enquiry {
   constructor(data) {
     this.id = data.id
@@ -25,11 +38,19 @@ class Enquiry {
     this.createdAt = new Date(data.createdAt)
     this.updatedAt = new Date(data.updatedAt)
     this.owner = data.owner
+    this.responses = []
+    if (data.responses) {
+      this.responses = data.responses.items.map((item) => new Response(item))
+    }
+    this.warriorName = data.warriorName
   }
 }
 
 export default {
   async create(phrase) {
+    const user = await userService.get()
+    console.log('user', user)
+
     const id = uuidv1()
     const input = {
       id,
@@ -39,6 +60,8 @@ export default {
       languageIndex: 'todo',
       type: 'phrase',
       table: 'enquiry',
+      warriorName: user.name,
+      warriorId: user.email,
     }
 
     const response = await client.request(mutations.createEnquiry, { input })
@@ -49,7 +72,7 @@ export default {
 
   async get(id) {
     const response = await client.request(queries.getEnquiry, { id })
-    return response.data
+    return new Enquiry(response.data.getEnquiry)
   },
 
   async listRecent() {

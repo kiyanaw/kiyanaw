@@ -6,7 +6,7 @@ class User {
   constructor(data, userData) {
     this.email = data.attributes.email
     // this.name = TODO
-    this.preferred_username = userData.find((el) => el.Name === 'preferred_username')?.Value || null
+    this.name = userData.find((el) => el.Name === 'preferred_username')?.Value || null
     this.groups = data.signInUserSession.accessToken.payload['cognito:groups'] || []
     this.language = userData.find((el) => el.Name === 'custom:language')?.Value || null
     this.dialect = userData.find((el) => el.Name === 'custom:dialect')?.Value || null
@@ -15,7 +15,7 @@ class User {
 }
 
 export default {
-  async getUser() {
+  async get() {
     window.Auth = Auth
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
@@ -28,6 +28,7 @@ export default {
     }
     return user
   },
+  // TODO: this is a leaky abstraction, fix
   async setCustomUserAttribute(name, value) {
     const attribute = {}
     attribute[`custom:${name}`] = value
@@ -43,7 +44,7 @@ export default {
     const response = await Auth.updateUserAttributes(curUser, attribute)
     return response
   },
-  flushUser() {
+  flush() {
     user = null
   },
 }

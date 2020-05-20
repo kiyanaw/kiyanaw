@@ -16,6 +16,7 @@ module.exports = {
     'semi': ['error', 'never'],
     'max-len': [1, 120],
     'no-console': 0,
+    'max-classes-per-file': 0,
     // override/add rules settings here, such as:
     // 'vue/no-unused-vars': 'error'
     "vue/component-tags-order": ["warn", {

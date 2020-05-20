@@ -4,7 +4,6 @@
 export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
   onCreateEnquiry(owner: $owner) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -58,7 +57,6 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
 export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
   onUpdateEnquiry(owner: $owner) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -112,7 +110,6 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
 export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
   onDeleteEnquiry(owner: $owner) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -178,7 +175,6 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -253,7 +249,6 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -328,7 +323,6 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -408,7 +402,6 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -480,7 +473,6 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -552,7 +544,6 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -617,7 +608,6 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -675,7 +665,6 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -733,7 +722,6 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text

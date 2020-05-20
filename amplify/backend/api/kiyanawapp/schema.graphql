@@ -27,7 +27,6 @@ type Enquiry
     ]
   ) {
   id: ID!
-  createdBy: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   text: String!

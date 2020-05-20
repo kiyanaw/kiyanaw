@@ -7,7 +7,6 @@ export const createEnquiry = `mutation CreateEnquiry(
 ) {
   createEnquiry(input: $input, condition: $condition) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -64,7 +63,6 @@ export const updateEnquiry = `mutation UpdateEnquiry(
 ) {
   updateEnquiry(input: $input, condition: $condition) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -121,7 +119,6 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
 ) {
   deleteEnquiry(input: $input, condition: $condition) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -190,7 +187,6 @@ export const createResponse = `mutation CreateResponse(
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -268,7 +264,6 @@ export const updateResponse = `mutation UpdateResponse(
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -346,7 +341,6 @@ export const deleteResponse = `mutation DeleteResponse(
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -429,7 +423,6 @@ export const createMedia = `mutation CreateMedia(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -504,7 +497,6 @@ export const updateMedia = `mutation UpdateMedia(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -579,7 +571,6 @@ export const deleteMedia = `mutation DeleteMedia(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -647,7 +638,6 @@ export const createWarrior = `mutation CreateWarrior(
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -708,7 +698,6 @@ export const updateWarrior = `mutation UpdateWarrior(
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -769,7 +758,6 @@ export const deleteWarrior = `mutation DeleteWarrior(
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text

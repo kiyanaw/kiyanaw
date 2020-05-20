@@ -4,7 +4,6 @@
 export const getEnquiry = `query GetEnquiry($id: ID!) {
   getEnquiry(id: $id) {
     id
-    createdBy
     createdAt
     updatedAt
     text
@@ -63,7 +62,6 @@ export const listEnquirys = `query ListEnquirys(
   listEnquirys(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -111,7 +109,6 @@ export const byEnquiryCreatedAt = `query ByEnquiryCreatedAt(
   ) {
     items {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -159,7 +156,6 @@ export const byEnquiryUpdatedAt = `query ByEnquiryUpdatedAt(
   ) {
     items {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -205,7 +201,6 @@ export const enquiryByWarrior = `query EnquiryByWarrior(
   ) {
     items {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -250,7 +245,6 @@ export const getResponse = `query GetResponse($id: ID!) {
     table
     enquiry {
       id
-      createdBy
       createdAt
       updatedAt
       text
@@ -330,7 +324,6 @@ export const listResponses = `query ListResponses(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -392,7 +385,6 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -454,7 +446,6 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -514,7 +505,6 @@ export const responseByEnquiry = `query ResponseByEnquiry(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -574,7 +564,6 @@ export const responseByWarrior = `query ResponseByWarrior(
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -626,7 +615,6 @@ export const getMedia = `query GetMedia($id: ID!) {
       table
       enquiry {
         id
-        createdBy
         createdAt
         updatedAt
         text
@@ -871,7 +859,6 @@ export const getWarrior = `query GetWarrior($id: ID!) {
     enquiries {
       items {
         id
-        createdBy
         createdAt
         updatedAt
         text

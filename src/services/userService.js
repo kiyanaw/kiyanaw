@@ -1,7 +1,7 @@
 import { Auth } from '@aws-amplify/auth'
-// import client from './client'
+import client from './client'
 
-// import * as queries from '../graphql/queries'
+import * as queries from '../graphql/queries'
 // import * as mutations from '../graphql/mutations'
 
 let user
@@ -24,10 +24,10 @@ export default {
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
-        // const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
-        // if (warrior.data) {
-        //   console.log(warrior)
-        // }
+        const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
+        if (warrior.data) {
+          console.log(warrior)
+        }
 
         const userData = await Auth.userAttributes(user)
         user = new User(user, userData)

@@ -15,6 +15,7 @@ type Enquiry
   @model
   @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
   @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "enquiryByWarrior") 
   @aws_iam
   @aws_cognito_user_pools
   @auth(
@@ -32,6 +33,9 @@ type Enquiry
   extra: AWSJSON # just a storage bin for lack of crystal ball...
   languageIndex: String!
   type: PhraseType!
+  warriorId: ID!
+  warrior: Warrior @connection(fields: ["warriorId"])
+  warriorName: String!
   responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
   table: EnquiryType!
@@ -63,8 +67,9 @@ type Response
   languageIndex: String!
   enquiryId: ID!
   enquiry: Enquiry @connection(fields: ["enquiryId"])
-  warriorId: String!
+  warriorId: ID!
   warrior: Warrior @connection(fields: ["warriorId"])
+  warriorName: String!
   media: [Media] @connection(keyName: "ByResponse", fields: ["id"])
   # this field is required to be able to sort on dates
   table: ResponseType!
@@ -86,16 +91,16 @@ type Media
   ) {
   responseId: ID!
   response: Response @connection(fields: ["responseId"])
-  warriorId: String!
+  warriorId: ID!
   warrior: Warrior @connection(fields: ["warriorId"])
+  warriorName: String!
   url: String!
 }
 
 type Warrior
   @model
   @key(fields: ["id"])
-  @aws_iam
-  @aws_cognito_user_pools
+  @key(name: "ByWarriorName", fields: ["name"], queryField: "warriorByName") 
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update, delete]  }
@@ -104,14 +109,15 @@ type Warrior
       { allow: groups, groups: ["everyone"], operations: [read] }
     ]
   ) {
-  id: String! # this will be email
-  username: String!
+  id: ID! # this will be email
+  name: String! # can be anything
   language: String!
   dialect: String
   region: String
   favorites: AWSJSON
   playlist: AWSJSON
   isWarrior: Boolean!
+  enquiries: [Enquiry] @connection(keyName: "ByWarrior", fields: ["id"])
   responses: [Response] @connection(keyName: "ByWarrior", fields: ["id"])
   media: [Media] @connection(keyName: "ByWarrior", fields: ["id"])
 }

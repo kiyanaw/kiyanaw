@@ -1,7 +1,7 @@
 import { Auth } from '@aws-amplify/auth'
-import client from './client'
+// import client from './client'
 
-import * as queries from '../graphql/queries'
+// import * as queries from '../graphql/queries'
 // import * as mutations from '../graphql/mutations'
 
 let user
@@ -9,7 +9,8 @@ let user
 class User {
   constructor(data, userData) {
     this.email = data.attributes.email
-    this.preferred_username = userData.find((el) => el.Name === 'preferred_username')?.Value || null
+    // this.name = TODO
+    this.name = userData.find((el) => el.Name === 'preferred_username')?.Value || null
     this.groups = data.signInUserSession.accessToken.payload['cognito:groups'] || []
     this.language = userData.find((el) => el.Name === 'custom:language')?.Value || null
     this.dialect = userData.find((el) => el.Name === 'custom:dialect')?.Value || null
@@ -18,16 +19,15 @@ class User {
 }
 
 export default {
-
-  async getUser() {
+  async get() {
     window.Auth = Auth
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
-        const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
-        if (warrior.data) {
-          console.log(warrior)
-        }
+        // const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
+        // if (warrior.data) {
+        //   console.log(warrior)
+        // }
 
         const userData = await Auth.userAttributes(user)
         user = new User(user, userData)
@@ -38,6 +38,7 @@ export default {
     return user
   },
 
+  // TODO: this is a leaky abstraction, fix
   async setCustomUserAttribute(name, value) {
     const attribute = {}
     attribute[`custom:${name}`] = value
@@ -47,7 +48,6 @@ export default {
     return response
   },
 
-
   async setRegularAttribute(name, value) {
     const attribute = {}
     attribute[name] = value
@@ -56,7 +56,7 @@ export default {
     return response
   },
 
-  flushUser() {
+  flush() {
     user = null
   },
 }

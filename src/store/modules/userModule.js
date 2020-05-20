@@ -44,14 +44,14 @@ const getters = {
     return context.region
   },
   username(context) {
-    return context.user.preferred_username
+    return context.user.name
   },
 }
 
 const actions = {
   setUser(store, user) {
     if (!user) {
-      userService.flushUser()
+      userService.flush()
     }
     store.commit('USER_LOGGED', user)
   },
@@ -59,7 +59,7 @@ const actions = {
     return userService.setUsername(username)
   },
   async getUser(store) {
-    userService.getUser().then((user) => {
+    userService.get().then((user) => {
       if (user) {
         store.dispatch('setUser', user)
       }

@@ -11,8 +11,7 @@
         :title="item.text"
         :subtitle="item.owner"
         :after="ago(item.updatedAt)"
-        link="/detail/"
-        @click="setDetailItem(item)" />
+        :link="'/detail/' + item.id" />
     </f7-list>
   </f7-page>
 </template>
@@ -41,11 +40,7 @@ export default {
     this.$f7.dialog.close()
   },
   methods: {
-    ...mapActions(['listRecentEnquiries', 'setEnquiry']),
-
-    setDetailItem(item) {
-      this.setEnquiry(item)
-    },
+    ...mapActions(['listRecentEnquiries']),
 
     ago(dateString) {
       return ago.format(new Date(dateString))

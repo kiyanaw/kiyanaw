@@ -1,6 +1,59 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getEnquiry = `query GetEnquiry($id: ID!) {
+  getEnquiry(id: $id) {
+    id
+    createdAt
+    updatedAt
+    text
+    extra
+    languageIndex
+    type
+    warriorId
+    warriorName
+    table
+    owner
+    responses {
+      items {
+        id
+        createdAt
+        updatedAt
+        text
+        extra
+        type
+        languageIndex
+        enquiryId
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
 export const listEnquirys = `query ListEnquirys(
   $filter: ModelEnquiryFilterInput
   $limit: Int
@@ -15,43 +68,26 @@ export const listEnquirys = `query ListEnquirys(
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
       }
-    }
-    nextToken
-  }
-}
-`;
-export const getEnquiry = `query GetEnquiry($id: ID!) {
-  getEnquiry(id: $id) {
-    id
-    createdAt
-    updatedAt
-    text
-    extra
-    languageIndex
-    type
-    table
-    owner
-    responses {
-      items {
+      warrior {
         id
-        createdAt
-        updatedAt
-        text
-        extra
-        type
-        languageIndex
-        enquiryId
-        warriorId
-        table
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
         owner
       }
-      nextToken
     }
+    nextToken
   }
 }
 `;
@@ -79,10 +115,23 @@ export const byEnquiryCreatedAt = `query ByEnquiryCreatedAt(
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     nextToken
@@ -113,10 +162,68 @@ export const byEnquiryUpdatedAt = `query ByEnquiryUpdatedAt(
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const enquiryByWarrior = `query EnquiryByWarrior(
+  $warriorId: ID
+  $sortDirection: ModelSortDirection
+  $filter: ModelEnquiryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  enquiryByWarrior(
+    warriorId: $warriorId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      createdAt
+      updatedAt
+      text
+      extra
+      languageIndex
+      type
+      warriorId
+      warriorName
+      table
+      owner
+      responses {
+        nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     nextToken
@@ -134,6 +241,7 @@ export const getResponse = `query GetResponse($id: ID!) {
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
@@ -143,10 +251,23 @@ export const getResponse = `query GetResponse($id: ID!) {
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -154,6 +275,7 @@ export const getResponse = `query GetResponse($id: ID!) {
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -161,13 +283,16 @@ export const getResponse = `query GetResponse($id: ID!) {
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -195,6 +320,7 @@ export const listResponses = `query ListResponses(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -204,6 +330,8 @@ export const listResponses = `query ListResponses(
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -213,7 +341,7 @@ export const listResponses = `query ListResponses(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -253,6 +381,7 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -262,6 +391,8 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -271,7 +402,7 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -311,6 +442,7 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -320,6 +452,8 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -329,7 +463,7 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -367,6 +501,7 @@ export const responseByEnquiry = `query ResponseByEnquiry(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -376,6 +511,8 @@ export const responseByEnquiry = `query ResponseByEnquiry(
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -385,7 +522,7 @@ export const responseByEnquiry = `query ResponseByEnquiry(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -400,7 +537,7 @@ export const responseByEnquiry = `query ResponseByEnquiry(
 }
 `;
 export const responseByWarrior = `query ResponseByWarrior(
-  $warriorId: String
+  $warriorId: ID
   $sortDirection: ModelSortDirection
   $filter: ModelResponseFilterInput
   $limit: Int
@@ -423,6 +560,7 @@ export const responseByWarrior = `query ResponseByWarrior(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -432,6 +570,8 @@ export const responseByWarrior = `query ResponseByWarrior(
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -441,7 +581,7 @@ export const responseByWarrior = `query ResponseByWarrior(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -459,6 +599,7 @@ export const getMedia = `query GetMedia($id: ID!) {
   getMedia(id: $id) {
     responseId
     warriorId
+    warriorName
     url
     response {
       id
@@ -470,6 +611,7 @@ export const getMedia = `query GetMedia($id: ID!) {
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
@@ -479,6 +621,8 @@ export const getMedia = `query GetMedia($id: ID!) {
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -488,7 +632,7 @@ export const getMedia = `query GetMedia($id: ID!) {
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -501,13 +645,16 @@ export const getMedia = `query GetMedia($id: ID!) {
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -528,6 +675,7 @@ export const listMedias = `query ListMedias(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -539,13 +687,14 @@ export const listMedias = `query ListMedias(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       owner
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -576,6 +725,7 @@ export const mediaByResponse = `query MediaByResponse(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -587,13 +737,14 @@ export const mediaByResponse = `query MediaByResponse(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       owner
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -608,7 +759,7 @@ export const mediaByResponse = `query MediaByResponse(
 }
 `;
 export const mediaByWarrior = `query MediaByWarrior(
-  $warriorId: String
+  $warriorId: ID
   $sortDirection: ModelSortDirection
   $filter: ModelMediaFilterInput
   $limit: Int
@@ -624,6 +775,7 @@ export const mediaByWarrior = `query MediaByWarrior(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -635,13 +787,14 @@ export const mediaByWarrior = `query MediaByWarrior(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       owner
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -656,7 +809,7 @@ export const mediaByWarrior = `query MediaByWarrior(
 }
 `;
 export const listWarriors = `query ListWarriors(
-  $id: String
+  $id: ID
   $filter: ModelWarriorFilterInput
   $limit: Int
   $nextToken: String
@@ -671,13 +824,16 @@ export const listWarriors = `query ListWarriors(
   ) {
     items {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -690,16 +846,32 @@ export const listWarriors = `query ListWarriors(
   }
 }
 `;
-export const getWarrior = `query GetWarrior($id: String!) {
+export const getWarrior = `query GetWarrior($id: ID!) {
   getWarrior(id: $id) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -711,6 +883,7 @@ export const getWarrior = `query GetWarrior($id: String!) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
@@ -720,12 +893,51 @@ export const getWarrior = `query GetWarrior($id: String!) {
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
       nextToken
     }
     owner
+  }
+}
+`;
+export const warriorByName = `query WarriorByName(
+  $name: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelWarriorFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  warriorByName(
+    name: $name
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+    nextToken
   }
 }
 `;

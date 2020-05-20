@@ -6,8 +6,9 @@
       back-link-url="/" />
 
     <f7-card
+      v-if="enquiry"
       :title="enquiry.text"
-      :content="`Submitted by ${enquiry.owner} ${ago}`">
+      :content="`Submitted by ${enquiry.warriorName} ${ago}`">
       <f7-card-footer>
         <f7-link icon-md="material:star_outline">
           Save
@@ -17,14 +18,13 @@
     </f7-card>
 
     <!-- TODO: Friendly message if no responses provided -->
-    <f7-block v-if="!responses">
-      There have been no responses for this enquiry
-    </f7-block>
-    <f7-block
-      v-for="response in responses"
-      :key="response.id">
-      <p> {{ response }} </p>
-    </f7-block>
+    <div v-if="enquiry">
+      <f7-block
+        v-for="response in enquiry.responses"
+        :key="response.id">
+        <p> {{ response }} </p>
+      </f7-block>
+    </div>
 
     <!-- Floating tab button -->
     <f7-fab
@@ -52,12 +52,17 @@ const ago = new TimeAgo('en-US')
 
 export default {
   name: 'Detail',
+  props: {
+    enquiryId: {
+      type: String,
+      default: null,
+    },
+  },
   data: () => ({
-    responses: [],
+    enquiry: null,
   }),
   computed: {
     ...mapGetters([
-      'enquiry',
       'user',
     ]),
     ago() {
@@ -69,8 +74,11 @@ export default {
   },
 
   async mounted() {
-    const details = await this.getEnquiry(this.enquiry.id)
-    this.responses = details.responses
+    console.log('getting responses')
+    this.$f7.dialog.preloader('Loading enquiry...')
+    this.enquiry = await this.getEnquiry(this.enquiryId)
+    this.$f7.dialog.close()
+    console.log('responses', this.responses)
   },
 
   methods: {

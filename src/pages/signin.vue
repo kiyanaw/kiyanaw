@@ -4,9 +4,9 @@
       title="Sign in"
       back-link="Back" />
     <f7-block
-      v-if="user && user.preferred_username"
+      v-if="user && user.name"
       class="sign-out-block">
-      You are signed in as {{ user.preferred_username }}
+      You are signed in as {{ user.name }}
       <amplify-sign-out />
     </f7-block>
     <f7-block v-else-if="user && !user.preffered_username">

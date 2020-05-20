@@ -6,6 +6,7 @@
       back-link-url="/" />
 
     <f7-card
+      v-if="enquiry"
       :title="enquiry.text"
       :content="`Submitted by some@body.com ${ago(enquiry.createdAt)}`">
       <f7-card-footer>
@@ -23,11 +24,13 @@
     </f7-link>
 
     <!-- TODO: Friendly message if no responses provided -->
-    <f7-block
-      v-for="response in responses"
-      :key="response.id">
-      <p> {{ response }} </p>
-    </f7-block>
+    <div v-if="enquiry">
+      <f7-block
+        v-for="response in enquiry.responses"
+        :key="response.id">
+        <p> {{ response }} </p>
+      </f7-block>
+    </div>
   </f7-page>
 </template>
 
@@ -42,18 +45,25 @@ const ago = new TimeAgo('en-US')
 
 export default {
   name: 'Detail',
+  props: {
+    enquiryId: {
+      type: String,
+      default: null,
+    },
+  },
+  data: () => ({
+    enquiry: null,
+  }),
   computed: {
-    data: () => ({
-      responses: [],
-    }),
     ...mapGetters([
-      'enquiry',
       'user',
     ]),
   },
 
   async mounted() {
-    this.responses = await this.getEnquiry(this.enquiry.id).responses
+    console.log('getting responses')
+    this.responses = await this.getEnquiry(this.enquiryId).responses
+    console.log('responses', this.responses)
   },
 
   methods: {

@@ -4,12 +4,15 @@
 export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
   onCreateEnquiry(owner: $owner) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -23,10 +26,31 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -34,12 +58,15 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
 export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
   onUpdateEnquiry(owner: $owner) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -53,10 +80,31 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -64,12 +112,15 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
 export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
   onDeleteEnquiry(owner: $owner) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -83,10 +134,31 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -102,19 +174,34 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -129,13 +216,16 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -158,19 +248,34 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -185,13 +290,16 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -214,19 +322,34 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -241,13 +364,16 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -274,15 +400,19 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -292,7 +422,7 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -305,13 +435,16 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -338,15 +471,19 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -356,7 +493,7 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -369,13 +506,16 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -402,15 +542,19 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -420,7 +564,7 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -433,13 +577,16 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -454,13 +601,30 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
 export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
   onCreateWarrior(owner: $owner) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -472,6 +636,7 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
@@ -493,13 +658,30 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
 export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
   onUpdateWarrior(owner: $owner) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -511,6 +693,7 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
@@ -532,13 +715,30 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
 export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
   onDeleteWarrior(owner: $owner) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -550,6 +750,7 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }

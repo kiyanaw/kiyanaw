@@ -5,6 +5,7 @@ let user
 class User {
   constructor(data, userData) {
     this.email = data.attributes.email
+    // this.name = TODO
     this.preferred_username = userData.find((el) => el.Name === 'preferred_username')?.Value || null
     this.groups = data.signInUserSession.accessToken.payload['cognito:groups'] || []
     this.language = userData.find((el) => el.Name === 'custom:language')?.Value || null

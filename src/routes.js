@@ -49,7 +49,7 @@ export default [
     component: Browse,
   },
   {
-    path: '/detail/',
+    path: '/detail/:enquiryId',
     component: Detail,
   },
   {

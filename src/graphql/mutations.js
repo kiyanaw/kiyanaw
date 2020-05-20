@@ -7,12 +7,15 @@ export const createEnquiry = `mutation CreateEnquiry(
 ) {
   createEnquiry(input: $input, condition: $condition) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -26,10 +29,31 @@ export const createEnquiry = `mutation CreateEnquiry(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -40,12 +64,15 @@ export const updateEnquiry = `mutation UpdateEnquiry(
 ) {
   updateEnquiry(input: $input, condition: $condition) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -59,10 +86,31 @@ export const updateEnquiry = `mutation UpdateEnquiry(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -73,12 +121,15 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
 ) {
   deleteEnquiry(input: $input, condition: $condition) {
     id
+    createdBy
     createdAt
     updatedAt
     text
     extra
     languageIndex
     type
+    warriorId
+    warriorName
     table
     owner
     responses {
@@ -92,10 +143,31 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
       nextToken
+    }
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
     }
   }
 }
@@ -114,19 +186,34 @@ export const createResponse = `mutation CreateResponse(
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -141,13 +228,16 @@ export const createResponse = `mutation CreateResponse(
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -173,19 +263,34 @@ export const updateResponse = `mutation UpdateResponse(
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -200,13 +305,16 @@ export const updateResponse = `mutation UpdateResponse(
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -232,19 +340,34 @@ export const deleteResponse = `mutation DeleteResponse(
     languageIndex
     enquiryId
     warriorId
+    warriorName
     table
     enquiry {
       id
+      createdBy
       createdAt
       updatedAt
       text
       extra
       languageIndex
       type
+      warriorId
+      warriorName
       table
       owner
       responses {
         nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
       }
     }
     owner
@@ -259,13 +382,16 @@ export const deleteResponse = `mutation DeleteResponse(
     }
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -295,15 +421,19 @@ export const createMedia = `mutation CreateMedia(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -313,7 +443,7 @@ export const createMedia = `mutation CreateMedia(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -326,13 +456,16 @@ export const createMedia = `mutation CreateMedia(
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -362,15 +495,19 @@ export const updateMedia = `mutation UpdateMedia(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -380,7 +517,7 @@ export const updateMedia = `mutation UpdateMedia(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -393,13 +530,16 @@ export const updateMedia = `mutation UpdateMedia(
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -429,15 +569,19 @@ export const deleteMedia = `mutation DeleteMedia(
       languageIndex
       enquiryId
       warriorId
+      warriorName
       table
       enquiry {
         id
+        createdBy
         createdAt
         updatedAt
         text
         extra
         languageIndex
         type
+        warriorId
+        warriorName
         table
         owner
       }
@@ -447,7 +591,7 @@ export const deleteMedia = `mutation DeleteMedia(
       }
       warrior {
         id
-        username
+        name
         language
         dialect
         region
@@ -460,13 +604,16 @@ export const deleteMedia = `mutation DeleteMedia(
     owner
     warrior {
       id
-      username
+      name
       language
       dialect
       region
       favorites
       playlist
       isWarrior
+      enquiries {
+        nextToken
+      }
       responses {
         nextToken
       }
@@ -484,13 +631,30 @@ export const createWarrior = `mutation CreateWarrior(
 ) {
   createWarrior(input: $input, condition: $condition) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -502,6 +666,7 @@ export const createWarrior = `mutation CreateWarrior(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
@@ -526,13 +691,30 @@ export const updateWarrior = `mutation UpdateWarrior(
 ) {
   updateWarrior(input: $input, condition: $condition) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -544,6 +726,7 @@ export const updateWarrior = `mutation UpdateWarrior(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }
@@ -568,13 +751,30 @@ export const deleteWarrior = `mutation DeleteWarrior(
 ) {
   deleteWarrior(input: $input, condition: $condition) {
     id
-    username
+    name
     language
     dialect
     region
     favorites
     playlist
     isWarrior
+    enquiries {
+      items {
+        id
+        createdBy
+        createdAt
+        updatedAt
+        text
+        extra
+        languageIndex
+        type
+        warriorId
+        warriorName
+        table
+        owner
+      }
+      nextToken
+    }
     responses {
       items {
         id
@@ -586,6 +786,7 @@ export const deleteWarrior = `mutation DeleteWarrior(
         languageIndex
         enquiryId
         warriorId
+        warriorName
         table
         owner
       }

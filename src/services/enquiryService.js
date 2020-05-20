@@ -3,7 +3,30 @@ import client from './client'
 
 import * as queries from '../graphql/queries'
 import * as mutations from '../graphql/mutations'
-// import * as subscriptions from '../graphql/subscriptions';
+
+/**
+createdAt: "2020-05-19T06:47:08.841Z"
+extra: null
+id: (...)
+languageIndex: "todo"
+owner: "f44b835a-01c4-4654-b4dd-5de9ca58acfd"
+responses: Object
+table: "enquiry"
+text: "From my phone"
+type: "phrase"
+updatedAt: "2020-05-19T06:47:08.841Z"
+ */
+
+class Enquiry {
+  constructor(data) {
+    this.id = data.id
+    this.text = data.text
+    this.type = data.type
+    this.createdAt = new Date(data.createdAt)
+    this.updatedAt = new Date(data.updatedAt)
+    this.owner = data.owner
+  }
+}
 
 export default {
   async create(phrase) {
@@ -24,9 +47,9 @@ export default {
     return response.data.createEnquiry
   },
 
-  async getEnquiry(id) {
-    const resp = await client.request(queries.getEnquiry, { table: 'enquiry', id })
-    return resp.data
+  async get(id) {
+    const response = await client.request(queries.getEnquiry, { id })
+    return response.data
   },
 
   async listRecent() {

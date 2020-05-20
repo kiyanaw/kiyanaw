@@ -281,6 +281,7 @@ export const getResponse = `query GetResponse($id: ID!) {
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -609,6 +610,7 @@ export const getMedia = `query GetMedia($id: ID!) {
   getMedia(id: $id) {
     responseId
     warriorId
+    warriorName
     url
     response {
       id
@@ -685,6 +687,7 @@ export const listMedias = `query ListMedias(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -734,6 +737,7 @@ export const mediaByResponse = `query MediaByResponse(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -783,6 +787,7 @@ export const mediaByWarrior = `query MediaByWarrior(
     items {
       responseId
       warriorId
+      warriorName
       url
       response {
         id
@@ -901,6 +906,7 @@ export const getWarrior = `query GetWarrior($id: ID!) {
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }

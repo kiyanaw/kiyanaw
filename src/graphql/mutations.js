@@ -221,6 +221,7 @@ export const createResponse = `mutation CreateResponse(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -298,6 +299,7 @@ export const updateResponse = `mutation UpdateResponse(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -375,6 +377,7 @@ export const deleteResponse = `mutation DeleteResponse(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -410,6 +413,7 @@ export const createMedia = `mutation CreateMedia(
   createMedia(input: $input, condition: $condition) {
     responseId
     warriorId
+    warriorName
     url
     response {
       id
@@ -484,6 +488,7 @@ export const updateMedia = `mutation UpdateMedia(
   updateMedia(input: $input, condition: $condition) {
     responseId
     warriorId
+    warriorName
     url
     response {
       id
@@ -558,6 +563,7 @@ export const deleteMedia = `mutation DeleteMedia(
   deleteMedia(input: $input, condition: $condition) {
     responseId
     warriorId
+    warriorName
     url
     response {
       id
@@ -676,6 +682,7 @@ export const createWarrior = `mutation CreateWarrior(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -736,6 +743,7 @@ export const updateWarrior = `mutation UpdateWarrior(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }
@@ -796,6 +804,7 @@ export const deleteWarrior = `mutation DeleteWarrior(
       items {
         responseId
         warriorId
+        warriorName
         url
         owner
       }

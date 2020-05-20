@@ -94,6 +94,7 @@ type Media
   response: Response @connection(fields: ["responseId"])
   warriorId: ID!
   warrior: Warrior @connection(fields: ["warriorId"])
+  warriorName: String!
   url: String!
 }
 

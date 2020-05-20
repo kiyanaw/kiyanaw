@@ -1,4 +1,8 @@
 import { Auth } from '@aws-amplify/auth'
+// import client from './client'
+
+// import * as queries from '../graphql/queries'
+// import * as mutations from '../graphql/mutations'
 
 let user
 
@@ -14,11 +18,17 @@ class User {
 }
 
 export default {
+
   async getUser() {
     window.Auth = Auth
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
+        // const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
+        // if (warrior.data) {
+        //   console.log(warrior)
+        // }
+
         const userData = await Auth.userAttributes(user)
         user = new User(user, userData)
       }
@@ -27,6 +37,7 @@ export default {
     }
     return user
   },
+
   async setCustomUserAttribute(name, value) {
     const attribute = {}
     attribute[`custom:${name}`] = value
@@ -35,6 +46,8 @@ export default {
     // TODO: return error if response is not success
     return response
   },
+
+
   async setRegularAttribute(name, value) {
     const attribute = {}
     attribute[name] = value
@@ -42,6 +55,7 @@ export default {
     const response = await Auth.updateUserAttributes(curUser, attribute)
     return response
   },
+
   flushUser() {
     user = null
   },

@@ -32,7 +32,7 @@
       slot="fixed"
       position="right-bottom"
       color="blue"
-      href="/add-response/">
+      :href="`/add-response/${enquiryId}`">
       <f7-icon
         ios="f7:create"
         aurora="f7:create"

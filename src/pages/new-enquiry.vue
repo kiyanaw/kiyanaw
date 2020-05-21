@@ -34,12 +34,10 @@ export default {
   methods: {
     ...mapActions(['createEnquiry']),
     async onSubmit() {
-      console.log('the phrase', this.phrase)
       this.$f7.dialog.preloader('Creating phrase...')
       const enquiry = await this.createEnquiry(this.phrase)
       this.$f7.dialog.close()
-      console.log('got new enquiry', enquiry)
-      this.$f7router.navigate('/detail/')
+      this.$f7router.navigate(`/detail/${enquiry.id}`)
     },
   },
 }

@@ -5,18 +5,6 @@ import userService from './userService'
 import * as queries from '../graphql/queries'
 import * as mutations from '../graphql/mutations'
 
-/** ENTRY
-createdAt: "2020-05-19T06:47:08.841Z"
-extra: null
-id: (...)
-languageIndex: "todo"
-owner: "f44b835a-01c4-4654-b4dd-5de9ca58acfd"
-responses: Object
-table: "enquiry"
-text: "From my phone"
-type: "phrase"
-updatedAt: "2020-05-19T06:47:08.841Z"
- */
 
 class Response {
   constructor(data) {
@@ -25,7 +13,8 @@ class Response {
     this.type = data.type
     this.createdAt = new Date(data.createdAt)
     this.updatedAt = new Date(data.updatedAt)
-    this.warriorName = data.warriorName
+    this.warriorId = data.warriorId
+    // this.warrior = data.warrior // TODO
     // this.media
   }
 }
@@ -42,14 +31,13 @@ class Enquiry {
     if (data.responses) {
       this.responses = data.responses.items.map((item) => new Response(item))
     }
-    this.warriorName = data.warriorName
+    this.warrior = data.warrior
   }
 }
 
 export default {
   async create(phrase) {
     const user = await userService.get()
-    console.log('user', user)
 
     const id = uuidv1()
     const input = {
@@ -60,14 +48,10 @@ export default {
       languageIndex: 'todo',
       type: 'phrase',
       table: 'enquiry',
-      warriorName: user.name,
       warriorId: user.email,
     }
-
     const response = await client.request(mutations.createEnquiry, { input })
-
-    // TODO: unwrap this
-    return response.data.createEnquiry
+    return new Enquiry(response.data.createEnquiry)
   },
 
   async get(id) {
@@ -84,6 +68,7 @@ export default {
       sortDirection: 'DESC',
     })
 
+    // TODO: unwrap this
     return response.data.byEnquiryUpdatedAt.items
   },
 }

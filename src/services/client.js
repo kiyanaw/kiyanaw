@@ -11,8 +11,7 @@ export default {
     // check to see if we have a session to determine how we authenticate with the API
     let authMode = AuthModes.Cognito
     try {
-      const user = await Auth.currentAuthenticatedUser({ bypassCache: false })
-      console.log('user', user)
+      await Auth.currentAuthenticatedUser({ bypassCache: false })
     } catch (error) {
       authMode = AuthModes.Iam
     }

@@ -8,13 +8,14 @@ let user
 
 class User {
   constructor(data, userData) {
-    this.email = data.attributes.email
-    // this.name = TODO
-    this.name = userData.find((el) => el.Name === 'preferred_username')?.Value || null
-    this.groups = data.signInUserSession.accessToken.payload['cognito:groups'] || []
-    this.language = userData.find((el) => el.Name === 'custom:language')?.Value || null
-    this.dialect = userData.find((el) => el.Name === 'custom:dialect')?.Value || null
-    this.region = userData.find((el) => el.Name === 'custom:region')?.Value || null
+    this.id = data.attributes.email
+    this.name = userData.find((el) => el.Name === 'preferred_username')?.Value || data.attributes.email
+    // this.groups = data.signInUserSession.accessToken.payload['cognito:groups'] || []
+    this.language = userData.find((el) => el.Name === 'custom:language')?.Value
+      || window.localStorage.getItem('language')
+      || null
+    this.dialect = userData.find((el) => el.Name === 'custom:dialect')?.Value || ''
+    this.region = userData.find((el) => el.Name === 'custom:region')?.Value || ''
   }
 }
 
@@ -56,9 +57,16 @@ export default {
   },
 
   async getUser(email) {
+    console.log('EMAIL!?!?!?!', email)
     const warrior = await client.request(queries.getWarrior, { id: email })
     console.log(warrior.data.getWarrior)
     return warrior.data.getWarrior
+  },
+
+  async save(warrior) {
+    const resp = await client.request(mutations.updateWarrior, { input: warrior })
+    console.log('Save Warrior response: ', resp)
+    return resp
   },
 
   // FOR DEV NOT FOR USE IN REAL LIFE!!!

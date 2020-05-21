@@ -4,29 +4,13 @@
       title="Sign in"
       back-link="Back" />
     <f7-block
-      v-if="user && user.name"
+      v-if="user && hasProfile"
       class="sign-out-block">
       You are signed in as {{ user.name }}
       <amplify-sign-out />
     </f7-block>
     <f7-block v-else-if="user && !hasProfile">
-      <f7-input
-        id="username"
-        :value="localname"
-        placeholder="Username"
-        inline-label="true"
-        type="text"
-        validate="true"
-        input-style="line-height: 36px; border-radius: 4px; font-size: 14px; text-align: center;"
-        tabindex="1"
-        @input="localname = $event.target.value" />
-
-      <f7-button
-        raised
-        type="submit"
-        @click="saveUsername()">
-        Save
-      </f7-button>
+      <user-settings />
     </f7-block>
     <amplify-authenticator
       v-else-if="!user" />
@@ -35,14 +19,19 @@
 
 <script>
 import { Hub } from '@aws-amplify/core'
-// import { Auth } from 'aws-amplify';
 import { mapActions, mapGetters } from 'vuex'
+import UserSettings from '../components/userSettings.vue'
 import userService from '../services/userService'
+
 
 export default {
   name: 'Signin',
+  components: {
+    UserSettings,
+  },
   data: () => ({
     localname: '',
+    hasProfile: false,
   }),
   computed: {
     ...mapGetters([
@@ -51,15 +40,18 @@ export default {
     ]),
   },
   mounted() {
-    userService.getUser('jed@palmater.ca')
+    if (this.user) {
+      this.hasProfile = this.checkProfile()
+    }
     Hub.listen('auth', (info) => {
-      console.log(info)
       if (info.payload.event === 'signIn') {
         // TO DO PUSH SET LANGUAGE TO USER PREF IF NOT ALREADY SET FOR USER
         window.localStorage.removeItem('language')
 
         // Populates user in the store
-        this.getUser()
+        this.getUser().then(() => {
+          this.hasProfile = this.checkProfile()
+        })
         // Redirects to home after good login
         this.$f7router.navigate('/')
       } else {
@@ -74,6 +66,16 @@ export default {
       'setUser',
       'updateUsername',
     ]),
+    async checkProfile() {
+      if (this.user) {
+        const profile = await userService.getUser(this.user.id)
+        if (profile === null) {
+          return false
+        }
+        return true
+      }
+      return false
+    },
     saveUsername() {
       this.updateUsername(this.localname)
     },

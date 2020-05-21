@@ -55,9 +55,7 @@ const actions = {
     }
     store.commit('USER_LOGGED', user)
   },
-  async setUsername(store, username) {
-    return userService.setUsername(username)
-  },
+
   async getUser(store) {
     userService.get().then((user) => {
       if (user) {
@@ -65,47 +63,25 @@ const actions = {
       }
     })
   },
-  setCurrentLanguage(store, val) {
-    store.commit('SET_CURRENT_LANGUAGE', val)
+
+  async updateUser(store, warrior) {
+    const result = await userService.save(warrior)
+    if (result) {
+      store.dispatch('USER_LOGGED', warrior)
+    }
   },
-  setCurrentRegion(store, val) {
-    store.commit('SET_CURRENT_REGION', val)
-  },
-  setCurrentDialect(store, val) {
-    store.commit('SET_CURRENT_DIALECT', val)
-  },
-  updateAttribute(store, payload) {
-    // Update user object here, then send to service layer
-    // TODO: restrict to only accept custom attributes
-    const localUser = store.getters.user
-    assert.ok(localUser.hasOwnProperty(payload.name), `user does not have attribute ${payload.name}`)
-    localUser[payload.name] = payload.value
-    userService.setCustomUserAttribute(payload.name, payload.value)
-    // TODO: Handle error if response is not success and revert user object in store
-    store.dispatch('getUser')
-  },
-  updateUsername(store, payload) {
-    userService.setRegularAttribute('preferred_username', payload).then(() => {
-      window.setTimeout(() => { store.dispatch('getUser') }, 2000)
-    })
+
+  async createUser(store, warrior) {
+    const result = await userService.createUserEntry(warrior)
+    if (result) {
+      store.dispatch('USER_LOGGED', warrior)
+    }
   },
 }
 
 const mutations = {
   USER_LOGGED(context, user) {
     Vue.set(context, 'user', user)
-  },
-  SET_CURRENT_LANGUAGE(context, val) {
-    window.localStorage.setItem('language', val)
-    Vue.set(context, 'language', val)
-  },
-  SET_CURRENT_REGION(context, val) {
-    window.localStorage.setItem('region', val)
-    Vue.set(context, 'region', val)
-  },
-  SET_CURRENT_DIALECT(context, val) {
-    window.localStorage.setItem('dialect', val)
-    Vue.set(context, 'dialect', val)
   },
 }
 

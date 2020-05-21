@@ -33,23 +33,21 @@ export default {
     return user
   },
 
-  async get2() {
-    window.Auth = Auth
-    const localUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
-    if (localUser) {
-      if (!this.getUser(localUser.attributes.email)) {
-        this.createUserEntry()
-      }
+  async getCognitoUser() {
+    const cognitoUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
+    if (cognitoUser) {
+      return cognitoUser
     }
+    return null
   },
 
   async createUserEntry(userObject) {
     const warriorObject = {
       id: userObject.email,
       name: userObject.name || user.email,
-      language: window.location.getItem('language') || '',
-      dialect: window.location.getItem('dialect') || '',
-      region: window.location.getItem('region') || '',
+      language: window.localStorage.getItem('language') || 'Cree',
+      dialect: window.localStorage.getItem('dialect') || '',
+      region: window.localStorage.getItem('region') || '',
       isWarrior: false,
     }
     const resp = await client.request(mutations.createWarrior,
@@ -58,9 +56,19 @@ export default {
   },
 
   async getUser(email) {
-    const warrior = await client.request(queries.getWarrior, email)
-    console.log(warrior)
-    return warrior.data
+    const warrior = await client.request(queries.getWarrior, { id: email })
+    console.log(warrior.data.getWarrior)
+    return warrior.data.getWarrior
+  },
+
+  // FOR DEV NOT FOR USE IN REAL LIFE!!!
+  async deleteUser(email) {
+    await client.request(mutations.deleteWarrior, { input: { id: email } })
+  },
+
+  async listUsers() {
+    const allWarriors = await client.request(queries.listWarriors)
+    console.log(allWarriors)
   },
 
   flush() {

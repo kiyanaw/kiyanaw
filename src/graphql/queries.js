@@ -11,7 +11,6 @@ export const getEnquiry = `query GetEnquiry($id: ID!) {
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -25,7 +24,6 @@ export const getEnquiry = `query GetEnquiry($id: ID!) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -69,7 +67,6 @@ export const listEnquirys = `query ListEnquirys(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -116,7 +113,6 @@ export const byEnquiryCreatedAt = `query ByEnquiryCreatedAt(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -163,7 +159,6 @@ export const byEnquiryUpdatedAt = `query ByEnquiryUpdatedAt(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -208,7 +203,6 @@ export const enquiryByWarrior = `query EnquiryByWarrior(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -241,7 +235,6 @@ export const getResponse = `query GetResponse($id: ID!) {
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -252,7 +245,6 @@ export const getResponse = `query GetResponse($id: ID!) {
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -275,7 +267,6 @@ export const getResponse = `query GetResponse($id: ID!) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -320,7 +311,6 @@ export const listResponses = `query ListResponses(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -331,7 +321,6 @@ export const listResponses = `query ListResponses(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -381,7 +370,6 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -392,7 +380,6 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -442,7 +429,6 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -453,7 +439,6 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -501,7 +486,6 @@ export const responseByEnquiry = `query ResponseByEnquiry(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -512,7 +496,6 @@ export const responseByEnquiry = `query ResponseByEnquiry(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -560,7 +543,6 @@ export const responseByWarrior = `query ResponseByWarrior(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -571,7 +553,6 @@ export const responseByWarrior = `query ResponseByWarrior(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -599,7 +580,6 @@ export const getMedia = `query GetMedia($id: ID!) {
   getMedia(id: $id) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -611,7 +591,6 @@ export const getMedia = `query GetMedia($id: ID!) {
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -622,7 +601,6 @@ export const getMedia = `query GetMedia($id: ID!) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -675,7 +653,6 @@ export const listMedias = `query ListMedias(
     items {
       responseId
       warriorId
-      warriorName
       url
       response {
         id
@@ -687,7 +664,6 @@ export const listMedias = `query ListMedias(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -725,7 +701,6 @@ export const mediaByResponse = `query MediaByResponse(
     items {
       responseId
       warriorId
-      warriorName
       url
       response {
         id
@@ -737,7 +712,6 @@ export const mediaByResponse = `query MediaByResponse(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -775,7 +749,6 @@ export const mediaByWarrior = `query MediaByWarrior(
     items {
       responseId
       warriorId
-      warriorName
       url
       response {
         id
@@ -787,7 +760,6 @@ export const mediaByWarrior = `query MediaByWarrior(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -866,7 +838,6 @@ export const getWarrior = `query GetWarrior($id: ID!) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -883,7 +854,6 @@ export const getWarrior = `query GetWarrior($id: ID!) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -893,7 +863,6 @@ export const getWarrior = `query GetWarrior($id: ID!) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }

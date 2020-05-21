@@ -11,7 +11,6 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -25,7 +24,6 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -64,7 +62,6 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -78,7 +75,6 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -117,7 +113,6 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -131,7 +126,6 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -171,7 +165,6 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -182,7 +175,6 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -205,7 +197,6 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -245,7 +236,6 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -256,7 +246,6 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -279,7 +268,6 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -319,7 +307,6 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -330,7 +317,6 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -353,7 +339,6 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -386,7 +371,6 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
   onCreateMedia(owner: $owner) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -398,7 +382,6 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -409,7 +392,6 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -457,7 +439,6 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
   onUpdateMedia(owner: $owner) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -469,7 +450,6 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -480,7 +460,6 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -528,7 +507,6 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
   onDeleteMedia(owner: $owner) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -540,7 +518,6 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -551,7 +528,6 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -615,7 +591,6 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -632,7 +607,6 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -642,7 +616,6 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -672,7 +645,6 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -689,7 +661,6 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -699,7 +670,6 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -729,7 +699,6 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -746,7 +715,6 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -756,7 +724,6 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }

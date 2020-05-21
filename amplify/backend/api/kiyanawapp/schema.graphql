@@ -35,7 +35,6 @@ type Enquiry
   type: PhraseType!
   warriorId: ID!
   warrior: Warrior! @connection(fields: ["warriorId"])
-  warriorName: String!
   responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
   table: EnquiryType!
@@ -69,7 +68,6 @@ type Response
   enquiry: Enquiry! @connection(fields: ["enquiryId"])
   warriorId: ID!
   warrior: Warrior! @connection(fields: ["warriorId"])
-  warriorName: String!
   media: [Media] @connection(keyName: "ByResponse", fields: ["id"])
   # this field is required to be able to sort on dates
   table: ResponseType!
@@ -93,7 +91,6 @@ type Media
   response: Response! @connection(fields: ["responseId"])
   warriorId: ID!
   warrior: Warrior! @connection(fields: ["warriorId"])
-  warriorName: String!
   url: String!
 }
 

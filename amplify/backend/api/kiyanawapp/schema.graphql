@@ -34,7 +34,7 @@ type Enquiry
   languageIndex: String!
   type: PhraseType!
   warriorId: ID!
-  warrior: Warrior @connection(fields: ["warriorId"])
+  warrior: Warrior! @connection(fields: ["warriorId"])
   warriorName: String!
   responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
@@ -66,9 +66,9 @@ type Response
   type: PhraseType!
   languageIndex: String!
   enquiryId: ID!
-  enquiry: Enquiry @connection(fields: ["enquiryId"])
+  enquiry: Enquiry! @connection(fields: ["enquiryId"])
   warriorId: ID!
-  warrior: Warrior @connection(fields: ["warriorId"])
+  warrior: Warrior! @connection(fields: ["warriorId"])
   warriorName: String!
   media: [Media] @connection(keyName: "ByResponse", fields: ["id"])
   # this field is required to be able to sort on dates
@@ -90,9 +90,9 @@ type Media
     ]
   ) {
   responseId: ID!
-  response: Response @connection(fields: ["responseId"])
+  response: Response! @connection(fields: ["responseId"])
   warriorId: ID!
-  warrior: Warrior @connection(fields: ["warriorId"])
+  warrior: Warrior! @connection(fields: ["warriorId"])
   warriorName: String!
   url: String!
 }

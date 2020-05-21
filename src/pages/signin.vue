@@ -9,7 +9,7 @@
       You are signed in as {{ user.name }}
       <amplify-sign-out />
     </f7-block>
-    <f7-block v-else-if="user && !user.preffered_username">
+    <f7-block v-else-if="user && !hasProfile">
       <f7-input
         id="username"
         :value="localname"
@@ -37,6 +37,7 @@
 import { Hub } from '@aws-amplify/core'
 // import { Auth } from 'aws-amplify';
 import { mapActions, mapGetters } from 'vuex'
+import userService from '../services/userService'
 
 export default {
   name: 'Signin',
@@ -50,6 +51,7 @@ export default {
     ]),
   },
   mounted() {
+    userService.getUser('jed@palmater.ca')
     Hub.listen('auth', (info) => {
       console.log(info)
       if (info.payload.event === 'signIn') {
@@ -58,7 +60,6 @@ export default {
 
         // Populates user in the store
         this.getUser()
-
         // Redirects to home after good login
         this.$f7router.navigate('/')
       } else {

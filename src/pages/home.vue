@@ -221,7 +221,7 @@ export default {
       if (this.user) {
         return true
       }
-      if (this.userLanguage) {
+      if (window.localStorage.getItem('language') || this.userLanguage) {
         return true
       }
       return false
@@ -231,9 +231,6 @@ export default {
     currentQuery(val) {
       console.log(val)
     },
-  },
-  mounted() {
-    console.log('HOME MOUNTED', this.userLanguage)
   },
   methods: {
     ...mapActions([

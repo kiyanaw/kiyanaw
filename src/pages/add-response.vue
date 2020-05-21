@@ -2,7 +2,8 @@
   <f7-page v-if="enquiry">
     <f7-navbar
       title="Response"
-      back-link="Back" />
+      back-link="Back"
+      :back-link-url="`/detail/${enquiryId}`" />
 
     <f7-block>{{ enquiry.text }}</f7-block>
     <f7-block>
@@ -56,9 +57,9 @@ export default {
       'getEnquiry',
     ]),
     async onSubmit() {
-      this.$f7.dialog.preloader('Creating phrase...')
+      // this.$f7.dialog.preloader('Creating phrase...')
       await this.createResponse({ text: this.phrase, enquiryId: this.enquiryId })
-      this.$f7.dialog.close()
+      // this.$f7.dialog.close()
     },
 
   },

@@ -1,8 +1,8 @@
 import { Auth } from '@aws-amplify/auth'
-// import client from './client'
+import client from './client'
 
-// import * as queries from '../graphql/queries'
-// import * as mutations from '../graphql/mutations'
+import * as queries from '../graphql/queries'
+import * as mutations from '../graphql/mutations'
 
 let user
 
@@ -24,11 +24,6 @@ export default {
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
-        // const warrior = client.request(queries.getWarrior, { id: user.attributes.email })
-        // if (warrior.data) {
-        //   console.log(warrior)
-        // }
-
         const userData = await Auth.userAttributes(user)
         user = new User(user, userData)
       }
@@ -38,22 +33,34 @@ export default {
     return user
   },
 
-  // TODO: this is a leaky abstraction, fix
-  async setCustomUserAttribute(name, value) {
-    const attribute = {}
-    attribute[`custom:${name}`] = value
-    const curUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
-    const response = await Auth.updateUserAttributes(curUser, attribute)
-    // TODO: return error if response is not success
-    return response
+  async get2() {
+    window.Auth = Auth
+    const localUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
+    if (localUser) {
+      if (!this.getUser(localUser.attributes.email)) {
+        this.createUserEntry()
+      }
+    }
   },
 
-  async setRegularAttribute(name, value) {
-    const attribute = {}
-    attribute[name] = value
-    const curUser = await Auth.currentAuthenticatedUser({ bypassCache: false })
-    const response = await Auth.updateUserAttributes(curUser, attribute)
-    return response
+  async createUserEntry(userObject) {
+    const warriorObject = {
+      id: userObject.email,
+      name: userObject.name || user.email,
+      language: window.location.getItem('language') || '',
+      dialect: window.location.getItem('dialect') || '',
+      region: window.location.getItem('region') || '',
+      isWarrior: false,
+    }
+    const resp = await client.request(mutations.createWarrior,
+      { input: warriorObject })
+    console.log(resp)
+  },
+
+  async getUser(email) {
+    const warrior = await client.request(queries.getWarrior, email)
+    console.log(warrior)
+    return warrior.data
   },
 
   flush() {

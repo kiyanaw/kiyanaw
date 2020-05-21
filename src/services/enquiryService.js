@@ -65,7 +65,7 @@ export default {
     }
 
     const response = await client.request(mutations.createEnquiry, { input })
-    console.log('got enquiry', response)
+
     // TODO: unwrap this
     return response.data.createEnquiry
   },

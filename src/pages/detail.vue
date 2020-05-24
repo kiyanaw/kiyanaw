@@ -8,7 +8,7 @@
     <f7-card
       v-if="enquiry"
       :title="enquiry.text"
-      :content="`Submitted by ${enquiry.warriorName} ${ago}`">
+      :content="`Submitted by ${enquiry.warrior.name} ${ago(enquiry.createdAt)}`">
       <f7-card-footer>
         <f7-link icon-md="material:star_outline">
           Save
@@ -19,11 +19,11 @@
 
     <!-- TODO: Friendly message if no responses provided -->
     <div v-if="enquiry">
-      <f7-block
+      <f7-card
         v-for="response in enquiry.responses"
-        :key="response.id">
-        <p> {{ response }} </p>
-      </f7-block>
+        :key="response.id"
+        :content="response.text"
+        :footer="'by ' + response.warrior.name + ' ' + ago(response.createdAt)" />
     </div>
 
     <!-- Floating tab button -->
@@ -42,10 +42,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { mapGetters, mapActions } from 'vuex'
+
+import enquiryService from '../services/enquiryService'
+import responseService from '../services/responseService'
+
 
 TimeAgo.addLocale(en)
 const ago = new TimeAgo('en-US')
@@ -65,26 +68,36 @@ export default {
     ...mapGetters([
       'user',
     ]),
-    ago() {
-      return ago.format(new Date(this.enquiry.createdAt))
-    },
-    enquiryOwner() {
-      return this.userLookup(this.enquiry.owner)
-    },
+
+    // enquiryOwner() {
+    //   return this.userLookup(this.enquiry.owner)
+    // },
   },
 
   async mounted() {
-    console.log('getting responses')
     this.$f7.dialog.preloader('Loading enquiry...')
-    this.enquiry = await this.getEnquiry(this.enquiryId)
+
+    // pull a fresh copy of enquiry and responses to get warrior details
+    // we go around the store here because this data won't be used elsewhere
+    const [enquiry, responses] = await Promise.all([
+      enquiryService.get(this.enquiryId),
+      responseService.byEnquiry(this.enquiryId),
+    ])
+
+    // TODO: not sure if I like this approach yet
+    enquiry.responses = responses
+    this.enquiry = enquiry
     this.$f7.dialog.close()
-    console.log('responses', this.responses)
   },
 
   methods: {
     ...mapActions([
-      'getEnquiry',
+      // 'getEnquiry',
+      // 'getResponsesByEnquiry',
     ]),
+    ago() {
+      return ago.format(new Date(this.enquiry.createdAt))
+    },
   },
 }
 </script>

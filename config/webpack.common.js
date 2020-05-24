@@ -9,7 +9,7 @@ const entryFile = path.join(__dirname + "/../src/main.js");
 
 module.exports = function(options) {
   return {
-    devtool: "source-map",
+    devtool: "inline-source-map",
     mode: options.mode,
     entry: entryFile,
 

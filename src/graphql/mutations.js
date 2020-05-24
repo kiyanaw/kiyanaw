@@ -14,7 +14,6 @@ export const createEnquiry = `mutation CreateEnquiry(
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -28,7 +27,6 @@ export const createEnquiry = `mutation CreateEnquiry(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -70,7 +68,6 @@ export const updateEnquiry = `mutation UpdateEnquiry(
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -84,7 +81,6 @@ export const updateEnquiry = `mutation UpdateEnquiry(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -126,7 +122,6 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
     languageIndex
     type
     warriorId
-    warriorName
     table
     owner
     responses {
@@ -140,7 +135,6 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -183,7 +177,6 @@ export const createResponse = `mutation CreateResponse(
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -194,7 +187,6 @@ export const createResponse = `mutation CreateResponse(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -217,7 +209,6 @@ export const createResponse = `mutation CreateResponse(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -260,7 +251,6 @@ export const updateResponse = `mutation UpdateResponse(
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -271,7 +261,6 @@ export const updateResponse = `mutation UpdateResponse(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -294,7 +283,6 @@ export const updateResponse = `mutation UpdateResponse(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -337,7 +325,6 @@ export const deleteResponse = `mutation DeleteResponse(
     languageIndex
     enquiryId
     warriorId
-    warriorName
     table
     enquiry {
       id
@@ -348,7 +335,6 @@ export const deleteResponse = `mutation DeleteResponse(
       languageIndex
       type
       warriorId
-      warriorName
       table
       owner
       responses {
@@ -371,7 +357,6 @@ export const deleteResponse = `mutation DeleteResponse(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -407,7 +392,6 @@ export const createMedia = `mutation CreateMedia(
   createMedia(input: $input, condition: $condition) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -419,7 +403,6 @@ export const createMedia = `mutation CreateMedia(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -430,7 +413,6 @@ export const createMedia = `mutation CreateMedia(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -481,7 +463,6 @@ export const updateMedia = `mutation UpdateMedia(
   updateMedia(input: $input, condition: $condition) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -493,7 +474,6 @@ export const updateMedia = `mutation UpdateMedia(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -504,7 +484,6 @@ export const updateMedia = `mutation UpdateMedia(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -555,7 +534,6 @@ export const deleteMedia = `mutation DeleteMedia(
   deleteMedia(input: $input, condition: $condition) {
     responseId
     warriorId
-    warriorName
     url
     response {
       id
@@ -567,7 +545,6 @@ export const deleteMedia = `mutation DeleteMedia(
       languageIndex
       enquiryId
       warriorId
-      warriorName
       table
       enquiry {
         id
@@ -578,7 +555,6 @@ export const deleteMedia = `mutation DeleteMedia(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -645,7 +621,6 @@ export const createWarrior = `mutation CreateWarrior(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -662,7 +637,6 @@ export const createWarrior = `mutation CreateWarrior(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -672,7 +646,6 @@ export const createWarrior = `mutation CreateWarrior(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -705,7 +678,6 @@ export const updateWarrior = `mutation UpdateWarrior(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -722,7 +694,6 @@ export const updateWarrior = `mutation UpdateWarrior(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -732,7 +703,6 @@ export const updateWarrior = `mutation UpdateWarrior(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }
@@ -765,7 +735,6 @@ export const deleteWarrior = `mutation DeleteWarrior(
         languageIndex
         type
         warriorId
-        warriorName
         table
         owner
       }
@@ -782,7 +751,6 @@ export const deleteWarrior = `mutation DeleteWarrior(
         languageIndex
         enquiryId
         warriorId
-        warriorName
         table
         owner
       }
@@ -792,7 +760,6 @@ export const deleteWarrior = `mutation DeleteWarrior(
       items {
         responseId
         warriorId
-        warriorName
         url
         owner
       }

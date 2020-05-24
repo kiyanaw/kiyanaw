@@ -66,6 +66,7 @@ export default {
       }
     })
   },
+
   methods: {
     ...mapActions([
       'getUser',

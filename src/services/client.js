@@ -1,14 +1,19 @@
 import { API } from 'aws-amplify'
 import { Auth } from '@aws-amplify/auth'
 
+const AuthModes = {
+  Cognito: 'AMAZON_COGNITO_USER_POOLS',
+  Iam: 'AWS_IAM',
+}
+
 export default {
   async request(query, variables) {
-    // NOTE: we intentionally go around the store here
-    const user = await Auth.currentAuthenticatedUser({ bypassCache: false })
-    let authMode = 'AMAZON_COGNITO_USER_POOLS'
-    if (!user) {
-      // AWS_IAM will allow for public: read as per the graphql schema
-      authMode = 'AWS_IAM'
+    // check to see if we have a session to determine how we authenticate with the API
+    let authMode = AuthModes.Cognito
+    try {
+      await Auth.currentAuthenticatedUser({ bypassCache: false })
+    } catch (error) {
+      authMode = AuthModes.Iam
     }
 
     return API.graphql({ query, variables, authMode })

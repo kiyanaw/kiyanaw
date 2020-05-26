@@ -19,35 +19,6 @@
           </option>
         </f7-list-input>
 
-        <!-- Region -->
-        <!-- <f7-list-input
-          label="Region"
-          type="select"
-          placeholder="Region"
-          :value="localRegion"
-          @change="localRegion = $event.target.value">
-          <option
-            v-for="region in regions"
-            :key="region">
-            {{ region }}
-          </option>
-        </f7-list-input> -->
-
-        <!-- Dialect -->
-        <!-- <f7-list-input
-          label="Dialect"
-          type="select"
-          placeholder="Dialect"
-          :value="localDialect"
-          @change="localDialect = $event.target.value">
-          <option
-            v-for="dialect in dialects"
-            :key="dialect">
-            {{ dialect }}
-          </option>
-        </f7-list-input>
-      </f7-list> -->
-
         <!-- SIGN IN BUTTON -->
         <f7-button
           v-if="!user"

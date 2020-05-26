@@ -1,7 +1,5 @@
 <template>
   <f7-page>
-    <!-- <amplify-authenticator> -->
-    <!-- The rest of your app code -->
     <!-- Top Nav -->
     <f7-navbar>
       <f7-nav-left>
@@ -32,9 +30,13 @@
         @searchbar:search="onSearch" />
     </f7-navbar>
 
-    <onboarding v-if="!searching && !searchText && !languageSet" />
+    <onboarding v-if="!searching && !searchText && !userLanguage" />
 
-    <f7-block v-if="!searching && !searchText && languageSet">
+    <f7-block v-else-if="showSettings">
+      <user-settings />
+    </f7-block>
+
+    <f7-block v-if="!searching && !searchText && userLanguage && !showSettings">
       <p>
         Search for words or phrases you want to know in the
         {{ userLanguage }} language, or browse the list of submissions.
@@ -65,7 +67,7 @@
       </f7-block>
     </f7-block>
 
-    <div v-if="searching && !searchText && languageSet">
+    <div v-if="searching && !searchText && userLanguage && !showSettings">
       <!-- <f7-block-title>Recent</f7-block-title> -->
       <f7-list class="nomargin">
         <f7-list-item
@@ -198,13 +200,15 @@
 <script>
 import Timeout from 'smart-timeout'
 import { mapGetters, mapActions } from 'vuex'
+import UserSettings from '../components/userSettings.vue'
 // eslint-disable-next-line import/no-unresolved
-import onboarding from 'src/components/onboarding.vue'
+import onboarding from '../components/onboarding.vue'
 
 export default {
   name: 'Home',
   components: {
     onboarding,
+    UserSettings,
   },
   data: () => ({
     language: 'Cree',
@@ -223,6 +227,12 @@ export default {
       }
       if (window.localStorage.getItem('language') || this.userLanguage) {
         return true
+      }
+      return false
+    },
+    showSettings() {
+      if (this.user) {
+        return !this.user?.profile
       }
       return false
     },

@@ -21,7 +21,7 @@ export default {
       type: 'phrase',
       table: 'response',
       enquiryId: data.enquiryId,
-      warriorId: user.email,
+      warriorId: user.id,
     }
 
     const response = await client.request(mutations.createResponse, { input })

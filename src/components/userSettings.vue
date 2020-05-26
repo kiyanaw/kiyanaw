@@ -112,7 +112,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import userService from '../services/userService'
 
 export default {
   name: 'UserSettings',
@@ -131,10 +130,13 @@ export default {
     ]),
     localname: {
       get() {
-        return this.user.name
+        if (this.user.profile) {
+          return this.user.name
+        }
+        return window.localStorage.getItem('name')
       },
       set(val) {
-        if (this.hasProfile) {
+        if (this.user.profile) {
           const user = { ...this.user }
           user.name = val
           this.updateUser(user)
@@ -144,10 +146,13 @@ export default {
     },
     localUserLang: {
       get() {
-        return this.userLanguage
+        if (this.user.profile) {
+          return this.user.language
+        }
+        return window.localStorage.getItem('language')
       },
       set(val) {
-        if (this.hasProfile) {
+        if (this.user.profile) {
           const user = { ...this.user }
           user.language = val
           this.updateUser(user)
@@ -157,10 +162,13 @@ export default {
     },
     localUserDialect: {
       get() {
-        return this.userDialect
+        if (this.user.dialect) {
+          return this.user.dialect
+        }
+        return window.localStorage.getItem('dialect')
       },
       set(val) {
-        if (this.hasProfile) {
+        if (this.user.profile) {
           const user = { ...this.user }
           user.dialect = val
           this.updateUser(user)
@@ -170,10 +178,13 @@ export default {
     },
     localUserRegion: {
       get() {
-        return this.userRegion
+        if (this.user.profile) {
+          return this.user.region
+        }
+        return window.localStorage.getItem('region')
       },
       set(val) {
-        if (this.hasProfile) {
+        if (this.user.profile) {
           const user = { ...this.user }
           user.region = val
           this.updateUser(user)
@@ -183,30 +194,20 @@ export default {
     },
   },
   mounted() {
-    this.hasProfile = this.checkProfile()
   },
   methods: {
     ...mapActions([
       'updateAttribute',
       'updateUser',
+      'createUser',
     ]),
-    async checkProfile() {
-      if (this.user) {
-        const profile = await userService.getUser(this.user.id)
-        if (profile === null) {
-          return false
-        }
-        return true
-      }
-      return false
-    },
     saveUser() {
       const localUser = { ...this.user }
       localUser.language = window.localStorage.getItem('language')
       localUser.dialect = window.localStorage.getItem('dialect')
       localUser.region = window.localStorage.getItem('region')
-      localUser.name = window.localStore.getItem('name')
-      console.log(localUser)
+      localUser.name = window.localStorage.getItem('name')
+      delete localUser.profile
       this.createUser(localUser)
     },
   },

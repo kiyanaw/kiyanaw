@@ -74,7 +74,8 @@ const actions = {
   async createUser(store, warrior) {
     const result = await userService.createUserEntry(warrior)
     if (result) {
-      store.dispatch('USER_LOGGED', warrior)
+      result.data.createWarrior.profile = true
+      store.commit('USER_LOGGED', result.data.createWarrior)
     }
   },
 }

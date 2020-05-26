@@ -1,15 +1,12 @@
-/* Amplify Params - DO NOT EDIT
-You can access the following resource attributes as environment variables from your Lambda function
-var environment = process.env.ENV
-var region = process.env.REGION
+/* eslint no-await-in-loop: 0 */
+/* eslint no-restricted-syntax: 0 */
+const AWS = require('aws-sdk')
+const { handler } = require('./lib')
 
-Amplify Params - DO NOT EDIT */
 
 exports.handler = async (event) => {
-  // TODO implement
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify('Hello from Lambda!'),
-  }
-  return response
+  const records = event.Records.map((record) => AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage))
+
+  console.log('Incoming records:', records)
+  return handler(records)
 }

@@ -69,7 +69,7 @@
 
     <div v-if="searching && !searchText && userLanguage && !showSettings">
       <!-- <f7-block-title>Recent</f7-block-title> -->
-      <f7-list class="nomargin">
+      <!-- <f7-list class="nomargin">
         <f7-list-item
           title="visits"
           @click="$refs.searchbar.search('visits')" />
@@ -79,94 +79,28 @@
         <f7-list-item
           title="itâhkamikisiw"
           @click="$refs.searchbar.search('itâhkamikisiw')" />
-      </f7-list>
+      </f7-list> -->
     </div>
 
     <div v-if="searchText.length">
       <f7-block-title>Search results for {{ searchText }}</f7-block-title>
-      <f7-list>
+      <f7-list v-if="results">
         <f7-list-item
+          v-for="result in results"
+          :key="result.id"
+          link="#"
+          :header="result.enquiryText"
+          :title="result.responseText"
+          :footer="'updated at ' + ago(result.updatedAt)"
+          after="🎵" />
+        <!-- <f7-list-item
+          v-for="result in results"
+          :key="result.id"
           link="#"
           title="tânispî ohci ê-nôhtê-kiyokêyan"
           header="How long do you want to visit?"
           footer="updated 3 minutes ago by bengodden"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="ahâw mâka"
-          header="Okay then..."
-          footer="updated 4 minutes ago by aaronfay"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="nitawi-wîcê-mêtawêmik kîtisânak"
-          header="Go and play with your siblings"
-          footer="updated 7 minutes by wjackson"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="kika-kî-nipân"
-          header="You should be sleeping"
-          footer="updated 15 minutes by jhill"
-          after />
-
-        <f7-list-item
-          link="#"
-          title="kiwâmpamâw cî kitôtêminaw Ben?"
-          header="Have you seen our friend Ben?"
-          footer="updated 21 minutes by rfletcher"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="mwêstas ê-wî-pîkiskwâtikok"
-          header="I will talk to you all later"
-          footer="updated 27 minutes by bgodden"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="tânitê êtikwê"
-          header="I wonder where..."
-          footer="updated 33 minutes by aogg"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="kitatamiskâtinâwâw kahkiyaw"
-          header="I greet you all"
-          footer="updated 40 minutes by tgreen"
-          after="🎵" />
-        <f7-list-item
-          link="#"
-          title="kiwâmpamâw cî kitôtêminaw Ben?"
-          header="Have you seen our friend Ben?"
-          footer="updated 21 minutes by rfletcher"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="mwêstas ê-wî-pîkiskwâtikok"
-          header="I will talk to you all later"
-          footer="updated 27 minutes by bgodden"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="tânitê êtikwê"
-          header="I wonder where..."
-          footer="updated 33 minutes by aogg"
-          after="🎵" />
-
-        <f7-list-item
-          link="#"
-          title="kitatamiskâtinâwâw kahkiyaw"
-          header="I greet you all"
-          footer="updated 40 minutes by tgreen"
-          after="🎵" />
+          after="🎵" /> -->
       </f7-list>
     </div>
 
@@ -204,6 +138,13 @@ import UserSettings from '../components/userSettings.vue'
 // eslint-disable-next-line import/no-unresolved
 import onboarding from '../components/onboarding.vue'
 
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+import searchService from '../services/search'
+
+TimeAgo.addLocale(en)
+const ago = new TimeAgo('en-US')
+
 export default {
   name: 'Home',
   components: {
@@ -214,6 +155,7 @@ export default {
     language: 'Cree',
     searching: false,
     searchText: '',
+    results: [],
   }),
   computed: {
     ...mapGetters([
@@ -244,17 +186,23 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setCurrentQuery',
+      // 'setCurrentQuery',
       'getUser',
       'setUsername',
     ]),
+    ago(dateString) {
+      return ago.format(new Date(dateString))
+    },
     // eslint-disable-next-line no-unused-vars
     onSearch(searchBar, query, previousQuery) {
       Timeout.set(this.setSearch, 250, query)
     },
-    setSearch(query) {
+    async setSearch(query) {
       this.searchText = query
-      this.setCurrentQuery(query)
+      this.results = []
+      const results = await searchService.search(query)
+      console.log('got results', results)
+      this.results = results
     },
   },
 }

@@ -9,19 +9,30 @@ import * as queries from '../graphql/queries'
 export default {
 
   async create(data) {
+    const id = uuidv1()
     const user = await userService.get()
 
-    const id = uuidv1()
+    let extra
+    if (user.dialect) {
+      extra = extra || {}
+      extra.dialect = user.dialect
+    }
+    if (user.region) {
+      extra = extra || {}
+      extra.region = user.region
+    }
+
     const input = {
       id,
       createdAt: new Date(),
       updatedAt: new Date(),
       text: data.text,
-      languageIndex: 'todo',
+      languageIndex: 'todo', // FIXME
       type: 'phrase',
       table: 'response',
       enquiryId: data.enquiryId,
       warriorId: user.id,
+      extra,
     }
 
     const response = await client.request(mutations.createResponse, { input })

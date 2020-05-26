@@ -29,17 +29,26 @@ const getters = {
     if (context.user) {
       return context.user.language
     }
+    if (!context.language) {
+      return window.localStorage.getItem('language')
+    }
     return context.language
   },
   userDialect(context) {
     if (context.user) {
       return context.user.dialect
     }
+    if (!context.dialect) {
+      return window.localStorage.getItem('dialect')
+    }
     return context.dialect
   },
   userRegion(context) {
     if (context.user) {
       return context.user.region
+    }
+    if (!context.region) {
+      return window.localStorage.getItem('region')
     }
     return context.region
   },
@@ -78,11 +87,33 @@ const actions = {
       store.commit('USER_LOGGED', result.data.createWarrior)
     }
   },
+
+  setCurrentLanguage(store, lang) {
+    window.localStorage.setItem('language', lang)
+    store.commit('SET_CURRENT_LANGUAGE', lang)
+  },
+  setCurrentRegion(store, region) {
+    window.localStorage.setItem('region', region)
+    store.commit('SET_CURRENT_REGION', region)
+  },
+  setCurrentDialect(store, dialect) {
+    window.localStorage.setItem('dialect', dialect)
+    store.commit('SET_CURRENT_DIALECT', dialect)
+  },
 }
 
 const mutations = {
   USER_LOGGED(context, user) {
     Vue.set(context, 'user', user)
+  },
+  SET_CURRENT_LANGUAGE(context, lang) {
+    Vue.set(context, 'language', lang)
+  },
+  SET_CURRENT_REGION(context, lang) {
+    Vue.set(context, 'region', lang)
+  },
+  SET_CURRENT_DIALECT(context, lang) {
+    Vue.set(context, 'dialect', lang)
   },
 }
 

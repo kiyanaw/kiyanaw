@@ -31,7 +31,7 @@ export default {
       type: 'phrase',
       table: 'response',
       enquiryId: data.enquiryId,
-      warriorId: user.email,
+      warriorId: user.id,
       extra,
     }
 

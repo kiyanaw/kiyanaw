@@ -48,7 +48,7 @@ export default {
       languageIndex: 'todo',
       type: 'phrase',
       table: 'enquiry',
-      warriorId: user.email,
+      warriorId: user.id,
     }
     const response = await client.request(mutations.createEnquiry, { input })
     return new Enquiry(response.data.createEnquiry)

@@ -29,17 +29,26 @@ const getters = {
     if (context.user) {
       return context.user.language
     }
+    if (!context.language) {
+      return window.localStorage.getItem('language')
+    }
     return context.language
   },
   userDialect(context) {
     if (context.user) {
       return context.user.dialect
     }
+    if (!context.dialect) {
+      return window.localStorage.getItem('dialect')
+    }
     return context.dialect
   },
   userRegion(context) {
     if (context.user) {
       return context.user.region
+    }
+    if (!context.region) {
+      return window.localStorage.getItem('region')
     }
     return context.region
   },
@@ -55,9 +64,7 @@ const actions = {
     }
     store.commit('USER_LOGGED', user)
   },
-  async setUsername(store, username) {
-    return userService.setUsername(username)
-  },
+
   async getUser(store) {
     userService.get().then((user) => {
       if (user) {
@@ -65,29 +72,33 @@ const actions = {
       }
     })
   },
-  setCurrentLanguage(store, val) {
-    store.commit('SET_CURRENT_LANGUAGE', val)
+
+  async updateUser(store, warrior) {
+    const result = await userService.save(warrior)
+    if (result) {
+      store.dispatch('USER_LOGGED', warrior)
+    }
   },
-  setCurrentRegion(store, val) {
-    store.commit('SET_CURRENT_REGION', val)
+
+  async createUser(store, warrior) {
+    const result = await userService.createUserEntry(warrior)
+    if (result) {
+      result.data.createWarrior.profile = true
+      store.commit('USER_LOGGED', result.data.createWarrior)
+    }
   },
-  setCurrentDialect(store, val) {
-    store.commit('SET_CURRENT_DIALECT', val)
+
+  setCurrentLanguage(store, lang) {
+    window.localStorage.setItem('language', lang)
+    store.commit('SET_CURRENT_LANGUAGE', lang)
   },
-  updateAttribute(store, payload) {
-    // Update user object here, then send to service layer
-    // TODO: restrict to only accept custom attributes
-    const localUser = store.getters.user
-    assert.ok(localUser.hasOwnProperty(payload.name), `user does not have attribute ${payload.name}`)
-    localUser[payload.name] = payload.value
-    userService.setCustomUserAttribute(payload.name, payload.value)
-    // TODO: Handle error if response is not success and revert user object in store
-    store.dispatch('getUser')
+  setCurrentRegion(store, region) {
+    window.localStorage.setItem('region', region)
+    store.commit('SET_CURRENT_REGION', region)
   },
-  updateUsername(store, payload) {
-    userService.setRegularAttribute('preferred_username', payload).then(() => {
-      window.setTimeout(() => { store.dispatch('getUser') }, 2000)
-    })
+  setCurrentDialect(store, dialect) {
+    window.localStorage.setItem('dialect', dialect)
+    store.commit('SET_CURRENT_DIALECT', dialect)
   },
 }
 
@@ -95,17 +106,14 @@ const mutations = {
   USER_LOGGED(context, user) {
     Vue.set(context, 'user', user)
   },
-  SET_CURRENT_LANGUAGE(context, val) {
-    window.localStorage.setItem('language', val)
-    Vue.set(context, 'language', val)
+  SET_CURRENT_LANGUAGE(context, lang) {
+    Vue.set(context, 'language', lang)
   },
-  SET_CURRENT_REGION(context, val) {
-    window.localStorage.setItem('region', val)
-    Vue.set(context, 'region', val)
+  SET_CURRENT_REGION(context, lang) {
+    Vue.set(context, 'region', lang)
   },
-  SET_CURRENT_DIALECT(context, val) {
-    window.localStorage.setItem('dialect', val)
-    Vue.set(context, 'dialect', val)
+  SET_CURRENT_DIALECT(context, lang) {
+    Vue.set(context, 'dialect', lang)
   },
 }
 

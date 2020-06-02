@@ -102,6 +102,7 @@
     </div>
 
     <f7-button
+      v-if="!user.profile"
       raised
       type="submit"
       @click="saveUser()">
@@ -157,7 +158,7 @@ export default {
           user.language = val
           this.updateUser(user)
         }
-        window.localStorage.setItem('language', val)
+        this.setCurrentLanguage(val)
       },
     },
     localUserDialect: {
@@ -173,7 +174,7 @@ export default {
           user.dialect = val
           this.updateUser(user)
         }
-        window.localStorage.setItem('dialect', val)
+        this.setCurrentDialect(val)
       },
     },
     localUserRegion: {
@@ -189,7 +190,7 @@ export default {
           user.region = val
           this.updateUser(user)
         }
-        window.localStorage.setItem('region', val)
+        this.setCurrentRegion(val)
       },
     },
   },
@@ -200,6 +201,9 @@ export default {
       'updateAttribute',
       'updateUser',
       'createUser',
+      'setCurrentDialect',
+      'setCurrentRegion',
+      'setCurrentLanguage',
     ]),
     saveUser() {
       const localUser = { ...this.user }

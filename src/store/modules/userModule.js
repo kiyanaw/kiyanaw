@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import assert from 'assert'
+// import assert from 'assert'
 import userService from '../../services/userService'
 
 const state = {
@@ -76,7 +76,7 @@ const actions = {
   async updateUser(store, warrior) {
     const result = await userService.save(warrior)
     if (result) {
-      store.dispatch('USER_LOGGED', warrior)
+      store.commit('USER_LOGGED', warrior)
     }
   },
 

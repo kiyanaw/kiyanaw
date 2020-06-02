@@ -40,6 +40,14 @@ export default {
     return user
   },
 
+  async save(userObject) {
+    const saveObject = { ...userObject }
+    delete saveObject.profile
+    const resp = await client.request(mutations.updateWarrior, { input: saveObject })
+    user = userObject
+    return resp
+  },
+
   async createUserEntry(userObject) {
     const resp = await client.request(mutations.createWarrior, { input: userObject })
     user = userObject

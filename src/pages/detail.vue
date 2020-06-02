@@ -8,9 +8,11 @@
     <f7-card
       v-if="enquiry"
       :title="enquiry.text"
-      :content="`Submitted by ${enquiry.warrior.name} ${ago(enquiry.createdAt)}`">
+      :content="`Submitted by ${enquiry.warrior.name} ${someTimeAgo(enquiry.createdAt)}`">
       <f7-card-footer>
-        <f7-link icon-md="material:star_outline">
+        <f7-link
+          :icon-md="isFav ? 'material:start_fill' : 'material:star_outline'"
+          @click="toggleFav()">
           Save
         </f7-link>
         <!-- <f7-link>Read more</f7-link> -->
@@ -23,7 +25,7 @@
         v-for="response in enquiry.responses"
         :key="response.id"
         :content="response.text"
-        :footer="'by ' + response.warrior.name + ' ' + ago(response.createdAt)" />
+        :footer="'by ' + response.warrior.name + ' ' + someTimeAgo(response.createdAt)" />
     </div>
 
     <!-- Floating tab button -->
@@ -42,16 +44,17 @@
 </template>
 
 <script>
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
+// import TimeAgo from 'javascript-time-ago'
+// import en from 'javascript-time-ago/locale/en'
 import { mapGetters, mapActions } from 'vuex'
+import utils from '../utils/utils'
 
 import enquiryService from '../services/enquiryService'
 import responseService from '../services/responseService'
 
 
-TimeAgo.addLocale(en)
-const ago = new TimeAgo('en-US')
+// TimeAgo.addLocale(en)
+// const ago = new TimeAgo('en-US')
 
 export default {
   name: 'Detail',
@@ -68,7 +71,9 @@ export default {
     ...mapGetters([
       'user',
     ]),
-
+    isFav() {
+      return this.user.favorites.findIndex((el) => el.id === this.enquiryId) > -1
+    },
     // enquiryOwner() {
     //   return this.userLookup(this.enquiry.owner)
     // },
@@ -94,9 +99,18 @@ export default {
     ...mapActions([
       // 'getEnquiry',
       // 'getResponsesByEnquiry',
+      'saveFavorites',
+      'deleteFavorite',
     ]),
-    ago() {
-      return ago.format(new Date(this.enquiry.createdAt))
+    toggleFav() {
+      if (this.isFav) {
+        this.deleteFavorite(this.enquiry)
+      } else {
+        this.saveFavorites(this.enquiry)
+      }
+    },
+    someTimeAgo(time) {
+      return utils.someTimeAgo(time)
     },
   },
 }

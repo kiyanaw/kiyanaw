@@ -80,6 +80,29 @@ const actions = {
     }
   },
 
+  async saveFavorites(store, enquiry) {
+    const user = { ...store.getters.user }
+    const favs = user.favorites
+    if (favs.findIndex((el) => el.id === enquiry.id) <= -1) {
+      favs.push(enquiry)
+      const result = await userService.save(user)
+      if (result) {
+        store.commit('USER_LOGGED', user)
+      }
+    }
+  },
+
+  async deleteFavorite(store, enquiry) {
+    const user = { ...store.getters.user }
+    const favs = user.favorites
+    const idx = favs.findIndex((el) => el.id === enquiry.id)
+    favs.splice(idx, 1)
+    const result = await userService.save(user)
+    if (result) {
+      store.commit('USER_LOGGED', user)
+    }
+  },
+
   async createUser(store, warrior) {
     const result = await userService.createUserEntry(warrior)
     if (result) {

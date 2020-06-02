@@ -134,12 +134,12 @@
 <script>
 import Timeout from 'smart-timeout'
 import { mapGetters, mapActions } from 'vuex'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 import UserSettings from '../components/userSettings.vue'
 // eslint-disable-next-line import/no-unresolved
 import onboarding from '../components/onboarding.vue'
 
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
 import searchService from '../services/search'
 
 TimeAgo.addLocale(en)
@@ -183,6 +183,9 @@ export default {
     currentQuery(val) {
       console.log(val)
     },
+  },
+  mounted() {
+    console.log('Home.vue, current user', this.user)
   },
   methods: {
     ...mapActions([

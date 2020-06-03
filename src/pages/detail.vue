@@ -43,17 +43,10 @@
 </template>
 
 <script>
-// import TimeAgo from 'javascript-time-ago'
-// import en from 'javascript-time-ago/locale/en'
 import { mapGetters, mapActions } from 'vuex'
 import utils from '../utils/utils'
-
 import enquiryService from '../services/enquiryService'
 import responseService from '../services/responseService'
-
-
-// TimeAgo.addLocale(en)
-// const ago = new TimeAgo('en-US')
 
 export default {
   name: 'Detail',
@@ -73,9 +66,6 @@ export default {
     isFav() {
       return this.user.favorites.findIndex((el) => el.id === this.enquiryId) > -1
     },
-    // enquiryOwner() {
-    //   return this.userLookup(this.enquiry.owner)
-    // },
   },
 
   async mounted() {
@@ -92,6 +82,7 @@ export default {
     enquiry.responses = responses
     this.enquiry = enquiry
     this.$f7.dialog.close()
+    this.updateHistory(enquiry)
   },
 
   methods: {
@@ -100,6 +91,7 @@ export default {
       // 'getResponsesByEnquiry',
       'saveFavorites',
       'deleteFavorite',
+      'updateHistory',
     ]),
     toggleFav() {
       if (this.isFav) {
@@ -110,6 +102,28 @@ export default {
     },
     someTimeAgo(time) {
       return utils.someTimeAgo(time)
+    },
+    addToHistory(enquiry) {
+      let history = JSON.parse(window.localStorage.getItem('history'))
+      // If the object doesn't exist we need to create it as an array
+      if (history === null || history === undefined) {
+        history = []
+      }
+      // We don't want to keep EVERYTHING so delete the first historical item after N records
+      if (history.length > 10) {
+        history = history.shift()
+      }
+      // If the item is already in the history, remove it where it's from so it can be put to the end
+      const idx = history.findIndex((el) => el.id === enquiry.id)
+      if (idx > -1) {
+        history.splice(idx, 1)
+      }
+      // Push the item to the array and stringify it since localStorage only allaows strings
+      const enquiryToPush = { ...enquiry }
+      enquiryToPush.viewedAt = new Date()
+      history.push(enquiryToPush)
+      history = JSON.stringify(history)
+      window.localStorage.setItem('history', history)
     },
   },
 }

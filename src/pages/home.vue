@@ -162,6 +162,7 @@ export default {
       'user',
       'currentQuery',
       'userLanguage',
+      'history',
     ]),
     languageSet() {
       if (this.user) {
@@ -185,13 +186,14 @@ export default {
     },
   },
   mounted() {
-    console.log('Home.vue, current user', this.user)
+    this.syncHistory()
   },
   methods: {
     ...mapActions([
       // 'setCurrentQuery',
       'getUser',
       'setUsername',
+      'syncHistory',
     ]),
     ago(dateString) {
       return ago.format(new Date(dateString))

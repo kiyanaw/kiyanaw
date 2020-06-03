@@ -10,6 +10,7 @@ const state = {
   language: null,
   region: null,
   dialect: null,
+  history: null,
 }
 
 const getters = {
@@ -54,6 +55,9 @@ const getters = {
   },
   username(context) {
     return context.user.name
+  },
+  history(context) {
+    return context.history
   },
 }
 
@@ -125,6 +129,39 @@ const actions = {
     window.localStorage.setItem('dialect', dialect)
     store.commit('SET_CURRENT_DIALECT', dialect)
   },
+
+  updateHistory(store, enquiry) {
+    // console.log('UPDATE HISTORY')
+    let { history } = store.getters
+    if (history === null || history === undefined) {
+      history = JSON.parse(window.localStorage.getItem('history'))
+      if (history === null || history === undefined) {
+        history = []
+      }
+    }
+    if (history.length > 10) {
+      history = history.shift()
+    }
+    // If the item is already in the history, remove it where it's from so it can be put to the end
+    const idx = history.findIndex((el) => el.id === enquiry.id)
+    if (idx > -1) {
+      history.splice(idx, 1)
+    }
+    // Push the item to the array and stringify it since localStorage only allaows strings
+    const enquiryToPush = { ...enquiry }
+    enquiryToPush.viewedAt = new Date()
+    history.push(enquiryToPush)
+    store.commit('SAVE_HISTORY', history)
+    const stringHistory = JSON.stringify(history)
+    window.localStorage.setItem('history', stringHistory)
+  },
+
+  syncHistory(store) {
+    if (store.getters.history === null) {
+      // console.log('SYNC HISTORY')
+      store.commit('SAVE_HISTORY', JSON.parse(window.localStorage.getItem('history')))
+    }
+  },
 }
 
 const mutations = {
@@ -139,6 +176,9 @@ const mutations = {
   },
   SET_CURRENT_DIALECT(context, lang) {
     Vue.set(context, 'dialect', lang)
+  },
+  SAVE_HISTORY(context, history) {
+    Vue.set(context, 'history', history)
   },
 }
 

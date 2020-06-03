@@ -29,6 +29,7 @@
           material="favorite" />
       </f7-list-item>
       <f7-list-item
+        v-if="history && history.length > 0"
         link="/history/"
         title="History"
         panel-close>
@@ -84,7 +85,10 @@ import { mapGetters } from 'vuex'
 export default {
   components: {},
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters([
+      'user',
+      'history',
+    ]),
   },
   methods: {},
 }

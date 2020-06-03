@@ -3,16 +3,11 @@
     <f7-navbar
       title="Favorites"
       back-link="back" />
-
     <f7-card
       v-for="fav in favorites"
       :key="fav.id">
       <f7-card-content>
-        <!-- <f7-link
-          color="black"
-          @click="goToDetail(fav.id)"> -->
         {{ fav.text }}
-        <!-- </f7-link> -->
       </f7-card-content>
       <f7-card-footer>
         {{ `Favorited ${ago(fav.favoritedAt)}` }}
@@ -53,7 +48,6 @@ export default {
       return utils.someTimeAgo(time)
     },
     goToDetail(id) {
-      console.log('AAAAA')
       this.$f7router.navigate(`/detail/${id}`)
     },
   },

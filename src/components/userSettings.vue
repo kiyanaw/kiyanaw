@@ -118,6 +118,7 @@ export default {
   name: 'UserSettings',
   data: () => ({
     hasProfile: false,
+    usernameTimeout: null,
   }),
   computed: {
     ...mapGetters([
@@ -137,12 +138,15 @@ export default {
         return window.localStorage.getItem('name')
       },
       set(val) {
-        if (this.user.profile) {
-          const user = { ...this.user }
-          user.name = val
-          this.updateUser(user)
-        }
-        window.localStorage.setItem('name', val)
+        window.clearTimeout(this.usernameTimeout)
+        this.usernameTimeout = window.setTimeout(() => {
+          if (this.user.profile) {
+            const user = { ...this.user }
+            user.name = val
+            this.updateUser(user)
+          }
+          window.localStorage.setItem('name', val)
+        }, 500)
       },
     },
     localUserLang: {

@@ -32,7 +32,6 @@ export default {
       'history',
     ]),
     sortedHistory() {
-      // console.log('SORTING HAT', this.history)
       const { history } = this
       return history.sort((a, b) => {
         const aTime = new Date(a.viewedAt).getTime()

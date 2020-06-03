@@ -47,7 +47,7 @@ export default {
 
   async byEnquiry(enquiryId) {
     const response = await client.request(queries.responseByEnquiry, { enquiryId })
-    console.log('responses', response)
+    // console.log('responses', response)
     // TODO: unwrap this
     return response.data.responseByEnquiry.items
   },

@@ -31,7 +31,6 @@ export default {
         const warrior = await client.request(queries.getWarrior, { id: user.attributes.email })
         if (warrior.data.getWarrior !== null) {
           const userData = warrior.data.getWarrior
-          console.log(userData)
           userData.profile = true
           user = new User(user, userData)
         } else {
@@ -51,7 +50,6 @@ export default {
     delete saveObject.profile
     saveObject.favorites = JSON.stringify(saveObject.favorites)
     saveObject.playlist = JSON.stringify(saveObject.playlist)
-    console.log('========= USER OBJECT TO BE SAVED', saveObject)
     const resp = await client.request(mutations.updateWarrior, { input: saveObject })
     user = userObject
     return resp

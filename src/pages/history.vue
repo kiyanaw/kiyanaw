@@ -43,9 +43,6 @@ export default {
       })
     },
   },
-  mounted() {
-    console.log('History mounted')
-  },
   methods: {
     ago(time) {
       return utils.someTimeAgo(time)

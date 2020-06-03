@@ -7,20 +7,26 @@
     <f7-card
       v-for="fav in favorites"
       :key="fav.id">
-      <f7-card-content :padding="false">
-        <f7-card-header>
-          {{ fav.text }}
-        </f7-card-header>
-        <div v-if="fav.responses.length >= 1">
-          {{ fav.responses[0].text }}
-        </div>
+      <f7-card-content>
+        <!-- <f7-link
+          color="black"
+          @click="goToDetail(fav.id)"> -->
+        {{ fav.text }}
+        <!-- </f7-link> -->
       </f7-card-content>
+      <f7-card-footer>
+        {{ `Favorited ${ago(fav.favoritedAt)}` }}
+        <f7-link
+          @click="goToDetail(fav.id)">
+          View Details
+        </f7-link>
+      </f7-card-footer>
     </f7-card>
   </f7-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import utils from '../utils/utils'
 
 export default {
@@ -30,11 +36,19 @@ export default {
       'user',
     ]),
     favorites() {
-      console.log(this.user.favorites)
-      return this.user.favorites
+      let userFavs = this.user.favorites
+      userFavs = userFavs.sort((a, b) => {
+        if (a.favoritedAt > b.favoritedAt) return -1
+        if (b.favoritedAt > a.favorites) return 1
+        return 0
+      })
+      return userFavs
     },
   },
   methods: {
+    ...mapActions([
+      'deleteFavorite',
+    ]),
     ago(time) {
       return utils.someTimeAgo(time)
     },

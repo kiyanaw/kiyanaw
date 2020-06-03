@@ -2,8 +2,7 @@
   <f7-page>
     <f7-navbar
       title="Detail"
-      back-link="Back"
-      back-link-url="/" />
+      back-link="Back" />
 
     <f7-card
       v-if="enquiry"
@@ -11,9 +10,9 @@
       :content="`Submitted by ${enquiry.warrior.name} ${someTimeAgo(enquiry.createdAt)}`">
       <f7-card-footer>
         <f7-link
-          :icon-md="isFav ? 'material:start_fill' : 'material:star_outline'"
+          :icon-md="isFav ? 'material:star_fill' : 'material:star_outline'"
           @click="toggleFav()">
-          Save
+          {{ isFav ? 'Un-Favorite' : 'Favorite ' }}
         </f7-link>
         <!-- <f7-link>Read more</f7-link> -->
       </f7-card-footer>

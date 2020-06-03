@@ -83,8 +83,10 @@ const actions = {
   async saveFavorites(store, enquiry) {
     const user = { ...store.getters.user }
     const favs = user.favorites
+    const enquiryToSave = { ...enquiry }
+    enquiryToSave.favoritedAt = new Date()
     if (favs.findIndex((el) => el.id === enquiry.id) <= -1) {
-      favs.push(enquiry)
+      favs.push(enquiryToSave)
       const result = await userService.save(user)
       if (result) {
         store.commit('USER_LOGGED', user)

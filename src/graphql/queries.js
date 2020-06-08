@@ -12,6 +12,7 @@ export const getEnquiry = `query GetEnquiry($id: ID!) {
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -68,6 +69,7 @@ export const listEnquirys = `query ListEnquirys(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -114,6 +116,7 @@ export const byEnquiryCreatedAt = `query ByEnquiryCreatedAt(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -160,6 +163,7 @@ export const byEnquiryUpdatedAt = `query ByEnquiryUpdatedAt(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -204,6 +208,54 @@ export const enquiryByWarrior = `query EnquiryByWarrior(
       type
       warriorId
       table
+      linkId
+      owner
+      responses {
+        nextToken
+      }
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const byLinkUpdatedAt = `query ByLinkUpdatedAt(
+  $linkId: String
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelEnquiryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  byLinkUpdatedAt(
+    linkId: $linkId
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      createdAt
+      updatedAt
+      text
+      extra
+      languageIndex
+      type
+      warriorId
+      table
+      linkId
       owner
       responses {
         nextToken
@@ -246,6 +298,7 @@ export const getResponse = `query GetResponse($id: ID!) {
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -322,6 +375,7 @@ export const listResponses = `query ListResponses(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -381,6 +435,7 @@ export const byResponseCreatedAt = `query ByResponseCreatedAt(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -440,6 +495,7 @@ export const byResponseUpdatedAt = `query ByResponseUpdatedAt(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -497,6 +553,7 @@ export const responseByEnquiry = `query ResponseByEnquiry(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -554,6 +611,7 @@ export const responseByWarrior = `query ResponseByWarrior(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -602,6 +660,7 @@ export const getMedia = `query GetMedia($id: ID!) {
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -839,6 +898,7 @@ export const getWarrior = `query GetWarrior($id: ID!) {
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken

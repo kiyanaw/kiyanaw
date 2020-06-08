@@ -15,6 +15,7 @@ export const createEnquiry = `mutation CreateEnquiry(
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -69,6 +70,7 @@ export const updateEnquiry = `mutation UpdateEnquiry(
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -123,6 +125,7 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -188,6 +191,7 @@ export const createResponse = `mutation CreateResponse(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -262,6 +266,7 @@ export const updateResponse = `mutation UpdateResponse(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -336,6 +341,7 @@ export const deleteResponse = `mutation DeleteResponse(
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -414,6 +420,7 @@ export const createMedia = `mutation CreateMedia(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -485,6 +492,7 @@ export const updateMedia = `mutation UpdateMedia(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -556,6 +564,7 @@ export const deleteMedia = `mutation DeleteMedia(
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -622,6 +631,7 @@ export const createWarrior = `mutation CreateWarrior(
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken
@@ -679,6 +689,7 @@ export const updateWarrior = `mutation UpdateWarrior(
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken
@@ -736,6 +747,7 @@ export const deleteWarrior = `mutation DeleteWarrior(
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken

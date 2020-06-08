@@ -12,6 +12,7 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -63,6 +64,7 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -114,6 +116,7 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
     type
     warriorId
     table
+    linkId
     owner
     responses {
       items {
@@ -176,6 +179,7 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -247,6 +251,7 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -318,6 +323,7 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
       type
       warriorId
       table
+      linkId
       owner
       responses {
         nextToken
@@ -393,6 +399,7 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -461,6 +468,7 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -529,6 +537,7 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       owner
@@ -592,6 +601,7 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken
@@ -646,6 +656,7 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken
@@ -700,6 +711,7 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         type
         warriorId
         table
+        linkId
         owner
       }
       nextToken

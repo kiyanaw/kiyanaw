@@ -15,7 +15,8 @@ type Enquiry
   @model
   @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
   @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
-  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "enquiryByWarrior") 
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "enquiryByWarrior")
+  @key(name: "ByLink", fields: ["linkId", "createdAt"], queryField: "byLinkUpdatedAt")
   @aws_iam
   @aws_cognito_user_pools
   @auth(
@@ -38,7 +39,28 @@ type Enquiry
   responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
   table: EnquiryType!
+  # manual lookup type
+  linkId: String
 }
+
+# type Comment
+#   @model
+#   @aws_iam
+#   @aws_cognito_user_pools
+#   @auth(
+#     rules: [
+#       { allow: owner, operations: [create, read, update, delete]  }
+#       { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+#       { allow: public, provider: iam, operations: [read] }
+#       { allow: groups, groups: ["everyone"], operations: [read] }
+#     ]
+#   )
+# {
+#   id: ID!
+#   createdAt: AWSDateTime!
+#   text: String!
+
+# }
 
 type Response
   @model

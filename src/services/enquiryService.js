@@ -27,6 +27,7 @@ class Enquiry {
     this.createdAt = new Date(data.createdAt)
     this.updatedAt = new Date(data.updatedAt)
     this.owner = data.owner
+    this.link = data.link
     this.responses = []
     if (data.responses) {
       this.responses = data.responses.items.map((item) => new Response(item))
@@ -49,6 +50,7 @@ export default {
       type: 'phrase',
       table: 'enquiry',
       warriorId: user.id,
+      link: 'null',
     }
     const response = await client.request(mutations.createEnquiry, { input })
     return new Enquiry(response.data.createEnquiry)

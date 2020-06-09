@@ -276,6 +276,144 @@ export const byLinkUpdatedAt = `query ByLinkUpdatedAt(
   }
 }
 `;
+export const getComment = `query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const listComments = `query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      createdAt
+      text
+      targetId
+      warriorId
+      owner
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const commentByTarget = `query CommentByTarget(
+  $targetId: String
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  commentByTarget(
+    targetId: $targetId
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      createdAt
+      text
+      targetId
+      warriorId
+      owner
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const commentByWarrior = `query CommentByWarrior(
+  $warriorId: ID
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  commentByWarrior(
+    warriorId: $warriorId
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      createdAt
+      text
+      targetId
+      warriorId
+      owner
+      warrior {
+        id
+        name
+        language
+        dialect
+        region
+        favorites
+        playlist
+        isWarrior
+        owner
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getResponse = `query GetResponse($id: ID!) {
   getResponse(id: $id) {
     id

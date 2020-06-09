@@ -1,6 +1,7 @@
 enum PhraseType {
   word
   phrase
+  question
 }
 
 enum EnquiryType {
@@ -43,24 +44,26 @@ type Enquiry
   linkId: String
 }
 
-# type Comment
-#   @model
-#   @aws_iam
-#   @aws_cognito_user_pools
-#   @auth(
-#     rules: [
-#       { allow: owner, operations: [create, read, update, delete]  }
-#       { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
-#       { allow: public, provider: iam, operations: [read] }
-#       { allow: groups, groups: ["everyone"], operations: [read] }
-#     ]
-#   )
-# {
-#   id: ID!
-#   createdAt: AWSDateTime!
-#   text: String!
-
-# }
+type Comment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
+  @key(name: "ByTarget", fields: ["targetId", "createdAt"], queryField: "commentByTarget")
+  @key(name: "ByWarrior", fields: ["warriorId", "createdAt"], queryField: "commentByWarrior")
+{
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  targetId: String!
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+}
 
 type Response
   @model

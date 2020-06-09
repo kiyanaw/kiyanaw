@@ -166,6 +166,108 @@ export const deleteEnquiry = `mutation DeleteEnquiry(
   }
 }
 `;
+export const createComment = `mutation CreateComment(
+  $input: CreateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  createComment(input: $input, condition: $condition) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const updateComment = `mutation UpdateComment(
+  $input: UpdateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  updateComment(input: $input, condition: $condition) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const deleteComment = `mutation DeleteComment(
+  $input: DeleteCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  deleteComment(input: $input, condition: $condition) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
 export const createResponse = `mutation CreateResponse(
   $input: CreateResponseInput!
   $condition: ModelResponseConditionInput

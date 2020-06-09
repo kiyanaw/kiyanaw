@@ -67,9 +67,9 @@
       </f7-block>
     </f7-block>
 
-    <div v-if="searching && !searchText && userLanguage && !showSettings">
-      <!-- <f7-block-title>Recent</f7-block-title> -->
-      <!-- <f7-list class="nomargin">
+    <div v-if="!searching">
+      <f7-block-title>Recent</f7-block-title>
+      <f7-list class="nomargin">
         <f7-list-item
           title="visits"
           @click="$refs.searchbar.search('visits')" />
@@ -79,7 +79,7 @@
         <f7-list-item
           title="itâhkamikisiw"
           @click="$refs.searchbar.search('itâhkamikisiw')" />
-      </f7-list> -->
+      </f7-list>
     </div>
 
     <div v-if="searchText.length">

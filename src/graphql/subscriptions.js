@@ -157,6 +157,99 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
   }
 }
 `;
+export const onCreateComment = `subscription OnCreateComment($owner: String) {
+  onCreateComment(owner: $owner) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const onUpdateComment = `subscription OnUpdateComment($owner: String) {
+  onUpdateComment(owner: $owner) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const onDeleteComment = `subscription OnDeleteComment($owner: String) {
+  onDeleteComment(owner: $owner) {
+    id
+    createdAt
+    text
+    targetId
+    warriorId
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
 export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
   onCreateResponse(owner: $owner) {
     id

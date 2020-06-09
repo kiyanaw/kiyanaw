@@ -71,14 +71,14 @@
       <f7-block-title>Recent</f7-block-title>
       <f7-list class="nomargin">
         <f7-list-item
-          title="visits"
-          @click="$refs.searchbar.search('visits')" />
-        <f7-list-item
-          title="fontanelle"
-          @click="$refs.searchbar.search('fontanelle')" />
-        <f7-list-item
-          title="itâhkamikisiw"
-          @click="$refs.searchbar.search('itâhkamikisiw')" />
+          v-for="enquiry in sortedHistory"
+          :key="enquiry.id"
+          :title="enquiry.text">
+          <f7-link
+            @click="goToDetail(enquiry.id)">
+            View Details
+          </f7-link>
+        </f7-list-item>
       </f7-list>
     </div>
 
@@ -93,14 +93,6 @@
           :title="result.responseText"
           :footer="'updated at ' + ago(result.updatedAt)"
           after="🎵" />
-        <!-- <f7-list-item
-          v-for="result in results"
-          :key="result.id"
-          link="#"
-          title="tânispî ohci ê-nôhtê-kiyokêyan"
-          header="How long do you want to visit?"
-          footer="updated 3 minutes ago by bengodden"
-          after="🎵" /> -->
       </f7-list>
     </div>
 
@@ -164,6 +156,19 @@ export default {
       'userLanguage',
       'history',
     ]),
+    sortedHistory() {
+      const { history } = this
+      if (history) {
+        return history.sort((a, b) => {
+          const aTime = new Date(a.viewedAt).getTime()
+          const bTime = new Date(b.viewedAt).getTime()
+          if (aTime > bTime) return -1
+          if (bTime > aTime) return 1
+          return 0
+        })
+      }
+      return []
+    },
     languageSet() {
       if (this.user) {
         return true
@@ -195,6 +200,9 @@ export default {
       'setUsername',
       'syncHistory',
     ]),
+    goToDetail(id) {
+      this.$f7router.navigate(`/detail/${id}`)
+    },
     ago(dateString) {
       return ago.format(new Date(dateString))
     },

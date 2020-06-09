@@ -21,6 +21,14 @@
           material="question_answer" />
       </f7-list-item>
       <f7-list-item
+        link="/"
+        title="Unanswered"
+        panel-close>
+        <f7-icon
+          slot="media"
+          material="feedback" />
+      </f7-list-item>
+      <f7-list-item
         link="/playlist/"
         title="Playlist"
         panel-close>

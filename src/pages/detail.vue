@@ -10,6 +10,7 @@
       :content="`Submitted by ${enquiry.warrior.name} ${someTimeAgo(enquiry.createdAt)}`">
       <f7-card-footer>
         <f7-link
+          v-if="user"
           :icon-md="isFav ? 'material:star_fill' : 'material:star_outline'"
           @click="toggleFav()">
           {{ isFav ? 'Un-Favorite' : 'Favorite ' }}
@@ -64,7 +65,10 @@ export default {
       'user',
     ]),
     isFav() {
-      return this.user.favorites.findIndex((el) => el.id === this.enquiryId) > -1
+      if (this.user) {
+        return this.user.favorites.findIndex((el) => el.id === this.enquiryId) > -1
+      }
+      return false
     },
   },
 

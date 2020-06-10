@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import Vue from 'vue'
-import store from './store'
 
 import Home from './pages/home.vue'
 import Browse from './pages/browse.vue'
@@ -12,7 +11,6 @@ import Preferences from './pages/preferences.vue'
 import Signin from './pages/signin.vue'
 import About from './pages/about.vue'
 import Playlist from './pages/playlist.vue'
-import History from './pages/history.vue'
 import Favorites from './pages/favorites.vue'
 
 export default [
@@ -27,10 +25,6 @@ export default [
   {
     path: '/playlist/',
     component: Playlist,
-  },
-  {
-    path: '/history/',
-    component: History,
   },
   {
     path: '/favorites/',

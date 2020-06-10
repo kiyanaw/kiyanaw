@@ -12,12 +12,34 @@ enum ResponseType {
   response
 }
 
+type Question 
+  @model
+  @key(name: "ByLinkCreatedAt", fields: ["link", "createdAt"], queryField: "questionByLinkCreatedAt")
+  @key(name: "ByWarrior", fields: ["warriorId" "createdAt"], queryField: "questionByWarriorCreatedAt")
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON # just a storage bin for lack of crystal ball...
+  languageIndex: String!
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+  link: String
+}
+
 type Enquiry
   @model
   @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
   @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
   @key(name: "ByWarrior", fields: ["warriorId"], queryField: "enquiryByWarrior")
-  @key(name: "ByLink", fields: ["linkId", "createdAt"], queryField: "byLinkUpdatedAt")
+  @key(name: "ByTypeAndWarrior", fields: ["type", "warriorId"], queryField: "enquiryByTypeWarrior")
   @aws_iam
   @aws_cognito_user_pools
   @auth(
@@ -40,8 +62,6 @@ type Enquiry
   responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
   # this field is required to be able to sort on dates
   table: EnquiryType!
-  # manual lookup type
-  linkId: String
 }
 
 type Comment

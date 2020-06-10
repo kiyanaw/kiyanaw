@@ -1,6 +1,105 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateQuestion = `subscription OnCreateQuestion($owner: String) {
+  onCreateQuestion(owner: $owner) {
+    id
+    createdAt
+    text
+    extra
+    languageIndex
+    warriorId
+    link
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const onUpdateQuestion = `subscription OnUpdateQuestion($owner: String) {
+  onUpdateQuestion(owner: $owner) {
+    id
+    createdAt
+    text
+    extra
+    languageIndex
+    warriorId
+    link
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const onDeleteQuestion = `subscription OnDeleteQuestion($owner: String) {
+  onDeleteQuestion(owner: $owner) {
+    id
+    createdAt
+    text
+    extra
+    languageIndex
+    warriorId
+    link
+    owner
+    warrior {
+      id
+      name
+      language
+      dialect
+      region
+      favorites
+      playlist
+      isWarrior
+      enquiries {
+        nextToken
+      }
+      responses {
+        nextToken
+      }
+      media {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
 export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
   onCreateEnquiry(owner: $owner) {
     id
@@ -12,7 +111,6 @@ export const onCreateEnquiry = `subscription OnCreateEnquiry($owner: String) {
     type
     warriorId
     table
-    linkId
     owner
     responses {
       items {
@@ -64,7 +162,6 @@ export const onUpdateEnquiry = `subscription OnUpdateEnquiry($owner: String) {
     type
     warriorId
     table
-    linkId
     owner
     responses {
       items {
@@ -116,7 +213,6 @@ export const onDeleteEnquiry = `subscription OnDeleteEnquiry($owner: String) {
     type
     warriorId
     table
-    linkId
     owner
     responses {
       items {
@@ -272,7 +368,6 @@ export const onCreateResponse = `subscription OnCreateResponse($owner: String) {
       type
       warriorId
       table
-      linkId
       owner
       responses {
         nextToken
@@ -344,7 +439,6 @@ export const onUpdateResponse = `subscription OnUpdateResponse($owner: String) {
       type
       warriorId
       table
-      linkId
       owner
       responses {
         nextToken
@@ -416,7 +510,6 @@ export const onDeleteResponse = `subscription OnDeleteResponse($owner: String) {
       type
       warriorId
       table
-      linkId
       owner
       responses {
         nextToken
@@ -492,7 +585,6 @@ export const onCreateMedia = `subscription OnCreateMedia($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       owner
@@ -561,7 +653,6 @@ export const onUpdateMedia = `subscription OnUpdateMedia($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       owner
@@ -630,7 +721,6 @@ export const onDeleteMedia = `subscription OnDeleteMedia($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       owner
@@ -694,7 +784,6 @@ export const onCreateWarrior = `subscription OnCreateWarrior($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       nextToken
@@ -749,7 +838,6 @@ export const onUpdateWarrior = `subscription OnUpdateWarrior($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       nextToken
@@ -804,7 +892,6 @@ export const onDeleteWarrior = `subscription OnDeleteWarrior($owner: String) {
         type
         warriorId
         table
-        linkId
         owner
       }
       nextToken

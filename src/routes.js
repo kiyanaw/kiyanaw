@@ -4,7 +4,8 @@ import Vue from 'vue'
 import Home from './pages/home.vue'
 import Browse from './pages/browse.vue'
 import Detail from './pages/detail.vue'
-import NewEnquiry from './pages/new-enquiry.vue'
+import NewEnquiry from './pages/new-question.vue'
+import Question from './pages/question.vue'
 import AddResponse from './pages/add-response.vue'
 import PanelLeftPage from './pages/panel-left.vue'
 import Preferences from './pages/preferences.vue'
@@ -12,6 +13,7 @@ import Signin from './pages/signin.vue'
 import About from './pages/about.vue'
 import Playlist from './pages/playlist.vue'
 import Favorites from './pages/favorites.vue'
+import MyQuestions from './pages/myQuestions.vue'
 
 export default [
   {
@@ -31,7 +33,7 @@ export default [
     component: Favorites,
   },
   {
-    path: '/new-enquiry/',
+    path: '/new-question/',
     component: NewEnquiry,
   },
   {
@@ -45,6 +47,14 @@ export default [
   {
     path: '/detail/:enquiryId',
     component: Detail,
+  },
+  {
+    path: '/question/:questionId',
+    component: Question,
+  },
+  {
+    path: '/my-questions/',
+    component: MyQuestions,
   },
   {
     path: '/panel-left/',

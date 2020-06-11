@@ -29,10 +29,6 @@ const actions = {
     store.commit('SET_RECENT_ENQUIRIES', list)
   },
 
-  // setEnquiry(store, enquiry) {
-  //   store.commit('SET_ENQUIRY', enquiry)
-  // },
-
   async getEnquiry(store, id) {
     const result = await enquiryService.get(id)
     console.log('got result', result)

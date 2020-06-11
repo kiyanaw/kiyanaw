@@ -67,34 +67,30 @@
       </f7-block>
     </f7-block>
 
-    <div v-if="!searching">
+    <f7-block v-if="!searching">
       <f7-block-title>Recent</f7-block-title>
       <f7-list class="nomargin">
         <f7-list-item
-          v-for="enquiry in sortedHistory"
-          :key="enquiry.id"
-          :title="enquiry.text">
-          <f7-link
-            @click="goToDetail(enquiry.id)">
-            View Details
-          </f7-link>
-        </f7-list-item>
+          v-for="question in sortedHistory"
+          :key="question.id"
+          :title="question.text"
+          :link="`/detail/${question.id}`" />
       </f7-list>
-    </div>
+    </f7-block>
 
-    <div v-if="searchText.length">
+    <f7-block v-if="searchText.length">
       <f7-block-title>Search results for {{ searchText }}</f7-block-title>
       <f7-list v-if="results">
         <f7-list-item
           v-for="result in results"
           :key="result.id"
-          link="#"
+          :link="`/detail/${result.enquiryId}`"
           :header="result.enquiryText"
           :title="result.responseText"
           :footer="'updated at ' + ago(result.updatedAt)"
           after="🎵" />
       </f7-list>
-    </div>
+    </f7-block>
 
     <f7-fab
       v-if="user"
@@ -114,7 +110,7 @@
         color="green">
         <f7-fab-button
           fab-close
-          href="/new-enquiry/">
+          href="/new-question/">
           <f7-icon
             md="material:create"
             size="15" />

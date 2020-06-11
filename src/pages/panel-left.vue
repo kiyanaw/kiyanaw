@@ -13,7 +13,7 @@
           material="search" />
       </f7-list-item>
       <f7-list-item
-        link="/"
+        link="/my-questions/"
         title="My Questions"
         panel-close>
         <f7-icon
@@ -37,6 +37,7 @@
           material="queue_music" />
       </f7-list-item>
       <f7-list-item
+        v-if="user && user.favorites"
         link="/favorites/"
         title="Favorites"
         panel-close>
@@ -44,15 +45,6 @@
           slot="media"
           material="favorite" />
       </f7-list-item>
-      <!-- <f7-list-item
-        v-if="history && history.length > 0"
-        link="/history/"
-        title="History"
-        panel-close>
-        <f7-icon
-          slot="media"
-          material="history" />
-      </f7-list-item> -->
       <f7-list-item
         v-if="user"
         link="/preferences/"

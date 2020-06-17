@@ -1,7 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar
-      title="My Questions"
+      title="Unanswered Questions"
       back-link="back" />
     <f7-block
       v-if="questions.length > 0">

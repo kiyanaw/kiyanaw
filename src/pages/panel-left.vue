@@ -88,7 +88,7 @@
   </f7-page>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {},
@@ -96,9 +96,24 @@ export default {
     ...mapGetters([
       'user',
       'history',
+      'userQuestions',
+      'unansweredQuestions',
     ]),
   },
-  methods: {},
+  mounted() {
+    this.getUserQuestions()
+    this.getUnansweredQuestions()
+    // const { user } = this
+    // user.isWarrior = true
+    // this.updateUser(user)
+  },
+  methods: {
+    ...mapActions([
+      'getUserQuestions',
+      'getUnansweredQuestions',
+      'updateUser',
+    ]),
+  },
 }
 </script>
 

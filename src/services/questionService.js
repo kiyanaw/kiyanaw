@@ -48,8 +48,21 @@ export default {
   async listUserQuestions() {
     const user = await userService.get()
     const questions = await client.request(queries.listQuestions, { owner: user.id })
-    console.log('Questions', questions.data.listQuestions.items)
     return questions.data.listQuestions.items
+  },
+
+  async getUnansweredQuestions() {
+    const user = await userService.get()
+    if (user.isWarrior) {
+      console.log('User is a warrior')
+      let questions = await client.request(queries.listQuestions)
+      questions = questions.data.listQuestions.items
+      const unanswered = questions.filter((el) => el.link === 'null')
+      console.log('unanswered', unanswered)
+      return unanswered
+    }
+    console.log('User not warrior')
+    return []
   },
 
   async delete(id) {

@@ -14,6 +14,7 @@ import About from './pages/about.vue'
 import Playlist from './pages/playlist.vue'
 import Favorites from './pages/favorites.vue'
 import MyQuestions from './pages/myQuestions.vue'
+import UnansweredQuestions from './pages/unansweredQuestions.vue'
 
 export default [
   {
@@ -55,6 +56,10 @@ export default [
   {
     path: '/my-questions/',
     component: MyQuestions,
+  },
+  {
+    path: '/unanswered-questions/',
+    component: UnansweredQuestions,
   },
   {
     path: '/panel-left/',

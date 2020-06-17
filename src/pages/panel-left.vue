@@ -21,7 +21,7 @@
           material="question_answer" />
       </f7-list-item>
       <f7-list-item
-        link="/"
+        link="/unanswered-questions/"
         title="Unanswered"
         panel-close>
         <f7-icon

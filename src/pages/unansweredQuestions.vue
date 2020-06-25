@@ -22,7 +22,7 @@
     </f7-block>
     <f7-block
       v-else-if="loaded && questions.length <= 0">
-      <h2> There are no unanswered Questions </h2>
+      <h2> No unanswered Questions :)</h2>
     </f7-block>
   </f7-page>
 </template>

@@ -31,7 +31,6 @@ export default {
         const warrior = await client.request(queries.getWarrior, { id: user.attributes.email })
         if (warrior.data.getWarrior !== null) {
           const userData = warrior.data.getWarrior
-          console.log('===USER===', userData)
           userData.profile = true
           user = new User(user, userData)
         } else {

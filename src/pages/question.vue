@@ -67,8 +67,6 @@ export default {
       questionService.get(this.questionId),
     ])
     this.question = question
-    console.log(question, this.user)
-    console.log('PREVIOUS ROUTE', this.$f7router.history, this.$f7router.previousRoute)
   },
 
   methods: {

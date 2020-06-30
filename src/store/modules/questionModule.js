@@ -44,7 +44,7 @@ const actions = {
   },
 
   async linkQuestion(store, payload) {
-    const linkedQ = await questionService.updateQuestion(payload.responseID, payload.question)
+    const linkedQ = await questionService.updateLink(payload.enquiryID, payload.question)
     return linkedQ
   },
 }

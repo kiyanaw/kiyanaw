@@ -75,7 +75,7 @@ export default {
       // Link to question
       const linkPayload = {
         question: this.question,
-        responseID: resp.id,
+        enquiryID: enq.id,
       }
       await this.linkQuestion(linkPayload)
       this.$f7router.navigate(`/detail/${enq.id}`)

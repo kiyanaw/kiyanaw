@@ -17,22 +17,24 @@
         :content="`Submitted by ${question.warrior.name} ${someTimeAgo(question.createdAt)}`">
         <f7-card-footer>
           <f7-link
-            v-if="question.warrior.id === user.id"
+            v-if="question.warrior.id === user.id && question.link === 'null'"
             @click="deleteQuestion(question.id)">
-            <f7-icon
-              material="delete" />Delete
+            <f7-icon material="delete" />Delete
           </f7-link>
           <f7-link
-            v-if="user.isWarrior"
+            v-if="user.isWarrior || question.warrior.id === user.id"
             @click="comment()">
-            <f7-icon
-              material="comment" /> Comment
+            <f7-icon material="comment" /> Comment
           </f7-link>
           <f7-link
             v-if="user.isWarrior"
             :href="`/add-response/${question.id}`">
-            <f7-icon
-              material="reply" /> Answer
+            <f7-icon material="reply" /> Answer
+          </f7-link>
+          <f7-link
+            v-if="question.link !== 'null'"
+            :href="`/detail/${question.link}`">
+            <f7-icon material="reply" /> View Response
           </f7-link>
         </f7-card-footer>
       </f7-card>

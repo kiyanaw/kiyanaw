@@ -6,7 +6,7 @@
     <f7-block
       v-if="questions.length > 0">
       <f7-card
-        v-for="question in questions"
+        v-for="question in sortedQuestions"
         :key="question.id">
         <f7-card-content>
           {{ question.text }}
@@ -42,6 +42,14 @@ export default {
     ...mapGetters([
       'user',
     ]),
+    sortedQuestions() {
+      const sortingList = this.questions
+      return sortingList.sort((a, b) => {
+        if (a.createdAt > b.createdAt) return -1
+        if (b.createdAt > a.createdAt) return 1
+        return 0
+      })
+    },
   },
   async mounted() {
     this.questions = await questionService.listUserQuestions()

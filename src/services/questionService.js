@@ -61,9 +61,9 @@ export default {
     return []
   },
 
-  async updateQuestion(responseID, question) {
+  async updateLink(enquiryID, question) {
     const res = await client.request(mutations.updateQuestion,
-      { input: { id: question.id, link: responseID } })
+      { input: { id: question.id, link: enquiryID } })
     return res
   },
 

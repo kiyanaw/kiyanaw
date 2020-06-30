@@ -61,6 +61,12 @@ export default {
     return []
   },
 
+  async updateQuestion(responseID, question) {
+    const res = await client.request(mutations.updateQuestion,
+      { input: { id: question.id, link: responseID } })
+    return res
+  },
+
   async delete(id) {
     const result = await client.request(mutations.deleteQuestion, { input: { id } })
     return result

@@ -38,7 +38,7 @@ export default [
     component: NewEnquiry,
   },
   {
-    path: '/add-response/:enquiryId',
+    path: '/add-response/:questionId',
     component: AddResponse,
   },
   {

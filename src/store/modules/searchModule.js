@@ -12,7 +12,6 @@ const vgetters = {
 
 const actions = {
   setCurrentQuery(store, query) {
-    console.log(query)
     store.commit('SET_QUERY', query)
   },
 }

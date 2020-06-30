@@ -1,15 +1,18 @@
 <template>
-  <f7-page v-if="enquiry">
+  <f7-page v-if="question">
     <f7-navbar
       title="Response"
       back-link="Back"
-      :back-link-url="`/detail/${enquiryId}`" />
+      :back-link-url="`/question/${question.id}`" />
 
-    <f7-block>{{ enquiry.text }}</f7-block>
     <f7-block>
-      <f7-list
-        form>
+      <f7-list form>
         <!-- input vue models cannot be bound https://v2.framework7.io/vue/inputs.html -->
+        <f7-list-input
+          :value="questionText"
+          type="text"
+          label="Question"
+          @input="questionText = $event.target.value" />
         <f7-list-input
           :value="phrase"
           type="text"
@@ -34,14 +37,15 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'AddResponse',
   props: {
-    enquiryId: {
+    questionId: {
       type: String,
       default: null,
     },
   },
   data: () => ({
     phrase: '',
-    enquiry: null,
+    questionText: '',
+    question: null,
   }),
   computed: {
     ...mapGetters([
@@ -49,17 +53,32 @@ export default {
     ]),
   },
   async mounted() {
-    this.enquiry = await this.getEnquiry(this.enquiryId)
+    this.question = await this.getQuestion(this.questionId)
+    this.questionText = this.question.text
   },
   methods: {
     ...mapActions([
       'createResponse',
-      'getEnquiry',
+      'getQuestion',
+      'createEnquiry',
+      'linkQuestion',
     ]),
     async onSubmit() {
-      // this.$f7.dialog.preloader('Creating phrase...')
-      await this.createResponse({ text: this.phrase, enquiryId: this.enquiryId })
-      // this.$f7.dialog.close()
+      // Create Enquiry
+      const enq = await this.createEnquiry(this.questionText)
+      // Create Response
+      const responseObject = {
+        enquiryId: enq.id,
+        text: this.phrase,
+      }
+      const resp = await this.createResponse(responseObject)
+      // Link to question
+      const linkPayload = {
+        question: this.question,
+        responseID: resp.id,
+      }
+      await this.linkQuestion(linkPayload)
+      this.$f7router.navigate(`/detail/${enq.id}`)
     },
 
   },

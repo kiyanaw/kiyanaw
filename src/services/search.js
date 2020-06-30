@@ -21,9 +21,7 @@ export default {
         body: { query: { wildcard: { searchText: `*${term}*` } } },
         // body: { query: { term: { text: { value: term } } } },
       }
-      console.log('query', JSON.stringify(query))
       const raw = await client.search(query)
-      console.log('raw', raw)
       results = raw.hits.hits.map((item) => item._source)
     }
     return results

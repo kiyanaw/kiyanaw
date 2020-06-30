@@ -42,6 +42,11 @@ const actions = {
     const unanswered = await questionService.getUnansweredQuestions()
     store.commit('SET_UNANSWERED_LIST', unanswered)
   },
+
+  async linkQuestion(store, payload) {
+    const linkedQ = await questionService.updateQuestion(payload.responseID, payload.question)
+    return linkedQ
+  },
 }
 
 const mutations = {

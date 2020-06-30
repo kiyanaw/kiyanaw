@@ -21,6 +21,7 @@ export default {
       extra = extra || {}
       extra.region = user.region
     }
+    extra = JSON.stringify(extra)
 
     const input = {
       id,
@@ -37,17 +38,15 @@ export default {
 
     const response = await client.request(mutations.createResponse, { input })
     // TODO: unwrap this
-    return response.data.createEnquiry
+    return response.data.createResponse
   },
   // async getResponse(id) {
-  //   console.log('IN Service')
   //   const response = await client.request(queries.getResponse)
   //   return response.data
   // },
 
   async byEnquiry(enquiryId) {
     const response = await client.request(queries.responseByEnquiry, { enquiryId })
-    // console.log('responses', response)
     // TODO: unwrap this
     return response.data.responseByEnquiry.items
   },

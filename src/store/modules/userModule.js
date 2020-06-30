@@ -131,7 +131,6 @@ const actions = {
   },
 
   updateHistory(store, enquiry) {
-    // console.log('UPDATE HISTORY')
     let { history } = store.getters
     if (history === null || history === undefined) {
       history = JSON.parse(window.localStorage.getItem('history'))
@@ -142,7 +141,8 @@ const actions = {
     if (history.length > 10) {
       history = history.shift()
     }
-    // If the item is already in the history, remove it where it's from so it can be put to the end
+    // If the item is already in the history, remove it where
+    // it's from so it can be put to the end
     const idx = history.findIndex((el) => el.id === enquiry.id)
     if (idx > -1) {
       history.splice(idx, 1)
@@ -158,7 +158,6 @@ const actions = {
 
   syncHistory(store) {
     if (store.getters.history === null) {
-      // console.log('SYNC HISTORY')
       store.commit('SAVE_HISTORY', JSON.parse(window.localStorage.getItem('history')))
     }
   },

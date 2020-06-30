@@ -50,7 +50,6 @@ export default {
       type: 'phrase',
       table: 'enquiry',
       warriorId: user.id,
-      link: 'null',
     }
     const response = await client.request(mutations.createEnquiry, { input })
     return new Enquiry(response.data.createEnquiry)

@@ -182,9 +182,6 @@ export default {
     },
   },
   watch: {
-    currentQuery(val) {
-      console.log(val)
-    },
   },
   mounted() {
     this.syncHistory()
@@ -210,7 +207,6 @@ export default {
       this.searchText = query
       this.results = []
       const results = await searchService.search(query)
-      console.log('got results', results)
       this.results = results
     },
   },

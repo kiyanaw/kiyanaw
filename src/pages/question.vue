@@ -30,7 +30,7 @@
           </f7-link>
           <f7-link
             v-if="user.isWarrior"
-            @click="answer()">
+            :href="`/add-response/${question.id}`">
             <f7-icon
               material="reply" /> Answer
           </f7-link>
@@ -76,15 +76,11 @@ export default {
       return utils.someTimeAgo(time)
     },
     deleteQuestion() {
-      // TODO: Need to navigate somehow after deleting question but without messing up the router
       questionService.delete(this.question.id)
       this.$f7router.back('/my-questions/', { force: true })
     },
     comment() {
       console.log('Comment click')
-    },
-    answer() {
-      console.log('answer clicked')
     },
   },
 }

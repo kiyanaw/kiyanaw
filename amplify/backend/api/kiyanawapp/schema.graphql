@@ -31,7 +31,7 @@ type Question
   languageIndex: String!
   warriorId: ID!
   warrior: Warrior! @connection(fields: ["warriorId"])
-  link: String
+  link: String # '--null--'
 }
 
 type Enquiry

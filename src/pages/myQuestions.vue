@@ -52,7 +52,9 @@ export default {
     },
   },
   async mounted() {
+    this.$f7.dialog.preloader('Loading ...')
     this.questions = await questionService.listUserQuestions()
+    this.$f7.dialog.close()
     this.loaded = true
   },
   methods: {

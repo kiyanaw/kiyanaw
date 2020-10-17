@@ -63,7 +63,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-kiyanaw-app-dev-223941-deployment",
-					"S3Key": "amplify-builds/streamToEs-6251764f30632b365455-build.zip"
+					"S3Key": "amplify-builds/streamToEs-504c454c674a694d7475-build.zip"
 				}
 			}
 		},

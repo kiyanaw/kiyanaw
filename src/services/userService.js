@@ -40,7 +40,7 @@ export default {
         }
       }
     } catch (error) {
-      console.warn('User not authenticated', error.message)
+      console.warn('Auth errors', error.message)
     }
     return user
   },

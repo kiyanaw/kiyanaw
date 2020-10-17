@@ -45,7 +45,7 @@
       <f7-row>
         <f7-col>
           <f7-button
-            raised
+            raised fill
             icon-md="material:search"
             class="searchbar-enable">
             Search
@@ -53,7 +53,7 @@
         </f7-col>
         <f7-col>
           <f7-button
-            raised
+            raised fill
             icon-md="material:list"
             href="/browse/">
             Browse
@@ -78,18 +78,20 @@
       </f7-list>
     </f7-block>
 
-    <f7-block v-if="searchText.length">
-      <f7-block-title>Search results for {{ searchText }}</f7-block-title>
-      <f7-list v-if="results">
-        <f7-list-item
-          v-for="result in results"
-          :key="result.id"
-          :link="`/detail/${result.enquiryId}`"
-          :header="result.enquiryText"
-          :title="result.responseText"
-          :footer="'updated at ' + ago(result.updatedAt)"
-          after="🎵" />
-      </f7-list>
+    <f7-block v-if="searchText.length" class="search-results-block">
+      <h3 class="search-results-header">Search results for "{{ searchText }}"</h3>
+      <f7-card>
+        <f7-list v-if="results">
+          <f7-list-item
+            v-for="result in results"
+            :key="result.id"
+            :link="`/detail/${result.enquiryId}`"
+            :header="result.enquiryText"
+            :title="result.responseText"
+            :footer="'updated at ' + ago(result.updatedAt)"
+            after="🎵" />
+        </f7-list>
+      </f7-card>
     </f7-block>
 
     <f7-fab
@@ -125,9 +127,9 @@ import { mapGetters, mapActions } from 'vuex'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import UserSettings from '../components/userSettings.vue'
+
 // eslint-disable-next-line import/no-unresolved
 import onboarding from '../components/onboarding.vue'
-
 import searchService from '../services/search'
 
 TimeAgo.addLocale(en)
@@ -206,7 +208,9 @@ export default {
     async setSearch(query) {
       this.searchText = query
       this.results = []
+      this.$f7.dialog.preloader('Searching...')
       const results = await searchService.search(query)
+      this.$f7.dialog.close()
       this.results = results
     },
   },
@@ -214,6 +218,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+.page {
+  background-color: #deeeff;
+}
+.panel .page {
+  background-color:white;
+}
 .navbar {
   .title {
     display: flex;
@@ -236,5 +247,16 @@ export default {
 
 .nomargin {
   margin: 0;
+}
+
+.search-results-block {
+  padding:0;
+  margin: 10px 0;
+}
+.search-results-header {
+  text-align: center;
+  font-weight: normal;
+  color:#7dbcff;
+  margin-bottom: 0;
 }
 </style>

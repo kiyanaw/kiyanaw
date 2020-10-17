@@ -46,6 +46,7 @@ export default {
     phrase: '',
     questionText: '',
     question: null,
+    useEnquiry: false
   }),
   computed: {
     ...mapGetters([
@@ -53,7 +54,9 @@ export default {
     ]),
   },
   async mounted() {
+    this.$f7.dialog.preloader('Loading...')
     this.question = await this.getQuestion(this.questionId)
+    this.$f7.dialog.close()
     this.questionText = this.question.text
   },
   methods: {
@@ -65,6 +68,7 @@ export default {
     ]),
     async onSubmit() {
       // Create Enquiry
+      this.$f7.dialog.preloader('Saving...')
       const enq = await this.createEnquiry(this.questionText)
       // Create Response
       const responseObject = {
@@ -78,6 +82,7 @@ export default {
         enquiryID: enq.id,
       }
       await this.linkQuestion(linkPayload)
+      this.$f7.dialog.close()
       this.$f7router.navigate(`/detail/${enq.id}`)
     },
 

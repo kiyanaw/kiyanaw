@@ -67,6 +67,7 @@ export default {
         gt: '0',
       },
       sortDirection: 'DESC',
+      limit: 50
     })
 
     // TODO: unwrap this

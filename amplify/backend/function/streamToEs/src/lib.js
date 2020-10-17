@@ -56,7 +56,7 @@ async function loadResponses(enquiryId) {
       ':hkey': enquiryId,
     },
   }
-  return getDocs(params).Items
+  return getDocs(params).Items || []
 }
 
 async function loadEnquiry(enquiryId) {

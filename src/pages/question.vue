@@ -65,9 +65,11 @@ export default {
   },
 
   async mounted() {
+    this.$f7.dialog.preloader('Loading ...')
     const [question] = await Promise.all([
       questionService.get(this.questionId),
     ])
+    this.$f7.dialog.close()
     this.question = question
   },
 

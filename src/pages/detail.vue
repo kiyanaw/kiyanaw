@@ -1,32 +1,47 @@
 <template>
   <f7-page>
     <f7-navbar
-      title="Detail"
+      title="Phrase"
       back-link="Back" />
 
     <f7-card
-      v-if="enquiry"
-      :title="enquiry.text"
-      :content="`Submitted by ${enquiry.warrior.name} ${someTimeAgo(enquiry.createdAt)}`">
+      v-if="enquiry">
+      <f7-card-content>
+        <h2>{{ enquiry.text }}</h2>
+        <h3 v-if="enquiry.type === 'word'">{{ toSyllabics(enquiry.responses[0].text) }}</h3>
+        <h3 v-if="enquiry.type === 'word'">{{ enquiry.responses[0].text }}</h3>
+        <h2 v-if="enquiry.type === 'word'" class='source'>Source - Cree: Words, Arok Wolvengrey</h2>
+      </f7-card-content>
       <f7-card-footer>
+        <span v-if="enquiry.type !== 'word'">by {{ enquiry.warrior.name }} {{ someTimeAgo(enquiry.createdAt) }}</span>
         <f7-link
           v-if="user"
           :icon-md="isFav ? 'material:star_fill' : 'material:star_outline'"
           @click="toggleFav()">
-          {{ isFav ? 'Un-Favorite' : 'Favorite ' }}
+          Favorite
         </f7-link>
-        <!-- <f7-link>Read more</f7-link> -->
       </f7-card-footer>
     </f7-card>
 
-    <!-- TODO: Friendly message if no responses provided -->
-    <div v-if="enquiry">
+    <div v-if="enquiry && enquiry.type !== 'word'">
+      <h3 class='responses-title'>Responses</h3>
       <f7-card
-        v-for="response in enquiry.responses"
-        :key="response.id"
-        :content="response.text"
-        :footer="'by ' + response.warrior.name + ' ' + someTimeAgo(response.createdAt)" />
+        v-for="(response, index) in enquiry.responses"
+        :key="response.id">
+        <f7-card-footer class="response-author">{{ response.warrior.name }} responded {{ someTimeAgo(response.createdAt) }}:</f7-card-footer>
+        <f7-card-content>
+          <h2 class="response-title">{{ response.text }}</h2>
+          <h2 class="response-title">{{ toSyllabics(response.text) }}</h2>
+          </f7-card-content>
+        <f7-card-footer>
+          <span v-if="index === 0">Plains Cree (Y)</span>
+          <span v-if="index === 1">Woods Cree (TH)</span>
+          <f7-link><f7-icon material="playlist_add"/>&nbsp; Add to playlist</f7-link>
+          <f7-link><f7-icon material="play_circle_filled"/>&nbsp; Play audio</f7-link>
+        </f7-card-footer>
+      </f7-card>
     </div>
+
 
     <!-- Floating tab button -->
     <f7-fab
@@ -34,7 +49,7 @@
       slot="fixed"
       position="right-bottom"
       color="blue"
-      :href="`/add-response/${enquiryId}`">
+      :href="`/add-response/${enquiryId}?enquiry=1`">
       <f7-icon
         ios="f7:create"
         aurora="f7:create"
@@ -45,6 +60,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { sro2syllabics } from 'cree-sro-syllabics'
+
 import utils from '../utils/utils'
 import enquiryService from '../services/enquiryService'
 import responseService from '../services/responseService'
@@ -86,7 +103,7 @@ export default {
     enquiry.responses = responses
     this.enquiry = enquiry
     this.$f7.dialog.close()
-    this.updateHistory(enquiry)
+    // this.updateHistory(enquiry)
   },
 
   methods: {
@@ -107,8 +124,29 @@ export default {
     someTimeAgo(time) {
       return utils.someTimeAgo(time)
     },
+    toSyllabics(text) {
+
+      return sro2syllabics(text)
+    }
   },
 }
 </script>
 
-<style></style>
+<style>
+.responses-title {
+  text-align: center;
+  font-weight: normal;
+  color:#7dbcff;
+  margin-bottom: 0;
+}
+.response-author {
+  font-size: 1em;
+}
+.response-title {
+  margin:0; 
+}
+
+.source {
+  color: #999;
+}
+</style>

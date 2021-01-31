@@ -1,0 +1,20 @@
+{
+    "CreateAPIKey": 0,
+    "AppSyncApiName": "kiyanawapp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authkiyanawapp459ca40c459ca40c",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-kiyanaw-app-dev-223941-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/b5a670c0216691676c89f72bb1861f555d1a1464"
+}

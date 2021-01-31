@@ -1,21 +1,54 @@
 {
   "name": "com.kiyanaw.app",
   "version": "1.0.0",
+  "private": true,
   "description": "Brand new cordova project with framework7 - vue - webpack!",
   "scripts": {
-    "start": "phonegap run browser -d -- --lr",
-    "default": "echo \"There is no scripts you can run with npm run command.\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "default": "echo \"There is no scripts you can run with npm run command.\" && exit 1",
+    "start": "phonegap run browser -d -- --lr"
   },
-  "keywords": [
-    "ecosystem:cordova"
-  ],
-  "license": "ISC",
+  "dependencies": {
+    "@aws-amplify/auth": "^3.2.7",
+    "@aws-amplify/common": "0.0.3",
+    "@aws-amplify/core": "^3.2.7",
+    "@aws-amplify/ui-vue": "^0.2.5",
+    "@fortawesome/fontawesome-free": "^5.11.1",
+    "aws-amplify": "^3.0.11",
+    "clean-css": "^4.1.11",
+    "cordova-android": "^9.0.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
+    "core-js": "^3.6.5",
+    "cree-sro-syllabics": "^2020.6.24-0",
+    "elasticsearch": "^15.4.1",
+    "fastclick": "^1.0.6",
+    "framework7": "^5.3.0",
+    "framework7-icons": "^3.0.0",
+    "framework7-vue": "^5.7.1",
+    "javascript-time-ago": "^2.0.7",
+    "jshint": "^2.11.0",
+    "loglevel": "^1.6.4",
+    "material-design-icons": "^3.0.1",
+    "register-service-worker": "^1.7.1",
+    "smart-timeout": "^2.4.1",
+    "uuid": "^8.0.0",
+    "vue": "^2.6.11",
+    "vuetify": "^2.2.26",
+    "vuex": "^3.1.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "^4.5.11",
+    "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.0",
     "cheerio": "^1.0.0-rc.3",
@@ -48,40 +81,32 @@
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^15.7.1",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.40.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1",
     "webpack-merge": "^4.2.2"
   },
-  "dependencies": {
-    "@aws-amplify/auth": "^3.2.7",
-    "@aws-amplify/common": "0.0.3",
-    "@aws-amplify/core": "^3.2.7",
-    "@aws-amplify/ui-vue": "^0.2.5",
-    "@fortawesome/fontawesome-free": "^5.11.1",
-    "aws-amplify": "^3.0.11",
-    "clean-css": "^4.1.11",
-    "cordova-android": "^9.0.0",
-    "cordova-browser": "^6.0.0",
-    "cordova-ios": "^5.1.1",
-    "cree-sro-syllabics": "^2020.6.24-0",
-    "elasticsearch": "^15.4.1",
-    "fastclick": "^1.0.6",
-    "framework7": "^5.3.0",
-    "framework7-icons": "^3.0.0",
-    "framework7-vue": "^5.7.1",
-    "javascript-time-ago": "^2.0.7",
-    "jshint": "^2.11.0",
-    "loglevel": "^1.6.4",
-    "material-design-icons": "^3.0.1",
-    "smart-timeout": "^2.4.1",
-    "uuid": "^8.0.0",
-    "vue": "^2.6.10",
-    "vuetify": "^2.2.26",
-    "vuex": "^3.1.1"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
   },
-  "displayName": "KiyanawApp",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "_id": "com.kiyanaw.app@1.0.0",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {}
@@ -91,5 +116,11 @@
       "android",
       "browser"
     ]
-  }
+  },
+  "displayName": "KiyanawApp",
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "license": "ISC",
+  "readme": "ERROR: No README data found!"
 }

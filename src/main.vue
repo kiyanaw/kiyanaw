@@ -30,6 +30,7 @@ if (document.location.search.indexOf('theme=') >= 0) {
 }
 
 export default {
+  name: 'main',
   components: {
     f7App,
     f7Panel,

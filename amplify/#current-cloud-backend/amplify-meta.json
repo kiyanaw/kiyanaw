@@ -1,0 +1,148 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-kiyanaw-app-dev-223941-authRole",
+			"UnauthRoleArn": "arn:aws:iam::494185203413:role/amplify-kiyanaw-app-dev-223941-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::494185203413:role/amplify-kiyanaw-app-dev-223941-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "amplify-kiyanaw-app-dev-223941-deployment",
+			"UnauthRoleName": "amplify-kiyanaw-app-dev-223941-unauthRole",
+			"StackName": "amplify-kiyanaw-app-dev-223941",
+			"StackId": "arn:aws:cloudformation:us-east-1:494185203413:stack/amplify-kiyanaw-app-dev-223941/7e0ba430-8d00-11ea-8d73-120022ae60fd",
+			"AmplifyAppId": "d36hff5euri57m"
+		},
+		"categories": {
+			"auth": {
+				"kiyanawapp459ca40c459ca40c": {}
+			},
+			"function": {
+				"kiyanawapp459ca40c459ca40cPostConfirmation": {
+					"GROUP": "everyone"
+				}
+			}
+		}
+	},
+	"auth": {
+		"userPoolGroups": {
+			"service": "Cognito-UserPool-Groups",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "kiyanawapp459ca40c459ca40c",
+					"attributes": [
+						"UserPoolId",
+						"AppClientIDWeb",
+						"AppClientID",
+						"IdentityPoolId"
+					]
+				}
+			],
+			"output": {
+				"AdminGroupRole": "arn:aws:iam::494185203413:role/us-east-1_C7gsK5Iug-AdminGroupRole",
+				"everyoneGroupRole": "arn:aws:iam::494185203413:role/us-east-1_C7gsK5Iug-everyoneGroupRole"
+			},
+			"lastPushTimeStamp": "2020-06-10T06:17:44.172Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-kiyanaw-app-dev-223941-deployment/amplify-cfn-templates/auth/template.json",
+				"logicalId": "authuserPoolGroups"
+			}
+		},
+		"kiyanawapp459ca40c459ca40c": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "kiyanawapp459ca40c459ca40cPostConfirmation",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			],
+			"output": {
+				"AppClientSecret": "1gjsvs6tldioamarmrecr4vbaelk1d0ss7m3dhn6nv7ke9jfe8dt",
+				"UserPoolId": "us-east-1_C7gsK5Iug",
+				"AppClientIDWeb": "q300o3fdg7heqnu4mbprn2p0a",
+				"AppClientID": "52cd1rk62rf104pksp1ri625cu",
+				"IdentityPoolId": "us-east-1:95855886-5e07-4b53-9e31-69cb4e3879f9",
+				"IdentityPoolName": "kiyanaw_app459ca40c_identitypool_459ca40c__dev",
+				"UserPoolName": "kiyanaw_app459ca40c_userpool_459ca40c"
+			},
+			"lastPushTimeStamp": "2020-06-10T06:17:44.180Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-kiyanaw-app-dev-223941-deployment/amplify-cfn-templates/auth/kiyanawapp459ca40c459ca40c-cloudformation-template.yml",
+				"logicalId": "authkiyanawapp459ca40c459ca40c"
+			}
+		}
+	},
+	"api": {
+		"kiyanawapp": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "AWS_IAM"
+						}
+					],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authkiyanawapp459ca40c459ca40c"
+						}
+					}
+				},
+				"GraphQLAPIIdOutput": "5cwvzbthlbccjcq6hv4oxa26em",
+				"GraphQLAPIEndpointOutput": "https://xnu5ji6q7nhvtjccybe6mrdxii.appsync-api.us-east-1.amazonaws.com/graphql"
+			},
+			"lastPushTimeStamp": "2020-06-10T06:17:46.365Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-kiyanaw-app-dev-223941-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apikiyanawapp"
+			},
+			"lastPushDirHash": "FBozOap0btAqbB6kxfCc/Ja1m8U="
+		}
+	},
+	"function": {
+		"streamToEs": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:494185203413:function:streamToEs-dev",
+				"Name": "streamToEs-dev",
+				"LambdaExecutionRole": "kiyanawappLambdaRole8076c90f-dev"
+			},
+			"lastPushTimeStamp": "2020-06-10T06:17:44.183Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-kiyanaw-app-dev-223941-deployment/amplify-cfn-templates/function/streamToEs-cloudformation-template.json",
+				"logicalId": "functionstreamToEs"
+			},
+			"lastBuildTimeStamp": "2020-05-25T06:55:48.122Z",
+			"lastPackageTimeStamp": "2020-05-25T19:44:03.623Z",
+			"distZipFilename": "streamToEs-6251764f30632b365455-build.zip",
+			"lastPushDirHash": "/+FEf1fpBGTieezlGnEHpe4pMCw="
+		},
+		"kiyanawapp459ca40c459ca40cPostConfirmation": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:494185203413:function:kiyanawapp459ca40c459ca40cPostConfirmation-dev",
+				"Name": "kiyanawapp459ca40c459ca40cPostConfirmation-dev",
+				"LambdaExecutionRole": "kiyanawapp459ca40c459ca40cPostConfirmation-dev"
+			},
+			"lastPushTimeStamp": "2020-06-10T06:17:44.184Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-kiyanaw-app-dev-223941-deployment/amplify-cfn-templates/function/kiyanawapp459ca40c459ca40cPostConfirmation-cloudformation-template.json",
+				"logicalId": "functionkiyanawapp459ca40c459ca40cPostConfirmation"
+			}
+		}
+	}
+}

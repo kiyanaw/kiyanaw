@@ -46,7 +46,7 @@ export default {
     phrase: '',
     questionText: '',
     question: null,
-    useEnquiry: false
+    useEnquiry: false,
   }),
   computed: {
     ...mapGetters([
@@ -75,7 +75,7 @@ export default {
         enquiryId: enq.id,
         text: this.phrase,
       }
-      const resp = await this.createResponse(responseObject)
+      await this.createResponse(responseObject)
       // Link to question
       const linkPayload = {
         question: this.question,

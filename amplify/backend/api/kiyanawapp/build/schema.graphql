@@ -1,0 +1,614 @@
+enum PhraseType {
+  word
+  phrase
+  question
+}
+
+enum EnquiryType {
+  enquiry
+}
+
+enum ResponseType {
+  response
+}
+
+type Question @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  languageIndex: String!
+  warriorId: ID!
+  link: String
+  owner: String
+  warrior: Warrior! @aws_iam @aws_cognito_user_pools
+}
+
+type Enquiry @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  languageIndex: String!
+  type: PhraseType!
+  warriorId: ID!
+  table: EnquiryType!
+  owner: String
+  responses(filter: ModelResponseFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  warrior: Warrior! @aws_iam @aws_cognito_user_pools
+}
+
+type Comment @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  targetId: String!
+  warriorId: ID!
+  owner: String
+  warrior: Warrior! @aws_iam @aws_cognito_user_pools
+}
+
+type Response @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  type: PhraseType!
+  languageIndex: String!
+  enquiryId: ID!
+  warriorId: ID!
+  table: ResponseType!
+  enquiry: Enquiry! @aws_iam @aws_cognito_user_pools
+  owner: String
+  media(filter: ModelMediaFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMediaConnection @aws_iam @aws_cognito_user_pools
+  warrior: Warrior! @aws_iam @aws_cognito_user_pools
+}
+
+type Media @aws_iam @aws_cognito_user_pools {
+  responseId: ID!
+  warriorId: ID!
+  url: String!
+  response: Response! @aws_iam @aws_cognito_user_pools
+  owner: String
+  warrior: Warrior! @aws_iam @aws_cognito_user_pools
+}
+
+type Warrior @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  language: String!
+  dialect: String
+  region: String
+  favorites: AWSJSON
+  playlist: AWSJSON
+  isWarrior: Boolean!
+  enquiries(filter: ModelEnquiryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  responses(filter: ModelResponseFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  media(filter: ModelMediaFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMediaConnection @aws_iam @aws_cognito_user_pools
+  owner: String
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelQuestionConnection @aws_iam @aws_cognito_user_pools {
+  items: [Question]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelQuestionFilterInput {
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  languageIndex: ModelStringInput
+  warriorId: ModelIDInput
+  link: ModelStringInput
+  and: [ModelQuestionFilterInput]
+  or: [ModelQuestionFilterInput]
+  not: ModelQuestionFilterInput
+}
+
+type Query {
+  getQuestion(id: ID!): Question @aws_iam @aws_cognito_user_pools
+  listQuestions(filter: ModelQuestionFilterInput, limit: Int, nextToken: String): ModelQuestionConnection @aws_iam @aws_cognito_user_pools
+  questionByLinkCreatedAt(link: String, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelQuestionFilterInput, limit: Int, nextToken: String): ModelQuestionConnection @aws_iam @aws_cognito_user_pools
+  questionByWarriorCreatedAt(warriorId: ID, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelQuestionFilterInput, limit: Int, nextToken: String): ModelQuestionConnection @aws_iam @aws_cognito_user_pools
+  getEnquiry(id: ID!): Enquiry @aws_iam @aws_cognito_user_pools
+  listEnquirys(filter: ModelEnquiryFilterInput, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  byEnquiryCreatedAt(table: EnquiryType, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelEnquiryFilterInput, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  byEnquiryUpdatedAt(table: EnquiryType, updatedAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelEnquiryFilterInput, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  enquiryByWarrior(warriorId: ID, sortDirection: ModelSortDirection, filter: ModelEnquiryFilterInput, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  enquiryByTypeWarrior(type: PhraseType, warriorId: ModelIDKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelEnquiryFilterInput, limit: Int, nextToken: String): ModelEnquiryConnection @aws_iam @aws_cognito_user_pools
+  getComment(id: ID!): Comment @aws_iam @aws_cognito_user_pools
+  listComments(filter: ModelCommentFilterInput, limit: Int, nextToken: String): ModelCommentConnection @aws_iam @aws_cognito_user_pools
+  commentByTarget(targetId: String, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelCommentFilterInput, limit: Int, nextToken: String): ModelCommentConnection @aws_iam @aws_cognito_user_pools
+  commentByWarrior(warriorId: ID, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelCommentFilterInput, limit: Int, nextToken: String): ModelCommentConnection @aws_iam @aws_cognito_user_pools
+  getResponse(id: ID!): Response @aws_iam @aws_cognito_user_pools
+  listResponses(filter: ModelResponseFilterInput, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  byResponseCreatedAt(table: ResponseType, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelResponseFilterInput, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  byResponseUpdatedAt(table: ResponseType, updatedAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelResponseFilterInput, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  responseByEnquiry(enquiryId: ID, sortDirection: ModelSortDirection, filter: ModelResponseFilterInput, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  responseByWarrior(warriorId: ID, sortDirection: ModelSortDirection, filter: ModelResponseFilterInput, limit: Int, nextToken: String): ModelResponseConnection @aws_iam @aws_cognito_user_pools
+  getMedia(id: ID!): Media @aws_iam @aws_cognito_user_pools
+  listMedias(filter: ModelMediaFilterInput, limit: Int, nextToken: String): ModelMediaConnection @aws_iam @aws_cognito_user_pools
+  mediaByResponse(responseId: ID, sortDirection: ModelSortDirection, filter: ModelMediaFilterInput, limit: Int, nextToken: String): ModelMediaConnection @aws_iam @aws_cognito_user_pools
+  mediaByWarrior(warriorId: ID, sortDirection: ModelSortDirection, filter: ModelMediaFilterInput, limit: Int, nextToken: String): ModelMediaConnection @aws_iam @aws_cognito_user_pools
+  listWarriors(id: ID, filter: ModelWarriorFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelWarriorConnection @aws_iam @aws_cognito_user_pools
+  getWarrior(id: ID!): Warrior @aws_iam @aws_cognito_user_pools
+  warriorByName(name: String, sortDirection: ModelSortDirection, filter: ModelWarriorFilterInput, limit: Int, nextToken: String): ModelWarriorConnection @aws_iam @aws_cognito_user_pools
+}
+
+input CreateQuestionInput {
+  id: ID
+  createdAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  languageIndex: String!
+  warriorId: ID!
+  link: String
+}
+
+input UpdateQuestionInput {
+  id: ID!
+  createdAt: AWSDateTime
+  text: String
+  extra: AWSJSON
+  languageIndex: String
+  warriorId: ID
+  link: String
+}
+
+input DeleteQuestionInput {
+  id: ID
+}
+
+type Mutation {
+  createQuestion(input: CreateQuestionInput!, condition: ModelQuestionConditionInput): Question
+  updateQuestion(input: UpdateQuestionInput!, condition: ModelQuestionConditionInput): Question
+  deleteQuestion(input: DeleteQuestionInput!, condition: ModelQuestionConditionInput): Question
+  createEnquiry(input: CreateEnquiryInput!, condition: ModelEnquiryConditionInput): Enquiry
+  updateEnquiry(input: UpdateEnquiryInput!, condition: ModelEnquiryConditionInput): Enquiry
+  deleteEnquiry(input: DeleteEnquiryInput!, condition: ModelEnquiryConditionInput): Enquiry
+  createComment(input: CreateCommentInput!, condition: ModelCommentConditionInput): Comment
+  updateComment(input: UpdateCommentInput!, condition: ModelCommentConditionInput): Comment
+  deleteComment(input: DeleteCommentInput!, condition: ModelCommentConditionInput): Comment
+  createResponse(input: CreateResponseInput!, condition: ModelResponseConditionInput): Response
+  updateResponse(input: UpdateResponseInput!, condition: ModelResponseConditionInput): Response
+  deleteResponse(input: DeleteResponseInput!, condition: ModelResponseConditionInput): Response
+  createMedia(input: CreateMediaInput!, condition: ModelMediaConditionInput): Media
+  updateMedia(input: UpdateMediaInput!, condition: ModelMediaConditionInput): Media
+  deleteMedia(input: DeleteMediaInput!, condition: ModelMediaConditionInput): Media
+  createWarrior(input: CreateWarriorInput!, condition: ModelWarriorConditionInput): Warrior
+  updateWarrior(input: UpdateWarriorInput!, condition: ModelWarriorConditionInput): Warrior
+  deleteWarrior(input: DeleteWarriorInput!, condition: ModelWarriorConditionInput): Warrior
+}
+
+input ModelQuestionConditionInput {
+  createdAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  languageIndex: ModelStringInput
+  warriorId: ModelIDInput
+  link: ModelStringInput
+  and: [ModelQuestionConditionInput]
+  or: [ModelQuestionConditionInput]
+  not: ModelQuestionConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreateQuestion(owner: String): Question @aws_subscribe(mutations: ["createQuestion"])
+  onUpdateQuestion(owner: String): Question @aws_subscribe(mutations: ["updateQuestion"])
+  onDeleteQuestion(owner: String): Question @aws_subscribe(mutations: ["deleteQuestion"])
+  onCreateEnquiry(owner: String): Enquiry @aws_subscribe(mutations: ["createEnquiry"])
+  onUpdateEnquiry(owner: String): Enquiry @aws_subscribe(mutations: ["updateEnquiry"])
+  onDeleteEnquiry(owner: String): Enquiry @aws_subscribe(mutations: ["deleteEnquiry"])
+  onCreateComment(owner: String): Comment @aws_subscribe(mutations: ["createComment"])
+  onUpdateComment(owner: String): Comment @aws_subscribe(mutations: ["updateComment"])
+  onDeleteComment(owner: String): Comment @aws_subscribe(mutations: ["deleteComment"])
+  onCreateResponse(owner: String): Response @aws_subscribe(mutations: ["createResponse"])
+  onUpdateResponse(owner: String): Response @aws_subscribe(mutations: ["updateResponse"])
+  onDeleteResponse(owner: String): Response @aws_subscribe(mutations: ["deleteResponse"])
+  onCreateMedia(owner: String): Media @aws_subscribe(mutations: ["createMedia"])
+  onUpdateMedia(owner: String): Media @aws_subscribe(mutations: ["updateMedia"])
+  onDeleteMedia(owner: String): Media @aws_subscribe(mutations: ["deleteMedia"])
+  onCreateWarrior(owner: String): Warrior @aws_subscribe(mutations: ["createWarrior"])
+  onUpdateWarrior(owner: String): Warrior @aws_subscribe(mutations: ["updateWarrior"])
+  onDeleteWarrior(owner: String): Warrior @aws_subscribe(mutations: ["deleteWarrior"])
+}
+
+type ModelEnquiryConnection @aws_iam @aws_cognito_user_pools {
+  items: [Enquiry]
+  nextToken: String
+}
+
+input ModelPhraseTypeInput {
+  eq: PhraseType
+  ne: PhraseType
+}
+
+input ModelEnquiryTypeInput {
+  eq: EnquiryType
+  ne: EnquiryType
+}
+
+input ModelEnquiryFilterInput {
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  languageIndex: ModelStringInput
+  type: ModelPhraseTypeInput
+  warriorId: ModelIDInput
+  table: ModelEnquiryTypeInput
+  and: [ModelEnquiryFilterInput]
+  or: [ModelEnquiryFilterInput]
+  not: ModelEnquiryFilterInput
+}
+
+input CreateEnquiryInput {
+  id: ID
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  languageIndex: String!
+  type: PhraseType!
+  warriorId: ID!
+  table: EnquiryType!
+}
+
+input UpdateEnquiryInput {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  text: String
+  extra: AWSJSON
+  languageIndex: String
+  type: PhraseType
+  warriorId: ID
+  table: EnquiryType
+}
+
+input DeleteEnquiryInput {
+  id: ID
+}
+
+input ModelEnquiryConditionInput {
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  languageIndex: ModelStringInput
+  type: ModelPhraseTypeInput
+  warriorId: ModelIDInput
+  table: ModelEnquiryTypeInput
+  and: [ModelEnquiryConditionInput]
+  or: [ModelEnquiryConditionInput]
+  not: ModelEnquiryConditionInput
+}
+
+type ModelCommentConnection @aws_iam @aws_cognito_user_pools {
+  items: [Comment]
+  nextToken: String
+}
+
+input ModelCommentFilterInput {
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  text: ModelStringInput
+  targetId: ModelStringInput
+  warriorId: ModelIDInput
+  and: [ModelCommentFilterInput]
+  or: [ModelCommentFilterInput]
+  not: ModelCommentFilterInput
+}
+
+input CreateCommentInput {
+  id: ID
+  createdAt: AWSDateTime!
+  text: String!
+  targetId: String!
+  warriorId: ID!
+}
+
+input UpdateCommentInput {
+  id: ID!
+  createdAt: AWSDateTime
+  text: String
+  targetId: String
+  warriorId: ID
+}
+
+input DeleteCommentInput {
+  id: ID
+}
+
+input ModelCommentConditionInput {
+  createdAt: ModelStringInput
+  text: ModelStringInput
+  targetId: ModelStringInput
+  warriorId: ModelIDInput
+  and: [ModelCommentConditionInput]
+  or: [ModelCommentConditionInput]
+  not: ModelCommentConditionInput
+}
+
+type ModelResponseConnection @aws_iam @aws_cognito_user_pools {
+  items: [Response]
+  nextToken: String
+}
+
+input ModelResponseTypeInput {
+  eq: ResponseType
+  ne: ResponseType
+}
+
+input ModelResponseFilterInput {
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  type: ModelPhraseTypeInput
+  languageIndex: ModelStringInput
+  enquiryId: ModelIDInput
+  warriorId: ModelIDInput
+  table: ModelResponseTypeInput
+  and: [ModelResponseFilterInput]
+  or: [ModelResponseFilterInput]
+  not: ModelResponseFilterInput
+}
+
+input CreateResponseInput {
+  id: ID
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  type: PhraseType!
+  languageIndex: String!
+  enquiryId: ID!
+  warriorId: ID!
+  table: ResponseType!
+}
+
+input UpdateResponseInput {
+  id: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  text: String
+  extra: AWSJSON
+  type: PhraseType
+  languageIndex: String
+  enquiryId: ID
+  warriorId: ID
+  table: ResponseType
+}
+
+input DeleteResponseInput {
+  id: ID
+}
+
+input ModelResponseConditionInput {
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  text: ModelStringInput
+  extra: ModelStringInput
+  type: ModelPhraseTypeInput
+  languageIndex: ModelStringInput
+  enquiryId: ModelIDInput
+  warriorId: ModelIDInput
+  table: ModelResponseTypeInput
+  and: [ModelResponseConditionInput]
+  or: [ModelResponseConditionInput]
+  not: ModelResponseConditionInput
+}
+
+type ModelMediaConnection @aws_iam @aws_cognito_user_pools {
+  items: [Media]
+  nextToken: String
+}
+
+input ModelMediaFilterInput {
+  responseId: ModelIDInput
+  warriorId: ModelIDInput
+  url: ModelStringInput
+  and: [ModelMediaFilterInput]
+  or: [ModelMediaFilterInput]
+  not: ModelMediaFilterInput
+}
+
+input CreateMediaInput {
+  responseId: ID!
+  warriorId: ID!
+  url: String!
+}
+
+input UpdateMediaInput {
+  responseId: ID
+  warriorId: ID
+  url: String
+}
+
+input DeleteMediaInput {
+  id: ID
+}
+
+input ModelMediaConditionInput {
+  responseId: ModelIDInput
+  warriorId: ModelIDInput
+  url: ModelStringInput
+  and: [ModelMediaConditionInput]
+  or: [ModelMediaConditionInput]
+  not: ModelMediaConditionInput
+}
+
+type ModelWarriorConnection @aws_iam @aws_cognito_user_pools {
+  items: [Warrior]
+  nextToken: String
+}
+
+input ModelWarriorFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  language: ModelStringInput
+  dialect: ModelStringInput
+  region: ModelStringInput
+  favorites: ModelStringInput
+  playlist: ModelStringInput
+  isWarrior: ModelBooleanInput
+  and: [ModelWarriorFilterInput]
+  or: [ModelWarriorFilterInput]
+  not: ModelWarriorFilterInput
+}
+
+input CreateWarriorInput {
+  id: ID!
+  name: String!
+  language: String!
+  dialect: String
+  region: String
+  favorites: AWSJSON
+  playlist: AWSJSON
+  isWarrior: Boolean!
+}
+
+input UpdateWarriorInput {
+  id: ID!
+  name: String
+  language: String
+  dialect: String
+  region: String
+  favorites: AWSJSON
+  playlist: AWSJSON
+  isWarrior: Boolean
+}
+
+input DeleteWarriorInput {
+  id: ID!
+}
+
+input ModelWarriorConditionInput {
+  name: ModelStringInput
+  language: ModelStringInput
+  dialect: ModelStringInput
+  region: ModelStringInput
+  favorites: ModelStringInput
+  playlist: ModelStringInput
+  isWarrior: ModelBooleanInput
+  and: [ModelWarriorConditionInput]
+  or: [ModelWarriorConditionInput]
+  not: ModelWarriorConditionInput
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDKeyConditionInput {
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  between: [ID]
+  beginsWith: ID
+}

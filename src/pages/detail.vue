@@ -8,9 +8,17 @@
       v-if="enquiry">
       <f7-card-content>
         <h2>{{ enquiry.text }}</h2>
-        <h3 v-if="enquiry.type === 'word'">{{ toSyllabics(enquiry.responses[0].text) }}</h3>
-        <h3 v-if="enquiry.type === 'word'">{{ enquiry.responses[0].text }}</h3>
-        <h2 v-if="enquiry.type === 'word'" class='source'>Source - Cree: Words, Arok Wolvengrey</h2>
+        <h3 v-if="enquiry.type === 'word'">
+          {{ toSyllabics(enquiry.responses[0].text) }}
+        </h3>
+        <h3 v-if="enquiry.type === 'word'">
+          {{ enquiry.responses[0].text }}
+        </h3>
+        <h2
+          v-if="enquiry.type === 'word'"
+          class="source">
+          Source - Cree: Words, Arok Wolvengrey
+        </h2>
       </f7-card-content>
       <f7-card-footer>
         <span v-if="enquiry.type !== 'word'">by {{ enquiry.warrior.name }} {{ someTimeAgo(enquiry.createdAt) }}</span>
@@ -24,20 +32,28 @@
     </f7-card>
 
     <div v-if="enquiry && enquiry.type !== 'word'">
-      <h3 class='responses-title'>Responses</h3>
+      <h3 class="responses-title">
+        Responses
+      </h3>
       <f7-card
         v-for="(response, index) in enquiry.responses"
         :key="response.id">
-        <f7-card-footer class="response-author">{{ response.warrior.name }} responded {{ someTimeAgo(response.createdAt) }}:</f7-card-footer>
+        <f7-card-footer class="response-author">
+          {{ response.warrior.name }} responded {{ someTimeAgo(response.createdAt) }}:
+        </f7-card-footer>
         <f7-card-content>
-          <h2 class="response-title">{{ response.text }}</h2>
-          <h2 class="response-title">{{ toSyllabics(response.text) }}</h2>
-          </f7-card-content>
+          <h2 class="response-title">
+            {{ response.text }}
+          </h2>
+          <h2 class="response-title">
+            {{ toSyllabics(response.text) }}
+          </h2>
+        </f7-card-content>
         <f7-card-footer>
           <span v-if="index === 0">Plains Cree (Y)</span>
           <span v-if="index === 1">Woods Cree (TH)</span>
-          <f7-link><f7-icon material="playlist_add"/>&nbsp; Add to playlist</f7-link>
-          <f7-link><f7-icon material="play_circle_filled"/>&nbsp; Play audio</f7-link>
+          <f7-link><f7-icon material="playlist_add" />&nbsp; Add to playlist</f7-link>
+          <f7-link><f7-icon material="play_circle_filled" />&nbsp; Play audio</f7-link>
         </f7-card-footer>
       </f7-card>
     </div>
@@ -125,9 +141,8 @@ export default {
       return utils.someTimeAgo(time)
     },
     toSyllabics(text) {
-
       return sro2syllabics(text)
-    }
+    },
   },
 }
 </script>
@@ -143,7 +158,7 @@ export default {
   font-size: 1em;
 }
 .response-title {
-  margin:0; 
+  margin:0;
 }
 
 .source {

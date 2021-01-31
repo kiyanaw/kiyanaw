@@ -45,7 +45,8 @@
       <f7-row>
         <f7-col>
           <f7-button
-            raised fill
+            raised
+            fill
             icon-md="material:search"
             class="searchbar-enable">
             Search
@@ -53,7 +54,8 @@
         </f7-col>
         <f7-col>
           <f7-button
-            raised fill
+            raised
+            fill
             icon-md="material:list"
             href="/browse/">
             Browse
@@ -78,8 +80,12 @@
       </f7-list>
     </f7-block>
 
-    <f7-block v-if="searchText.length" class="search-results-block">
-      <h3 class="search-results-header">Search results for "{{ searchText }}"</h3>
+    <f7-block
+      v-if="searchText.length"
+      class="search-results-block">
+      <h3 class="search-results-header">
+        Search results for "{{ searchText }}"
+      </h3>
       <f7-card>
         <f7-list v-if="results">
           <f7-list-item

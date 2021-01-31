@@ -1,0 +1,165 @@
+enum PhraseType {
+  word
+  phrase
+  question
+}
+
+enum EnquiryType {
+  enquiry
+}
+
+enum ResponseType {
+  response
+}
+
+type Question 
+  @model
+  @key(name: "ByLinkCreatedAt", fields: ["link", "createdAt"], queryField: "questionByLinkCreatedAt")
+  @key(name: "ByWarrior", fields: ["warriorId" "createdAt"], queryField: "questionByWarriorCreatedAt")
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON # just a storage bin for lack of crystal ball...
+  languageIndex: String!
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+  link: String
+}
+
+type Enquiry
+  @model
+  @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byEnquiryCreatedAt")
+  @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byEnquiryUpdatedAt")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "enquiryByWarrior")
+  @key(name: "ByTypeAndWarrior", fields: ["type", "warriorId"], queryField: "enquiryByTypeWarrior")
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON # just a storage bin for lack of crystal ball...
+  languageIndex: String!
+  type: PhraseType!
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+  responses: [Response] @connection(keyName: "ByEnquiry", fields: ["id"])
+  # this field is required to be able to sort on dates
+  table: EnquiryType!
+}
+
+type Comment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
+  @key(name: "ByTarget", fields: ["targetId", "createdAt"], queryField: "commentByTarget")
+  @key(name: "ByWarrior", fields: ["warriorId", "createdAt"], queryField: "commentByWarrior")
+{
+  id: ID!
+  createdAt: AWSDateTime!
+  text: String!
+  targetId: String!
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+}
+
+type Response
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  )
+  # @key(name: "byType", fields: ["type"], queryField: "byType")
+  @key(name: "ByCreatedAt", fields: ["table", "createdAt"], queryField: "byResponseCreatedAt")
+  @key(name: "ByUpdatedAt", fields: ["table", "updatedAt"], queryField: "byResponseUpdatedAt")
+  @key(name: "ByEnquiry", fields: ["enquiryId"], queryField: "responseByEnquiry")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "responseByWarrior") {
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  text: String!
+  extra: AWSJSON
+  type: PhraseType!
+  languageIndex: String!
+  enquiryId: ID!
+  enquiry: Enquiry! @connection(fields: ["enquiryId"])
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+  media: [Media] @connection(keyName: "ByResponse", fields: ["id"])
+  # this field is required to be able to sort on dates
+  table: ResponseType!
+}
+
+type Media
+  @model
+  @key(name: "ByResponse", fields: ["responseId"], queryField: "mediaByResponse")
+  @key(name: "ByWarrior", fields: ["warriorId"], queryField: "mediaByWarrior")
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  responseId: ID!
+  response: Response! @connection(fields: ["responseId"])
+  warriorId: ID!
+  warrior: Warrior! @connection(fields: ["warriorId"])
+  url: String!
+}
+
+type Warrior
+  @model
+  @key(fields: ["id"])
+  @key(name: "ByWarriorName", fields: ["name"], queryField: "warriorByName") 
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete]  }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete]  }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
+  id: ID! # this will be email
+  name: String! # can be anything
+  language: String!
+  dialect: String
+  region: String
+  favorites: AWSJSON
+  playlist: AWSJSON
+  isWarrior: Boolean!
+  enquiries: [Enquiry] @connection(keyName: "ByWarrior", fields: ["id"])
+  responses: [Response] @connection(keyName: "ByWarrior", fields: ["id"])
+  media: [Media] @connection(keyName: "ByWarrior", fields: ["id"])
+}

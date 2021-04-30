@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "add-to-group"
+    ],
+    "parentResource": "kiyanawapp459ca40c459ca40c",
+    "functionName": "kiyanawapp459ca40c459ca40cPostConfirmation",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "PostConfirmation.json.ejs",
+    "roleName": "kiyanawapp459ca40c459ca40cPostConfirmation",
+    "skipEdit": true,
+    "resourceName": "kiyanawapp459ca40c459ca40cPostConfirmation"
+}

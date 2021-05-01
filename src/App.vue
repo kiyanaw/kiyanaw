@@ -1,15 +1,31 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark v-if="!searching">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title></v-toolbar-title>
+      <v-toolbar-title>kiyânaw</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon @click="onSearchClicked">mdi-magnify</v-icon>
       </v-btn>
+    </v-app-bar>
+
+    <v-app-bar app color="white" v-if="searching">
+      <v-text-field
+        hide-details
+        ref="mainSearchInput"
+        single-line
+        @blur="onSearchBlur"
+      >
+        <template v-slot:prepend>
+          <v-icon>mdi-arrow-left</v-icon>
+        </template>
+        <template v-slot:append>
+          <v-icon>mdi-magnify</v-icon>
+        </template>
+      </v-text-field>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -44,27 +60,44 @@
     </v-navigation-drawer>
 
     <v-main>
-      <HelloWorld />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+// import HelloWorld from './components/HelloWorld'
 import NavigationItem from './components/NavigationItem'
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    // HelloWorld,
     'nav-item': NavigationItem,
   },
 
   data: () => ({
     drawer: false,
     group: null,
+    searching: false,
   }),
+
+  methods: {
+    async onSearchClicked() {
+      this.searching = true
+
+      // allow some render time
+      await new Promise(resolve => setTimeout(resolve, 5))
+      this.$refs.mainSearchInput.focus()
+
+      // register listener
+    },
+
+    onSearchBlur() {
+      this.searching = false
+    },
+  },
 
   watch: {
     group() {

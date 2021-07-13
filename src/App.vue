@@ -2,11 +2,8 @@
   <v-app>
     <v-app-bar app color="primary" dark v-if="!searching">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
       <v-toolbar-title>kiyânaw</v-toolbar-title>
-
       <v-spacer></v-spacer>
-
       <v-btn icon>
         <v-icon @click="onSearchClicked">mdi-magnify</v-icon>
       </v-btn>
@@ -40,7 +37,7 @@
       <v-divider></v-divider>
       <v-list nav dense>
         <v-list-item-group v-model="group">
-          <nav-item title="Search" icon="magnify"></nav-item>
+          <nav-item title="Search" icon="magnify" to="/"></nav-item>
           <nav-item title="My Questions" icon="forum"></nav-item>
           <nav-item
             title="Unanswered"
@@ -48,14 +45,14 @@
           ></nav-item>
           <nav-item title="Playlist" icon="playlist-music"></nav-item>
           <nav-item title="Favorites" icon="bookmark"></nav-item>
-          <nav-item title="Preferences" icon="cog"></nav-item>
+          <nav-item title="Preferences" to="/user" icon="cog"></nav-item>
           <nav-item title="About" icon="information"></nav-item>
         </v-list-item-group>
       </v-list>
 
-      <v-btn block>
-        <!-- TODO -->
-        Logout
+      <v-btn block to="/user">
+        <span v-if="user">Sign out</span>
+        <span v-if="!user">Sign in</span>
       </v-btn>
     </v-navigation-drawer>
 
@@ -66,7 +63,7 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld'
+import { mapActions, mapGetters } from 'vuex'
 import NavigationItem from './components/NavigationItem'
 
 export default {
@@ -77,6 +74,10 @@ export default {
     'nav-item': NavigationItem,
   },
 
+  computed: {
+    ...mapGetters(['history', 'user']),
+  },
+
   data: () => ({
     drawer: false,
     group: null,
@@ -84,6 +85,8 @@ export default {
   }),
 
   methods: {
+    ...mapActions(['getUser']),
+
     async onSearchClicked() {
       this.searching = true
 
@@ -97,6 +100,11 @@ export default {
     onSearchBlur() {
       this.searching = false
     },
+  },
+
+  mounted() {
+    // check for user on first load
+    this.getUser()
   },
 
   watch: {

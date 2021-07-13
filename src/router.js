@@ -1,14 +1,11 @@
 import VueRouter from 'vue-router'
 
-import SignIn from './components/SignIn.vue'
+import User from './pages/User.vue'
 
-const routes = [
-  { path: '/sign-in/', component: SignIn },
-  // { path: '/bar', component: Bar },
-]
+const routes = [{ path: '/user', component: User }]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes,
 })
 

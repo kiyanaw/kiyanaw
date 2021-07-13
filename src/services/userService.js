@@ -10,9 +10,12 @@ class User {
   constructor(data, userData) {
     this.id = data.attributes.email
     this.name = userData.name || data.attributes.email
-    this.language = userData.language || window.localStorage.getItem('language') || null
-    this.dialect = userData.dialect || window.localStorage.getItem('dialect') || null
-    this.region = userData.region || window.localStorage.getItem('region') || null
+    this.language =
+      userData.language || window.localStorage.getItem('language') || null
+    this.dialect =
+      userData.dialect || window.localStorage.getItem('dialect') || null
+    this.region =
+      userData.region || window.localStorage.getItem('region') || null
     this.profile = userData.profile || false
     this.favorites = JSON.parse(userData.favorites) || []
     this.playlist = JSON.parse(userData.playlist) || []
@@ -24,11 +27,17 @@ class User {
 
 export default {
   async get() {
-    window.Auth = Auth
+    // window.Auth = Auth
+    if (user) {
+      console.log('return user')
+      return user
+    }
     try {
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
       if (user) {
-        const warrior = await client.request(queries.getWarrior, { id: user.attributes.email })
+        const warrior = await client.request(queries.getWarrior, {
+          id: user.attributes.email,
+        })
         if (warrior.data.getWarrior !== null) {
           const userData = warrior.data.getWarrior
           userData.profile = true
@@ -50,13 +59,17 @@ export default {
     delete saveObject.profile
     saveObject.favorites = JSON.stringify(saveObject.favorites)
     saveObject.playlist = JSON.stringify(saveObject.playlist)
-    const resp = await client.request(mutations.updateWarrior, { input: saveObject })
+    const resp = await client.request(mutations.updateWarrior, {
+      input: saveObject,
+    })
     user = userObject
     return resp
   },
 
   async createUserEntry(userObject) {
-    const resp = await client.request(mutations.createWarrior, { input: userObject })
+    const resp = await client.request(mutations.createWarrior, {
+      input: userObject,
+    })
     user = userObject
     return resp
   },
